@@ -1,4 +1,4 @@
-Hej jag heter Spencer och jag är en student på NJIT på Newark.
+Hej jag heter Spencer och jag är student på NJIT på Newark.
 Detta konto skapades för att ladda upp akademiska projekt men inte mycket annat.
 Jag gillar hundar, magi, språk, och programmering.
 Jag kan kontaktas på sdc2@njit.edu 
