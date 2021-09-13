@@ -1,11 +1,11 @@
 
-Hi I am Spencer and I am a student at NJIT at Newark.
+Hi I am Spencer and I am a computer science student at NJIT at Newark.
 My course number is 003 in the course IT202
 This account was created in order to upload academic projects but not much else.
 I like dogs, magic, languages, and programming.
 I can be contacted at sdc2@njit.edu
 
-Hej jag heter Spencer och jag är student på NJIT på Newark.
+Hej jag heter Spencer och jag pluggar datavetenskap på NJIT på Newark.
 Mitt kursnummer är 003 i kursen IT202
 Detta konto skapades för att ladda upp akademiska projekt men inte mycket annat.
 Jag gillar hundar, magi, språk, och programmering.
