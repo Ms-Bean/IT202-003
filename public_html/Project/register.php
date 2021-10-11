@@ -36,12 +36,6 @@ require(__DIR__ . "/../../lib/functions.php");
     if(empty($email)){
         array_push($errors, "Email must be set");
     }
-    //sanitize
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    //validate
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        array_push($errors, "Invalid email address");
-    }
     if(empty($password)){
         array_push($errors, "Password must be set");
     }
@@ -59,6 +53,24 @@ require(__DIR__ . "/../../lib/functions.php");
     }
     else{
         echo "Welcome, $email!";
+    }
+    //sanitize
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    //validate
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        array_push($errors, "Invalid email address");
+    }
+    else {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $db = getDB();
+        $stmt = $sb->prepare("INSERT INTO Users (email, password) VALUES (:email, :password)");
+        try {
+            $stmt ->execute([":email" => $email, ":password" => $hash]);
+            echo "You've been registered!";
+        } catch (Exception $e) {
+            echo "There was a problem registering";
+            echo "<pre>" . var_export($e, true) . "</pre>";
+        }
     }
  }
 ?>
