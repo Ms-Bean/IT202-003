@@ -1,7 +1,6 @@
-
 <?php
 //TODO 1: require db.php
-require_once(__DIR__ . "/db.php");
+
 /** Safe Echo Function
  * Takes in a value and passes it through htmlspecialchars()
  * or
@@ -34,11 +33,7 @@ function se($v, $k = null, $default = "", $isEcho = true) {
 }
 
 //TODO 2: filter helpers
-if(isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])){
-    $email = se($_POST, "email","", false);
-    $password = se($_POST, "password", "", false);
-    $confirm = se($_POST, "confirm", "", false);
-}
+
 //TODO 3: User helpers
 
 //TODO 4: Flash Message Helpers
