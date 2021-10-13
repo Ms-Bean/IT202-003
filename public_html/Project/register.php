@@ -30,42 +30,42 @@ require(__DIR__ . "/../../lib/functions.php");
      $email = se($_POST, "email", "", false);
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
- }
- $errors = [];
- if(empty($email)){
-     array_push($errors, "Email must be set");
- }
- $email = filter_var($email, FILTER_SANITIZE_EMAIL);
- if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-     array_push($errors, "Invalid email address");
- }
- if(empty($password)){
-     array_push($errors, "Password must be set");
- }
- if(empty($confirm)){
-     array_push($errors, "Confirm password must be set");
- }
- if(strlen($password) < 8){
-     array_push($errors, "Password must be 8 or more characters");
- }
- if(strlen($password) > 0 && $password !== $confirm){
-     array_push($errors, "Passwords don't match");
- }
- if(count($errors) > 0){
-     echo "<pre>" . var_export($errors, true) . "</pre>";
- }
- else{
-     echo "Welcome, $email!";
-     $hash = password_hash($password, PASSWORD_BCRYPT);
-     $db = getDB();
-     $stmt = $db->prepare("INSERT INTO USERS (email, password) VALUES (:email, :password)");
-     try {
-         $stmt->execute([":email" => $email, ":password" => $hash]);
-         echo "You've been registered";
+
+    $errors = [];
+    if(empty($email)){
+        array_push($errors, "Email must be set");
+    }
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+         array_push($errors, "Invalid email address");
      }
-     catch (Exception $e) {
-         echo "There was a problem registering";
-         echo "<pre>" . var_export($e, true) . "</pre>";
-     }
+    if(empty($password)){
+         array_push($errors, "Password must be set");
+    }
+    if(empty($confirm)){
+         array_push($errors, "Confirm password must be set");
+    }
+    if(strlen($password) < 8){
+         array_push($errors, "Password must be 8 or more characters");
+    }
+    if(strlen($password) > 0 && $password !== $confirm){
+         array_push($errors, "Passwords don't match");
+    }
+    if(count($errors) > 0){
+         echo "<pre>" . var_export($errors, true) . "</pre>";
+    }
+    else{
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES (:email, :password)");
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $r = $stmt->execute([":email"=>$email, ":password"=>$hash]);
+        if($r){
+            se("Welcome, you succesfuly registered");
+        }
+        else{
+            se("There was an error registering");
+            var_export($stmt->errorInfo);
+        }
+    }
  }
 ?>
