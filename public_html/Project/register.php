@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "/../../lib/functions.php");
+require(__DIR__ . "/../../partials/nav.php");
 ?>
 <form onsubmit="return validate(this)" method="POST">
     <div>
@@ -35,8 +35,8 @@ require(__DIR__ . "/../../lib/functions.php");
     if(empty($email)){
         array_push($errors, "Email must be set");
     }
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    $email = sanitize_email($email);
+    if(!is_valid_email($email)){
          array_push($errors, "Invalid email address");
      }
     if(empty($password)){
