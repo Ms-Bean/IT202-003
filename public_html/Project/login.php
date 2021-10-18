@@ -28,23 +28,27 @@ require(__DIR__."/../../partials/nav.php");?>
      $password = se($_POST, "password", "", false);
      //TODO 3: validate/use
      $errors = [];
+     $hasErrors = false;
      if(empty($email)){
-        array_push($errors, "Email must be set");
+         flash("Email must be set");
+         $hasErrors = true;
      }
      //sanitize
      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
      //validate
      if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        array_push($errors, "Invalid email address");
+         flash("Invalid email", "warning");
+         $hasErrors = true;
      }
      if(empty($password)){
-         array_push($errors, "Password must be set");
+         flash("Password must be set");
+         $hasErrors = true;
      }
      if(strlen($password) < 8){
-         array_push($errors, "Password must be 8 or more characters");
+         flash("Password must be at least 8 characters");
+         $hasErrors = true;
      }
-     if(count($errors) > 0){
-         echo "<pre>" . var_export($errors, true) . "</pre>";
+     if($hasErrors){ 
      }
      else{
          //TODO 4
@@ -59,15 +63,16 @@ require(__DIR__."/../../partials/nav.php");?>
                 $hash = $user["password"];
                 unset($user["password"]);
                 if(password_verify($password, $hash)){
+                    $_SESSION["user"] = $user;
                     echo "Welcome, $email";
                 } else {
-                    echo "Invalid password";
+                    flash("Invalid password", "danger");
                 }
             } else {
                 echo "Invalid email";
             }
         } catch (Exception $e) {
-            echo "<pre>" . var_export($e, true) . "</pre>";
+            flash(var_export($e, true));
         }
      } 
  }

@@ -31,40 +31,45 @@ require(__DIR__ . "/../../partials/nav.php");
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
 
-    $errors = [];
+    $hasErrors = false;
     if(empty($email)){
-        array_push($errors, "Email must be set");
+        $hasErrors = true;
+        flash("Email must be set");
     }
     $email = sanitize_email($email);
     if(!is_valid_email($email)){
-         array_push($errors, "Invalid email address");
+        $hasErrors = true;
+        flash("Email is invalid");
      }
     if(empty($password)){
-         array_push($errors, "Password must be set");
+        $hasErrors = true;
+        flash("Password must be set");
     }
     if(empty($confirm)){
-         array_push($errors, "Confirm password must be set");
+        $hasErrors = true;
+        flash("Confirm password must be set");
     }
     if(strlen($password) < 8){
-         array_push($errors, "Password must be 8 or more characters");
+        $hasErrors = true;
+        flash("Password must be 8 or more characters");
     }
     if(strlen($password) > 0 && $password !== $confirm){
-         array_push($errors, "Passwords don't match");
+        $hasErrors = true;
+        flash("Passwords must be equal");
     }
-    if(count($errors) > 0){
-         echo "<pre>" . var_export($errors, true) . "</pre>";
+    if($hasErrors){
     }
-    else{
-        $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES (:email, :password)");
+    else {
+        flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
-        $r = $stmt->execute([":email"=>$email, ":password"=>$hash]);
-        if($r){
-            se("Welcome, you succesfuly registered");
-        }
-        else{
-            se("There was an error registering");
-            var_export($stmt->errorInfo);
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        try {
+            $stmt->execute([":email" => $email, ":password" => $hash]);
+            flash("You've registered");
+        } catch (Exception $e) {
+            flash("There was a problem registering");
+            flash("<pre>" . var_export($e, true) . "</pre>");
         }
     }
  }
