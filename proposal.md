@@ -1,7 +1,7 @@
 # Project Name: Simple Shop
 ## Project Summary: A shop that allows users to register accounts and buy decorative and edible cacti
 ## Github Link: https://github.com/Spencer-Clarke/IT202-003/tree/prod
-## Project Board Link: 
+## Project Board Link: https://github.com/Spencer-Clarke/IT202-003/projects/1
 ## Website Link: https://sdc2-prod.herokuapp.com/Project/login.php
 ## Your Name: Spencer Clarke 
 
