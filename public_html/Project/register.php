@@ -7,6 +7,10 @@ require(__DIR__ . "/../../partials/nav.php");
         <input type="email" name="email" required />
     </div>
     <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" required maxlength="30" />
+    </div>
+    <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
     </div>
@@ -41,6 +45,10 @@ require(__DIR__ . "/../../partials/nav.php");
         $hasErrors = true;
         flash("Email is invalid");
      }
+    if(!preg_match('/^[a-z0-9_-]{3,30}$/', $username)){
+        $hasErrors = true;
+        flash("Invalid username, must be alphanumeric");
+    }
     if(empty($password)){
         $hasErrors = true;
         flash("Password must be set");
@@ -65,7 +73,7 @@ require(__DIR__ . "/../../partials/nav.php");
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
         try {
-            $stmt->execute([":email" => $email, ":password" => $hash]);
+            $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've registered");
         } catch (Exception $e) {
             flash("There was a problem registering");
