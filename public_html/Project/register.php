@@ -1,7 +1,16 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
-<form onsubmit="return validate(this)" method="POST">
+<style>
+    .input_section{
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+    }
+</style>
+<form class = input_section onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" required />
@@ -34,7 +43,7 @@ require(__DIR__ . "/../../partials/nav.php");
      $email = se($_POST, "email", "", false);
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
-
+     $username = se($_POST, "username", "", false);
     $hasErrors = false;
     if(empty($email)){
         $hasErrors = true;
@@ -65,13 +74,17 @@ require(__DIR__ . "/../../partials/nav.php");
         $hasErrors = true;
         flash("Passwords must be equal");
     }
+    if(!preg_match('/^[a-z0-9_-]{3,30}$/', $username)){
+        $hasErrors = true;
+        flash("Invalid username");
+    }
     if($hasErrors){
     }
     else {
         flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've registered");

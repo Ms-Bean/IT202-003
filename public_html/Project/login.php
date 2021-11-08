@@ -1,6 +1,15 @@
 <?php
 require(__DIR__."/../../partials/nav.php");?>
-<form onsubmit="return validate(this)" method="POST">
+<style>
+    .input_section{
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+    }
+</style>
+<form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" required />
@@ -53,7 +62,7 @@ require(__DIR__."/../../partials/nav.php");?>
      else{
          //TODO 4
         $db = getDB();
-        $stmt = $db->prepare("SELECT email, password FROM Users where email = :email");
+        $stmt = $db->prepare("SELECT id, email, password FROM Users where email = :email");
         try {
             $r = $stmt->execute([":email" => $email]);
             if($r){
