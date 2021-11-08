@@ -34,7 +34,7 @@ require(__DIR__ . "/../../partials/nav.php");
      $email = se($_POST, "email", "", false);
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
-
+     $username = se($_POST, "username", "", false);
     $hasErrors = false;
     if(empty($email)){
         $hasErrors = true;
@@ -65,13 +65,17 @@ require(__DIR__ . "/../../partials/nav.php");
         $hasErrors = true;
         flash("Passwords must be equal");
     }
+    if(!preg_match('/^[a-z0-9_-]{3,30}$/', $username)){
+        $hasErrors = true;
+        flash("Invalid username");
+    }
     if($hasErrors){
     }
     else {
         flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've registered");
