@@ -89,8 +89,14 @@ require(__DIR__ . "/../../partials/nav.php");
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've registered");
         } catch (Exception $e) {
-            flash("There was a problem registering");
-            flash("<pre>" . var_export($e, true) . "</pre>");
+            $error = var_export($e, true);
+            if(strpos($error, 'Duplicate entry')){
+                flash("Duplicate email. Choose another");
+            }
+            else {
+                flash("There was a problem registering");
+                flash("<pre>" . $error . "</pre>");
+            }
         }
     }
  }
