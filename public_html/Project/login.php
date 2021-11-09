@@ -16,10 +16,6 @@ require(__DIR__."/../../partials/nav.php");?>
 </style>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
-        <label for="username">Username</label>
-        <input type="text" name="username"/>
-    </div><br>
-    <div>
         <label for="email">Email</label>
         <input type="email" name="email" maxlength="30"/>
     </div><br>
@@ -39,8 +35,7 @@ require(__DIR__."/../../partials/nav.php");?>
 </script>
 <?php
  //TODO 2: add PHP Code
- if((isset($_POST["email"]) || isset($_POST["username"])) && isset($_POST["password"])){
-     $username = se($_POST, "username","",false);
+ if(isset($_POST["email"]) && isset($_POST["password"])){
      //get the email key from $_POST, default to "" if not set, and return the value
      $email = se($_POST, "email","", false);
      //same as above but for password
@@ -48,14 +43,14 @@ require(__DIR__."/../../partials/nav.php");?>
      //TODO 3: validate/use
      $errors = [];
      $hasErrors = false;
-     if(empty($email) && empty($username)){
-         flash("Email or username must be set", "warning");
+     if(empty($email)){
+         flash("Email must be set", "warning");
          $hasErrors = true;
      }
      //sanitize
      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
      //validate
-     if(!filter_var($email, FILTER_VALIDATE_EMAIL) && empty($username)){
+     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
          flash("Invalid email", "warning");
          $hasErrors = true;
      }
@@ -71,12 +66,11 @@ require(__DIR__."/../../partials/nav.php");?>
      }
      else{
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
+        if(isset($_POST["email"])){
+            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email or username = :email LIMIT 1");
+        }
         try {
             $r = $stmt->execute([":email" => $email]);
-            if(!$r){
-                $r = $stmt->execute(["username" => $username]);
-            }
             if ($r) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($user) {
@@ -85,20 +79,19 @@ require(__DIR__."/../../partials/nav.php");?>
                     if (password_verify($password, $hash)) {
                         flash("Welcome $email");
                         $_SESSION["user"] = $user;
-                        //lookup potential roles
                         $stmt = $db->prepare("SELECT Roles.name FROM Roles 
                         JOIN UserRoles on Roles.id = UserRoles.role_id 
                         where UserRoles.user_id = :user_id and Roles.is_active = 1 and UserRoles.is_active = 1");
                         $stmt->execute([":user_id" => $user["id"]]);
-                        $roles = $stmt->fetchAll(PDO::FETCH_ASSOC); //fetch all since we'll want multiple
-                        //save roles or empty array
+                        $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($roles) {
-                            $_SESSION["user"]["roles"] = $roles; //at least 1 role
+                            $_SESSION["user"]["roles"] = $roles; 
                         } else {
-                            $_SESSION["user"]["roles"] = []; //no roles
+                            $_SESSION["user"]["roles"] = [];
                         }
                         die(header("Location: home.php"));
                     } else {
+                        flash("Incorrect password");
                     }
                 } else {
                     flash("User not found", "danger");
