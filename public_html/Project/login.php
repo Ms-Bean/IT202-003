@@ -18,6 +18,8 @@ require(__DIR__."/../../partials/nav.php");?>
     <div>
         <label for="username">Username</label>
         <input type="text" name="username"/>
+    </div>
+    <div>
         <label for="email">Email</label>
         <input type="email" name="email" required maxlength="30"/>
     </div>
