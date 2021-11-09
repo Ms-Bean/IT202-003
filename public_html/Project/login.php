@@ -16,7 +16,7 @@ require(__DIR__."/../../partials/nav.php");?>
 </style>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
-        <label for="email">Email/User</label>
+        <label for="email">Email</label>
         <input type="email" name="email" maxlength="30"/>
     </div><br>
     <div>
@@ -44,7 +44,7 @@ require(__DIR__."/../../partials/nav.php");?>
      $errors = [];
      $hasErrors = false;
      if(empty($email)){
-         flash("Email or username must be set", "warning");
+         flash("Email must be set", "warning");
          $hasErrors = true;
      }
      //sanitize
@@ -93,6 +93,7 @@ require(__DIR__."/../../partials/nav.php");?>
                         }
                         die(header("Location: home.php"));
                     } else {
+                        flash("Incorrect password");
                     }
                 } else {
                     flash("User not found", "danger");
