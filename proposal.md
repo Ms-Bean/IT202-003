@@ -41,8 +41,8 @@
     - [ ] User will be able to login to their account (given they enter the correct credentials)
       - https://github.com/Spencer-Clarke/IT202-003/pull/27
       - https://github.com/Spencer-Clarke/IT202-003/pull/55
-        -Form
-            -User can login with email or username
+        - Form
+            - User can login with email or username
                 - This can be done as a single field or as two separate fields
                   - Everything is complete except for this. I could not figure out how to determine whether the input was a username or an invalidly typed email
             -Password is required
