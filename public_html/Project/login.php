@@ -16,13 +16,17 @@ require(__DIR__."/../../partials/nav.php");?>
 </style>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
+        <label for="username">Username</label>
+        <input type="text" name="username"/>
+    </div><br>
+    <div>
         <label for="email">Email</label>
-        <input type="email" name="email" required />
-    </div>
+        <input type="email" name="email" maxlength="30"/>
+    </div><br>
     <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
-    </div>
+    </div><br>
     <input type="submit" value="Login" />
 </form>
 <script>
@@ -35,7 +39,8 @@ require(__DIR__."/../../partials/nav.php");?>
 </script>
 <?php
  //TODO 2: add PHP Code
- if(isset($_POST["email"]) && isset($_POST["password"])){
+ if((isset($_POST["email"]) || isset($_POST["username"])) && isset($_POST["password"])){
+     $username = se($_POST, "username","",false);
      //get the email key from $_POST, default to "" if not set, and return the value
      $email = se($_POST, "email","", false);
      //same as above but for password
@@ -43,14 +48,14 @@ require(__DIR__."/../../partials/nav.php");?>
      //TODO 3: validate/use
      $errors = [];
      $hasErrors = false;
-     if(empty($email)){
-         flash("Email must be set", "warning");
+     if(empty($email) && empty($username)){
+         flash("Email or username must be set", "warning");
          $hasErrors = true;
      }
      //sanitize
      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
      //validate
-     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+     if(!filter_var($email, FILTER_VALIDATE_EMAIL) && empty($username)){
          flash("Invalid email", "warning");
          $hasErrors = true;
      }
@@ -69,6 +74,9 @@ require(__DIR__."/../../partials/nav.php");?>
         $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
         try {
             $r = $stmt->execute([":email" => $email]);
+            if(!$r){
+                $r = $stmt->execute(["username" => $username]);
+            }
             if ($r) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($user) {
@@ -93,7 +101,7 @@ require(__DIR__."/../../partials/nav.php");?>
                     } else {
                     }
                 } else {
-                    flash("Email not found", "danger");
+                    flash("User not found", "danger");
                 }
             }
         } catch (Exception $e) {
