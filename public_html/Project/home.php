@@ -7,6 +7,6 @@ if(is_logged_in()){
  echo "Welcome, " . $_SESSION["user"]["email"]; 
 }
 else{
-  echo "You're not logged in";
+  die(header("Location: login.php"));
 }
 ?>
