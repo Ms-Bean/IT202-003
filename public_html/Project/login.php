@@ -75,7 +75,7 @@ require(__DIR__."/../../partials/nav.php");?>
         try {
             $r = $stmt->execute([":email" => $email]);
             if(!$r){
-                $r = $stmt->execute(["username" => $username]);
+                $r = $stmt->execute([":username" => $username]);
             }
             if ($r) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
