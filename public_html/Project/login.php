@@ -16,11 +16,7 @@ require(__DIR__."/../../partials/nav.php");?>
 </style>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
-        <label for="username">Username</label>
-        <input type="text" name="username"/>
-    </div><br>
-    <div>
-        <label for="email">Email</label>
+        <label for="email">Email/User</label>
         <input type="email" name="email" maxlength="30"/>
     </div><br>
     <div>
@@ -39,8 +35,7 @@ require(__DIR__."/../../partials/nav.php");?>
 </script>
 <?php
  //TODO 2: add PHP Code
- if((isset($_POST["email"]) || isset($_POST["username"])) && isset($_POST["password"])){
-     $username = se($_POST, "username","",false);
+ if(isset($_POST["email"]) && isset($_POST["password"])){
      //get the email key from $_POST, default to "" if not set, and return the value
      $email = se($_POST, "email","", false);
      //same as above but for password
@@ -72,9 +67,7 @@ require(__DIR__."/../../partials/nav.php");?>
      else{
         $db = getDB();
         if(isset($_POST["email"])){
-            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
-        } else{
-            $stmt = $db->prepare("SELECT id, email, username, password from Users where username = :username");
+            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email or username = :email");
         }
         try {
             $r = $stmt->execute([":email" => $email]);
