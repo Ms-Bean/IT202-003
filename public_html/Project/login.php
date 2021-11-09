@@ -43,17 +43,13 @@ require(__DIR__."/../../partials/nav.php");?>
      //TODO 3: validate/use
      $errors = [];
      $hasErrors = false;
-     if(empty($email) && empty($username)){
+     if(empty($email)){
          flash("Email or username must be set", "warning");
          $hasErrors = true;
      }
      //sanitize
      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-     //validate
-     if(!filter_var($email, FILTER_VALIDATE_EMAIL) && empty($username)){
-         flash("Invalid email", "warning");
-         $hasErrors = true;
-     }
+
      if(empty($password)){
          flash("Password must be set", "warning");
          $hasErrors = true;
@@ -67,7 +63,7 @@ require(__DIR__."/../../partials/nav.php");?>
      else{
         $db = getDB();
         if(isset($_POST["email"])){
-            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email or username = :email");
+            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email or username = :email LIMIT 1");
         }
         try {
             $r = $stmt->execute([":email" => $email]);
