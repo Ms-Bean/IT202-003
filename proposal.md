@@ -41,12 +41,12 @@
     - [ ] User will be able to login to their account (given they enter the correct credentials)
       - https://github.com/Spencer-Clarke/IT202-003/pull/27
       - https://github.com/Spencer-Clarke/IT202-003/pull/55
-        -[ ] Form
-            -[ ] User can login with email or username
+        -Form
+            -User can login with email or username
                 - This can be done as a single field or as two separate fields
                   - Everything is complete except for this. I could not figure out how to determine whether the input was a username or an invalidly typed email
-            -[x] Password is required
-        -[x]User should see friendly error messages when an account either doesn’t exist or if passwords don’t match
+            -Password is required
+        -User should see friendly error messages when an account either doesn’t exist or if passwords don’t match
         - Logging in should fetch the user’s details (and roles) and save them into the session.
         - User will be directed to a landing page upon login
             - This is a protected page (non-logged in users shouldn’t have access)
@@ -78,7 +78,7 @@
     - [x] User will be able to see their profile
       - https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Email, username, etc
-    - [ ] User will be able to edit their profile
+    - [x] User will be able to edit their profile
       - https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Changing username/email should properly check to see if it’s available before allowing the change
         - Any other fields should be properly validated
