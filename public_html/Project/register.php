@@ -1,7 +1,19 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
-<form onsubmit="return validate(this)" method="POST">
+<style>
+    .input_section{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+    }
+</style>
+<form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" required />
@@ -32,6 +44,7 @@ require(__DIR__ . "/../../partials/nav.php");
  //TODO 2: add PHP Code
  if(isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])){
      $email = se($_POST, "email", "", false);
+     $username = se($_POST, "username", "", false);
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
 
@@ -81,4 +94,7 @@ require(__DIR__ . "/../../partials/nav.php");
         }
     }
  }
+?>
+<?php
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>

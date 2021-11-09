@@ -86,7 +86,19 @@ if (isset($_POST["save"])) {
 $email = get_user_email();
 $username = get_username();
 ?>
-<form method="POST" onsubmit="return validate(this);">
+<style>
+    .input_section{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+    }
+</style>
+<form class = "input_section" method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?php se($email); ?>" />
@@ -118,7 +130,7 @@ $username = get_username();
         let con = form.confirmPassword.value;
         let isValid = true;
         //TODO add other client side validation....
-
+        
         //example of using flash via javascript
         //find the flash container, create a new element, appendChild
         if (pw !== con) {
