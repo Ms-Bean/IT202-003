@@ -84,7 +84,7 @@ require(__DIR__ . "/../../partials/nav.php");
         flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've registered");
