@@ -81,7 +81,6 @@ require(__DIR__ . "/../../partials/nav.php");
     if($hasErrors){
     }
     else {
-        flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
