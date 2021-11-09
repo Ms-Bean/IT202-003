@@ -13,6 +13,15 @@ require(__DIR__ . "/../../partials/nav.php");
         width: 300px;
     }
 </style>
+<?php //Prevent username and password from being erased on error
+$confirm = ''; $password = '';
+if(isset($_POST['confirm'])){
+    $confirm = $_POST['confirm'];
+}
+if(isset($_POST['password'])){
+    $password = $_POST['password'];
+}
+?>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
@@ -24,11 +33,11 @@ require(__DIR__ . "/../../partials/nav.php");
     </div>
     <div>
         <label for="pw">Password</label>
-        <input type="password" id="pw" name="password" required minlength="8" />
+        <input value = "<?php echo $password;?>"type="password" id="pw" name="password" required minlength="8" />
     </div>
     <div>
         <label for="confirm">Confirm</label>
-        <input type="password" name="confirm" required minlength="8" />
+        <input value = "<?php echo $confirm;?>"type="password" name="confirm" required minlength="8" />
     </div>
     <input type="submit" value="Register" />
 </form>
