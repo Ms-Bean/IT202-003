@@ -3,6 +3,9 @@ require(__DIR__ . "/../../partials/nav.php");
 ?>
 <style>
     .input_section{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
         border: 1px solid black;
         box-shadow: 5px 5px black;
         padding: 10px;
@@ -10,7 +13,7 @@ require(__DIR__ . "/../../partials/nav.php");
         width: 300px;
     }
 </style>
-<form class = input_section onsubmit="return validate(this)" method="POST">
+<form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
         <input type="email" name="email" required />
@@ -38,67 +41,56 @@ require(__DIR__ . "/../../partials/nav.php");
     }
 </script>
 <?php
-//TODO 2: add PHP Code
-if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])) {
-    $email = se($_POST, "email", "", false);
-    $password = se($_POST, "password", "", false);
-    $confirm = se(
-        $_POST,
-        "confirm",
-        "",
-        false
-    );
-    $username = se($_POST, "username", "", false);
-    //TODO 3
-    $hasError = false;
-    if (empty($email)) {
-        flash("Email must not be empty", "danger");
-        $hasError = true;
+ //TODO 2: add PHP Code
+ if(isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])){
+     $email = se($_POST, "email", "", false);
+     $password = se($_POST, "password", "", false);
+     $confirm = se($_POST, "confirm", "", false);
+
+    $hasErrors = false;
+    if(empty($email)){
+        $hasErrors = true;
+        flash("Email must be set");
     }
-    //sanitize
     $email = sanitize_email($email);
-    //validate
-    if (!is_valid_email($email)) {
-        flash("Invalid email address", "danger");
-        $hasError = true;
+    if(!is_valid_email($email)){
+        $hasErrors = true;
+        flash("Email is invalid");
+     }
+    if(!preg_match('/^[a-z0-9_-]{3,30}$/', $username)){
+        $hasErrors = true;
+        flash("Invalid username, must be alphanumeric");
     }
-    if (!preg_match('/^[a-z0-9_-]{3,16}$/i', $username)) {
-        flash("Username must only be alphanumeric and can only contain - or _", "danger");
-        $hasError = true;
+    if(empty($password)){
+        $hasErrors = true;
+        flash("Password must be set");
     }
-    if (empty($password)) {
-        flash("password must not be empty", "danger");
-        $hasError = true;
+    if(empty($confirm)){
+        $hasErrors = true;
+        flash("Confirm password must be set");
     }
-    if (empty($confirm)) {
-        flash("Confirm password must not be empty", "danger");
-        $hasError = true;
+    if(strlen($password) < 8){
+        $hasErrors = true;
+        flash("Password must be 8 or more characters");
     }
-    if (strlen($password) < 8) {
-        flash("Password too short", "danger");
-        $hasError = true;
+    if(strlen($password) > 0 && $password !== $confirm){
+        $hasErrors = true;
+        flash("Passwords must be equal");
     }
-    if (
-        strlen($password) > 0 && $password !== $confirm
-    ) {
-        flash("Passwords must match", "danger");
-        $hasError = true;
+    if($hasErrors){
     }
-    if (!$hasError) {
-        //TODO 4
+    else {
+        flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
-            flash("Successfully registered!");
+            flash("You've registered");
         } catch (Exception $e) {
-            flash("There was a problem registering", "danger");
-            flash("<pre>" . var_export($e, true) . "</pre>", "danger");
+            flash("There was a problem registering");
+            flash("<pre>" . var_export($e, true) . "</pre>");
         }
     }
-}
-?>
-<?php
-require(__DIR__ . "/../../partials/flash.php");
+ }
 ?>
