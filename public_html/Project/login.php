@@ -71,10 +71,13 @@ require(__DIR__."/../../partials/nav.php");?>
      }
      else{
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
+        if(isset($_POST["email"])){
+            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
+        } else{
+            $stmt = $db->prepare("SELECT id, email, username, password from Users where username = :username");
+        }
         try {
-            $r = $stmt->execute([":username" => $username]);
-            
+            $r = $stmt->execute([":email" => $email]);
             if ($r) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($user) {
