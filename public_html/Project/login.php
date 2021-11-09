@@ -18,13 +18,15 @@ require(__DIR__."/../../partials/nav.php");?>
     <div>
         <label for="username">Username</label>
         <input type="text" name="username"/>
+    </div><br>
+    <div>
         <label for="email">Email</label>
-        <input type="email" name="email" required maxlength="30"/>
-    </div>
+        <input type="email" name="email" maxlength="30"/>
+    </div><br>
     <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
-    </div>
+    </div><br>
     <input type="submit" value="Login" />
 </form>
 <script>
