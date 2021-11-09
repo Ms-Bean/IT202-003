@@ -44,6 +44,7 @@ require(__DIR__ . "/../../partials/nav.php");
  //TODO 2: add PHP Code
  if(isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])){
      $email = se($_POST, "email", "", false);
+     $username = se($_POST, "username", "", false);
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
 
@@ -93,4 +94,7 @@ require(__DIR__ . "/../../partials/nav.php");
         }
     }
  }
+?>
+<?php
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>
