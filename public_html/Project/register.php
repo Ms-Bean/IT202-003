@@ -89,9 +89,14 @@ require(__DIR__ . "/../../partials/nav.php");
             flash("You've registered");
         } catch (Exception $e) {
             $error = var_export($e, true);
-            if(strpos($error, 'Duplicate entry')){
-                flash("Duplicate email. Choose another");
-            }
+            if ($e->errorInfo[1] === 1062) {
+                preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
+                if (isset($matches[1])) {
+                    flash("The chosen " . $matches[1] . " is not available.");
+                } else {
+                    flash("Duplicate information was found.");
+                }
+            } 
             else {
                 flash("There was a problem registering");
                 flash("<pre>" . $error . "</pre>");
