@@ -26,7 +26,6 @@
 
      - [x] User will be able to register a new account
       - https://github.com/Spencer-Clarke/IT202-003/issues/28
-      - https://github.com/Spencer-Clarke/IT202-003/pull/18
         - Form Fields
             - Username, email, password, confirm password (other fields optional)
               - Registration form screenshot
@@ -62,50 +61,82 @@
                 -This can be done as a single field or as two separate fields
                   - Everything is complete except for this. I could not figure out how to determine whether the input was a username or an invalidly typed email
             -Password is required
+              - Login page screenshot
+              ![image](https://user-images.githubusercontent.com/89927037/141154350-14d0087c-46a7-4f34-87bd-97b5afcfabc8.png)
         - User should see friendly error messages when an account either doesn’t exist or if passwords don’t match
+          - User friendly error message after entering bad input
+          ![image](https://user-images.githubusercontent.com/89927037/141154439-1a77f251-f8d3-437c-a387-39cb9d8e08e1.png)
         - Logging in should fetch the user’s details (and roles) and save them into the session.
+          - Data fetch and addition to session
+          ![image](https://user-images.githubusercontent.com/89927037/141154528-93a0ad63-845f-4229-b93f-a771e8f5eb09.png)
         - User will be directed to a landing page upon login
             - This is a protected page (non-logged in users shouldn’t have access)
-            - This can be home, profile, a dashboard, etc
+            - This can be home, profile, a dashboard, etc         
+              - Home page upon logging in screenshot
+              ![image](https://user-images.githubusercontent.com/89927037/141154713-357598ad-6f20-4d30-9e3b-0289ace5052c.png)
+              - Protection against users who arent loggred in
+              ![image](https://user-images.githubusercontent.com/89927037/141154821-2bae8739-0b17-487c-ad49-ea72e58c3057.png)
     - [x] User will be able to logout
       -https://github.com/Spencer-Clarke/IT202-003/issues/30
       -https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Logging out will redirect to login page
         - User should see a message that they’ve successfully logged out
+          - Logout page with message that user logged out
+          ![image](https://user-images.githubusercontent.com/89927037/141154956-929cb579-b480-400d-a887-73f1c956c504.png)
         - Session should be destroyed (so the back button doesn’t allow them access back in)
+          - Session destruction code
+          ![image](https://user-images.githubusercontent.com/89927037/141155157-9ff32fad-6325-4deb-aab4-db8f05ecc3a2.png)
     - [x] Basic security rules implemented
       -https://github.com/Spencer-Clarke/IT202-003/issues/31
       -https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Authentication:
             - Function to check if user is logged in
             - Function should be called on appropriate pages that only allow logged in users
+             - is_logged_in function
+             ![image](https://user-images.githubusercontent.com/89927037/141155586-77bc05c1-a4df-4617-bd35-af4ae8b42a99.png)
+
         - Roles/Authorization:
             - Have a roles table (see below)
     - [x] Basic Roles implemented
-      -https://github.com/Spencer-Clarke/IT202-003/issues/28
       -https://github.com/Spencer-Clarke/IT202-003/pull/46
         - Have a Roles table    (id, name, description, is_active, modified, created)
-        - Have a User Roles table (id, user_id, role_id, is_active, created, modified)
+          - Roles table
+          ![image](https://user-images.githubusercontent.com/89927037/141155984-df8c694d-8d8a-4014-a3c6-8132168a45df.png)
+        - Have a User Roles table (id, user_id, role_id, is_active, created, modified
+          - User roles table
+          ![image](https://user-images.githubusercontent.com/89927037/141156056-1e4cbaca-cfcd-49bf-9131-819868981970.png)
         - Include a function to check if a user has a specific role (we won’t use it for this milestone but it should be usable in the future)
+          - has_role function
+          ![image](https://user-images.githubusercontent.com/89927037/141156122-60bb5f4c-112d-412d-8128-4b42f951dc85.png)
+
     - [x] Site should have basic styles/theme applied; everything should be styled
       -https://github.com/Spencer-Clarke/IT202-003/issues/32
-      -https://github.com/Spencer-Clarke/IT202-003/pull/44
         - I.e., forms/input, navigation bar, etc
+          - Minty green login page with things in css-defined boxes
+           ![image](https://user-images.githubusercontent.com/89927037/141156300-c37f6219-f373-43a3-8d7e-f65244d42766.png)
     - [x] Any output messages/errors should be “user friendly”
       -https://github.com/Spencer-Clarke/IT202-003/issues/33
-      -https://github.com/Spencer-Clarke/IT202-003/pull/55
         - Any technical errors or debug output displayed will result in a loss of points
+          - Rounding off of remaining non-user friendly errors
+          ![image](https://user-images.githubusercontent.com/89927037/141156474-e330242f-a1e0-4b0b-bf49-be72f5678539.png)
     - [x] User will be able to see their profile
       -https://github.com/Spencer-Clarke/IT202-003/issues/34
-      -https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Email, username, etc
+          - Profile page visible, successful password reset
+          ![image](https://user-images.githubusercontent.com/89927037/141156716-85c02d50-18cd-4704-af6f-c4be2466fd12.png)
+
     - [x] User will be able to edit their profile
       -https://github.com/Spencer-Clarke/IT202-003/issues/35
       -https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Changing username/email should properly check to see if it’s available before allowing the change
+          - Duplicate username caught
+          ![image](https://user-images.githubusercontent.com/89927037/141156895-b405cb3d-f511-474d-b511-341cf8997c73.png)
         - Any other fields should be properly validated
         - Allow password reset (only if the existing correct password is provided)
             - Hint: logic for the password check would be similar to login
+              - Invalid password message on profile page
+              ![image](https://user-images.githubusercontent.com/89927037/141157242-9cf80035-ad52-4e5e-ac09-f41dc9580216.png)
+
 
 - Milestone 2
 - Milestone 3
