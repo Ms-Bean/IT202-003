@@ -39,6 +39,7 @@
             - Username should be unique
             - System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
             - The only fields that may be cleared are the password fields
+            ![alt text](![image](https://user-images.githubusercontent.com/89927037/141145285-e1da447b-8d03-48d9-8cd1-f66bfcd2b835.png))
     - [ ] User will be able to login to their account (given they enter the correct credentials)
       -https://github.com/Spencer-Clarke/IT202-003/issues/29
       -https://github.com/Spencer-Clarke/IT202-003/pull/27
