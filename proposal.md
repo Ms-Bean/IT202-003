@@ -55,7 +55,6 @@
                ![image](https://user-images.githubusercontent.com/89927037/141154030-a8e6ca82-7d44-4bcd-be3b-feb5bbb474a9.png)
     - [ ] User will be able to login to their account (given they enter the correct credentials)
       -https://github.com/Spencer-Clarke/IT202-003/issues/29
-      -https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Form
             - User can login with email or username
                 -This can be done as a single field or as two separate fields
@@ -98,7 +97,7 @@
         - Roles/Authorization:
             - Have a roles table (see below)
     - [x] Basic Roles implemented
-      -https://github.com/Spencer-Clarke/IT202-003/pull/46
+      -https://github.com/Spencer-Clarke/IT202-003/issues/36
         - Have a Roles table    (id, name, description, is_active, modified, created)
           - Roles table
           ![image](https://user-images.githubusercontent.com/89927037/141155984-df8c694d-8d8a-4014-a3c6-8132168a45df.png)
@@ -127,7 +126,6 @@
 
     - [x] User will be able to edit their profile
       -https://github.com/Spencer-Clarke/IT202-003/issues/35
-      -https://github.com/Spencer-Clarke/IT202-003/pull/27
         - Changing username/email should properly check to see if it’s available before allowing the change
           - Duplicate username caught
           ![image](https://user-images.githubusercontent.com/89927037/141156895-b405cb3d-f511-474d-b511-341cf8997c73.png)
