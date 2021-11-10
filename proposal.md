@@ -29,17 +29,31 @@
       - https://github.com/Spencer-Clarke/IT202-003/pull/18
         - Form Fields
             - Username, email, password, confirm password (other fields optional)
+              - Registration form screenshot
+                ![image](https://user-images.githubusercontent.com/89927037/141153303-25550e62-4467-4c4f-adaa-fa5d9d86af94.png)
             - Email is required and must be validated
+              - Email validation and sanitization
+               ![image](https://user-images.githubusercontent.com/89927037/141153371-db016d33-0a31-4ef3-bec7-2e1e9fc362c4.png)
             - Username is required
+              - See registration form screenshot
             - Confirm password’s match
+              - Message after entering mismatching passwords
+              ![image](https://user-images.githubusercontent.com/89927037/141153502-78df94bf-a95d-4e14-ae6c-388c367ef677.png)
             - Users Table
                 - Id, username, email, password (60 characters), created, modified
             - Password must be hashed (plain text passwords will lose points)
+              - Users table containing hashed passwords
+              ![image](https://user-images.githubusercontent.com/89927037/141153631-a9625b67-2932-45eb-bc02-9377606ae7a8.png)
             - Email should be unique
+              - Message after entering duplicate email
+                ![image](https://user-images.githubusercontent.com/89927037/141153847-39fbb506-9327-4744-884c-0e988cc042ae.png)
             - Username should be unique
+              - Message after entering duplicate username
+               ![image](https://user-images.githubusercontent.com/89927037/141153904-d759f7c2-bb07-4718-b80e-0436ac6936fb.png)
             - System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
             - The only fields that may be cleared are the password fields
-            ![alt text](![image](https://user-images.githubusercontent.com/89927037/141145285-e1da447b-8d03-48d9-8cd1-f66bfcd2b835.png))
+              - Fields containing persisted data after entering taken email
+               ![image](https://user-images.githubusercontent.com/89927037/141154030-a8e6ca82-7d44-4bcd-be3b-feb5bbb474a9.png)
     - [ ] User will be able to login to their account (given they enter the correct credentials)
       -https://github.com/Spencer-Clarke/IT202-003/issues/29
       -https://github.com/Spencer-Clarke/IT202-003/pull/27
