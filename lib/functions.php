@@ -54,25 +54,73 @@ function has_role($role) {
     }
     return false;
 }
+function get_random_str($length){
+    return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 36)), 0, $length);
+}
+function get_or_create_account()
+{
+    if (is_logged_in()) {
+        $account = ["id" => -1, "account_number" => false, "balance" => 0];
+        $query = "SELECT id, account, balance from BGD_Accounts where user_id = :uid LIMIT 1";
+        $db = getDB();
+        $stmt = $db->prepare($query);
+        try {
+            $stmt->execute([":uid" => get_user_id()]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$result) {
+                $created = false;
+                $query = "INSERT INTO BGD_Accounts (account, user_id) VALUES (:an, :uid)";
+                $stmt = $db->prepare($query);
+                $user_id = get_user_id();
+                $account_number = "";
+                while (!$created) {
+                    try {
+                        $account_number = get_random_str(12);
+                        $stmt->execute([":an" => $account_number, ":uid" => $user_id]);
+                        $created = true;
+                        flash("Welcome! Your account has been created successfully", "success");
+                    } catch (PDOException $e) {
+                        $code = se($e->errorInfo, 0, "00000", false);
+                        if (
+                            $code !== "23000"
+                        ) {
+                            throw $e;
+                        }
+                    }
+                }
+                $account["id"] = $db->lastInsertId();
+                $account["account_number"] = $account_number;
+            } else {
+                $account["id"] = $result["id"];
+                $account["account_number"] = $result["account"];
+                $account["balance"] = $result["balance"];
+            }
+        } catch (PDOException $e) {
+            flash("Technical error: " . var_export($e->errorInfo, true), "danger");
+        }
+        $_SESSION["user"]["account"] = $account;
+    } else {
+        flash("You're not logged in", "danger");
+    }
+}
 function get_username() {
-    if (is_logged_in()) { //we need to check for login first because "user" key may not exist
+    if (is_logged_in()) {
         return se($_SESSION["user"], "username", "", false);
     }
     return "";
 }
 function get_user_email() {
-    if (is_logged_in()) { //we need to check for login first because "user" key may not exist
+    if (is_logged_in()) {
         return se($_SESSION["user"], "email", "", false);
     }
     return "";
 }
 function get_user_id() {
-    if (is_logged_in()) { //we need to check for login first because "user" key may not exist
+    if (is_logged_in()) {
         return se($_SESSION["user"], "id", false, false);
     }
     return false;
 }
-//TODO 4: Flash Message Helpers
 function flash($msg = "", $color = "info")
 {
     $message = ["text" => $msg, "color" => $color];
@@ -86,16 +134,13 @@ function flash($msg = "", $color = "info")
 function users_check_duplicate($errorInfo)
 {
     if ($errorInfo[1] === 1062) {
-        //https://www.php.net/manual/en/function.preg-match.php
         preg_match("/Users.(\w+)/", $errorInfo[2], $matches);
         if (isset($matches[1])) {
             flash("The chosen " . $matches[1] . " is not available.", "warning");
         } else {
-            //TODO come up with a nice error message
             flash("<pre>" . var_export($errorInfo, true) . "</pre>");
         }
     } else {
-        //TODO come up with a nice error message
         flash("<pre>" . var_export($errorInfo, true) . "</pre>");
     }
 }
