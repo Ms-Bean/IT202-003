@@ -1,15 +1,20 @@
 <?php
-require(__DIR__. "/../../../partials/nav.php");
-if(!has_role("Admin")){
+//note we need to go up 1 more directory
+require(__DIR__ . "/../../../partials/nav.php");
+
+if (!has_role("Admin")) {
+    flash("You don't have permission to view this page", "warning");
     die(header("Location: $BASE_PATH" . "home.php"));
 }
-if($isset($_POST["submit"])) {
-    $id = save_data("ITEMS", $_POST);
-    if($id > 0) {
-        flash("Item created, id $id", "success");
+if (isset($_POST["submit"])) {
+    $id = save_data("Items", $_POST);
+    if ($id > 0) {
+        flash("Created Item with id $id", "success");
     }
 }
+//get the table definition
 $columns = get_columns("Items");
+//echo "<pre>" . var_export($columns, true) . "</pre>";
 $ignore = ["id", "modified", "created"];
 ?>
 <div class="container-fluid">
@@ -27,4 +32,7 @@ $ignore = ["id", "modified", "created"];
         <input class="btn btn-primary" type="submit" value="Create" name="submit" />
     </form>
 </div>
-<?php __DIR__. "/../../../partials/flash.php"?>
+<?php
+//note we need to go up 1 more directory
+require_once(__DIR__ . "/../../../partials/flash.php");
+?>
