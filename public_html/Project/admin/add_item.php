@@ -3,7 +3,7 @@ require(__DIR__. "/../../../partials/nav.php");
 if(!has_role("Admin")){
     die(header("Location: $BASE_PATH" . "home.php"));
 }
-if($isset($POST["submit"])) {
+if($isset($_POST["submit"])) {
     $id = save_data("ITEMS", $_POST);
     if($id > 0) {
         flash("Item created, id $id", "success");
