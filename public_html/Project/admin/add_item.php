@@ -1,5 +1,4 @@
 <?php
-//note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
 
 if (!has_role("Admin")) {
@@ -12,16 +11,28 @@ if (isset($_POST["submit"])) {
         flash("Created Item with id $id", "success");
     }
 }
-//get the table definition
 $columns = get_columns("Items");
-//echo "<pre>" . var_export($columns, true) . "</pre>";
 $ignore = ["id", "modified", "created"];
 ?>
-<div class="container-fluid">
+<style>
+    .input_section{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+        height: 200px;
+    }
+
+</style>
+<div class="container-fluid" class="input_section">
     <h1>Add Item</h1>
     <form method="POST">
         <?php foreach ($columns as $index => $column) : ?>
-            <?php /* Lazily ignoring fields via hardcoded array*/ ?>
+            <?php ?>
             <?php if (!in_array($column["Field"], $ignore)) : ?>
                 <div class="mb-4">
                     <label class="form-label" for="<?php se($column, "Field"); ?>"><?php se($column, "Field"); ?></label>
@@ -33,6 +44,5 @@ $ignore = ["id", "modified", "created"];
     </form>
 </div>
 <?php
-//note we need to go up 1 more directory
 require_once(__DIR__ . "/../../../partials/flash.php");
 ?>
