@@ -138,6 +138,10 @@
 - Milestone 2
     - [ ] User with an admin role or shop owner role will be able to add products to inventory
       - Table should be called Products (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])
+      - Image of add products page
+      - ![image](https://user-images.githubusercontent.com/89927037/142850646-289804e5-bb01-451f-9cb0-143265fd4694.png)
+      - Image of inventory database
+      - ![image](https://user-images.githubusercontent.com/89927037/142850772-6ede6e1e-ee8f-43d2-a384-0090736106ec.png)
     - [ ] Any user will be able to see products with visibility = true on the Shop page
       - Product list page will be public (i.e. doesn’t require login)
       - For now limit results to 10 most recent
