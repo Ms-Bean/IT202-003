@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {
         flash("Created Item with id $id", "success");
     }
 }
-$columns = get_columns("Items");
+$columns = get_columns("Products");
 $ignore = ["id", "modified", "created"];
 ?>
 <style>

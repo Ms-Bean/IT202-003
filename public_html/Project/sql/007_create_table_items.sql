@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Items(
+CREATE TABLE IF NOT EXISTS Products(
     id int AUTO_INCREMENT PRIMARY  KEY,
     name varchar(30) UNIQUE,
     description text,
