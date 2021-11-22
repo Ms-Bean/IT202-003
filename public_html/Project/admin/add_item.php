@@ -15,7 +15,7 @@ $columns = get_columns("Items");
 $ignore = ["id", "modified", "created"];
 ?>
 <style>
-    .input_section{
+    .container-fluid{
         position: fixed;
         left: 50%;
         margin-left: -150px;
@@ -28,7 +28,7 @@ $ignore = ["id", "modified", "created"];
     }
 
 </style>
-<div class="container-fluid" class="input_section">
+<div class="container-fluid">
     <h1>Add Item</h1>
     <form method="POST">
         <?php foreach ($columns as $index => $column) : ?>
