@@ -54,7 +54,7 @@ if (isset($_POST["itemName"])) {
                             $v = se($value, null, "N/A", false);
                             $searched = 'http';
                             if(strpos($v, $searched) === 0){
-                                echo '<img src = $v>';
+                                echo '<img src = "' . $v . '">';
                             }
                             else {
                                 echo $v;
