@@ -51,11 +51,10 @@ if (isset($_POST["itemName"])) {
                 <tr>
                     <?php foreach ($record as $column => $value) : ?>
                         <td><?php 
-                            $v = 
-                            se($value, null, "N/A", false); 
-                            if(strpos($v, "http")){
+                            $v = se($value, null, "N/A", false);
+                            $searched = "http";
+                            if(strpos($v, $searched)){
                                 echo "<img src = $v>";
-                        
                             }
                             else {
                                 echo $v;
