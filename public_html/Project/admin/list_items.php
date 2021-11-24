@@ -50,7 +50,17 @@ if (isset($_POST["itemName"])) {
                 <?php endif; ?>
                 <tr>
                     <?php foreach ($record as $column => $value) : ?>
-                        <td><?php se($value, null, "N/A"); ?></td>
+                        <td><?php 
+                            $v = 
+                            se($value, null, "N/A", false); 
+                            if(strpos($v, "http")){
+                                echo "<img src = $v>";
+                        
+                            }
+                            else {
+                                echo $v;
+                            }
+                            ?></td>
                     <?php endforeach; ?>
 
 
