@@ -22,9 +22,17 @@ if (isset($_POST["itemName"])) {
 }
 ?>
 <style>
-    .table{
+    table, tr, th, td{
         width: 100%;
         border: 1px solid black;
+    }
+    .image{
+        border: 1px solid black;
+        height: 100px;
+        width: 100px;
+    }
+    td{
+
     }
 </style>
 <div class="container-fluid">
@@ -54,7 +62,7 @@ if (isset($_POST["itemName"])) {
                             $v = se($value, null, "N/A", false);
                             $searched = 'http';
                             if(strpos($v, $searched) === 0){
-                                echo '<img src = "' . $v . '">';
+                                echo '<img src = "' . $v . '" class = "image">';
                             }
                             else {
                                 echo $v;
