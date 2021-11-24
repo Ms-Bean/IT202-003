@@ -3,7 +3,7 @@ require(__DIR__ . "/../../../partials/nav.php");
 
 if (!has_role("Admin")) {
     flash("You don't have permission to view this page", "warning");
-    die(header("Location: $BASE_PATH" . "home.php"));
+    die(header("Location: $BASE_PATH" . "login.php"));
 }
 
 $results = [];
@@ -23,8 +23,10 @@ if (isset($_POST["itemName"])) {
 ?>
 <style>
     table, tr, th, td{
-        width: 100%;
         border: 1px solid black;
+    }
+    td{
+        width: 14%;
     }
     .image{
         border: 1px solid black;
