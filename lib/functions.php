@@ -57,6 +57,15 @@ function has_role($role) {
 function get_random_str($length){
     return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 36)), 0, $length);
 }
+function mapColumn($col) {
+    global $columns;
+    foreach ($columns as $c) {
+        if ($c["Field"] === $col) {
+            return inputMap($c["Type"]);
+        }
+    }
+    return "text";
+}
 function get_or_create_account()
 {
     if (is_logged_in()) {
