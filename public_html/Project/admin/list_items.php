@@ -57,7 +57,7 @@ if (isset($_POST["itemName"])) {
                                 echo "<img src = $v>";
                             }
                             else {
-                                echo $v;
+                                echo strpos($v, $searched);
                             }
                             ?></td>
                     <?php endforeach; ?>
