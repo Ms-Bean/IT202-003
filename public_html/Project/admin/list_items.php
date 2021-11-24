@@ -21,6 +21,12 @@ if (isset($_POST["itemName"])) {
     }
 }
 ?>
+<style>
+    .table{
+        width: 100%;
+        border: 1px solid black;
+    }
+</style>
 <div class="container-fluid">
     <h1>List Items</h1>
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
@@ -32,7 +38,7 @@ if (isset($_POST["itemName"])) {
     <?php if (count($results) == 0) : ?>
         <p>No results to show</p>
     <?php else : ?>
-        <table class="table text-light">
+        <table class="table">
             <?php foreach ($results as $index => $record) : ?>
                 <?php if ($index == 0) : ?>
                     <thead>
