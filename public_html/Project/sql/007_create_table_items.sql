@@ -5,8 +5,7 @@ CREATE TABLE IF NOT EXISTS Products(
     description text,
     stock int DEFAULT  0,
     cost int DEFAULT  99999,
-    image text,
-    visibility boolean DEFAULT true,
+    visibility varchar(30),
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 )
