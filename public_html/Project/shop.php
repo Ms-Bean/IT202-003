@@ -7,14 +7,14 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $itemCategory = se($_POST, "itemCategory", "", false);
     $itemName = se($_POST, "itemName", "", false);
     $params = [];
-    $sqlstr = "SELECT * FROM Products WHERE 1=1";
+    $sqlstr = "SELECT * FROM Products WHERE 1=1 AND stock > 0 AND NOT visibility = 'false' ";
     if(!empty($itemCategory)){
         $sqlstr = $sqlstr . " AND category = :itemCategory";
         $params[":itemCategory"] = $itemCategory;
     }
     if(!empty($itemName)){
         $sqlstr = $sqlstr . " AND name like :itemName";
-        $params[":itemName"] = $itemName;
+        $params[":itemName"] = "%" . $itemName . "%";
     }
     $db = getDB();
     $stmt = $db->prepare($sqlstr);
