@@ -79,11 +79,11 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
                     <td>
                         <?php
                             if(has_role("Admin")){
-                                $id = se($record, "id");
-                                echo('<a href="admin/edit_item.php?id=' . $id . '">Edit</a>');
+                                echo('<a href="admin/edit_item.php?id=');
+                                se($record, "id");
+                                echo('">Edit</a>');
                             }
                         ?>
-                        <a href="admin/edit_item.php?id=<?php se($record, "id"); ?>">Edit</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
