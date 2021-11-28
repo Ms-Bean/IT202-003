@@ -1,22 +1,13 @@
 <?php
 require(__DIR__ . "/../../../partials/nav.php");
 
+
 $results = [];
-if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
+if (isset($_POST["itemName"])) {
     $db = getDB();
-    $sqlString = "";
-    if (isset($_POST["itemName"]) and isset($_POST["itemCategory"])){
-        $sqlString = "SELECT id, name, description, category, stock, cost from Products WHERE (name like :name AND category like :category) AND visibility='true' LIMIT 10";
-    }
-    elseif (isset($_POST["itemName"])){
-        $sqlString = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name AND visibility='true' LIMIT 10";
-    }
-    else {
-        $sqlString = "SELECT id, name, description, category, stock, cost from Products WHERE category like :category AND visibility='true' LIMIT 10";
-    }
-    $stmt = $db->prepare($sqlString);
+    $stmt = $db->prepare("SELECT id, name, description, category, stock, cost from Products WHERE name like :name LIMIT 50");
     try {
-        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%", ":category" => "%" . $_POST["itemCategory"] . "%"]);
+        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
@@ -47,7 +38,6 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
         <div class="input-group mb-3">
             <input class="form-control" type="search" name="itemName" placeholder="Item Filter" />
-            <input class="form-control" type="search" name="itemCategory" placeholder="Category Filter" />
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     </form>
@@ -68,17 +58,19 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
                     <?php foreach ($record as $column => $value) : ?>
                         <td><?php 
                             $v = se($value, null, "N/A", false);
-                            echo $v
+                            $searched = 'http';
+                            if(strpos($v, $searched) === 0){
+                                echo '<img src = "' . $v . '" class = "image">';
+                            }
+                            else {
+                                echo $v;
+                            }
                             ?></td>
                     <?php endforeach; ?>
 
 
                     <td>
-                        <?php
-                        if(has_role("Admin")){
-                            echo '<a href="edit_item.php?id=<?php se($record, "id"); ?>">Edit</a>';
-                        }
-                        ?>
+                        <a href="edit_item.php?id=<?php se($record, "id"); ?>">Edit</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
