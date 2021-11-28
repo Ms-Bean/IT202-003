@@ -2,8 +2,6 @@
 require(__DIR__ . "/../../partials/nav.php");
 
 
-$resultsName = [];
-$resultCategory = [];
 $results = [];
 if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $itemCategory = se($_POST, "itemCategory", "", false);
@@ -11,12 +9,12 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $params = [];
     $sqlstr = "SELECT * FROM Products WHERE 1=1";
     if(!empty($itemCategory)){
-        $sqlstr = $sqlstr . " AND category = :cat";
-        $params[":cat"] = $cat;
+        $sqlstr = $sqlstr . " AND category = :itemCategory";
+        $params[":itemCategory"] = $itemCategory;
     }
     if(!empty($itemName)){
-        $sqlstr = $sqlstr . " AND name like :name";
-        $params[":name"] = $name;
+        $sqlstr = $sqlstr . " AND name like :itemName";
+        $params[":itemName"] = $itemName;
     }
     $db = getDB();
     $stmt = $db->prepare($sqlstr);
@@ -24,7 +22,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         $stmt->execute($params);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
-            $resultsName = $r;
+            $results = $r;
         }
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
