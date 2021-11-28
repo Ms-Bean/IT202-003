@@ -3,6 +3,7 @@
 require(__DIR__ . "/../../partials/nav.php");
 $product_id = se($_GET, "id", -1, false);
 $user_id = $_SESSION["user"]["id"];
+$desired_quantity = 4;
 if(isset($_POST['desired_quantity'])){
     $desired_quantity = $_POST['desired_quantity'];
 }
@@ -19,9 +20,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $unit_cost = $result["cost"];
-if (isset($_POST["submit"])) {
-    echo($product_id . $user_id . $desired_quantity . $unit_cost);
-}
+echo($product_id . $user_id . $desired_quantity . $unit_cost);
 ?>
 <style>
     .container-fluid{
