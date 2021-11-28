@@ -9,7 +9,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $itemCategory = se($_POST, "itemCategory", "", false);
     $itemName = se($_POST, "itemName", "", false);
     $params = [];
-    $sqlstr = "SELECT [fields] FROM Products WHERE 1=1";
+    $sqlstr = "SELECT * FROM Products WHERE 1=1";
     if(!empty($cat)){
         $sqlstr = $sqlstr . " AND category = :cat";
         $params[":cat"] = $cat;
