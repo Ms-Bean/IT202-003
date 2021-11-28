@@ -20,14 +20,16 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $unit_cost = $result["cost"];
-echo($product_id . $user_id . $desired_quantity . $unit_cost);
-$stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
+if (isset($_POST["submit"])) {
+    $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
     try {
         $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
         flash("Added to cart");
     } catch (Exception $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     } 
+}
+
 ?>
 <style>
     .container-fluid{
@@ -51,7 +53,7 @@ $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quanti
             <input type="number" min="0" name="desired_quantity" required />
         </div>
         <div>
-            <input type="submit" value="Add to cart" />
+        <input class="btn btn-primary" type="submit" value="Add to cart" name="submit" />
         </div>
     </form>
 
