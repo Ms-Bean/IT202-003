@@ -2,28 +2,50 @@
 require(__DIR__ . "/../../partials/nav.php");
 
 
+$resultsName = [];
+$resultCategory = [];
 $results = [];
-if (isset($_POST["itemName"]) or isset($_POST["categoryName"])) {
+if (isset($_POST["itemName"])) {
     $db = getDB();
-    $sqlstr = "";
-    if(isset($_POST["categoryName"]) and isset($_POST["itemName"])){
-        $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name AND category like :category LIMIT 10";
-    }
-    elseif(isset($_POST["categoryName"])){
-        $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE category like :category LIMIT 10";
-    }
-    else{
-        $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name LIMIT 10";
-    }
+    $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name";
     $stmt = $db->prepare($sqlstr);
     try {
-        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%", ":category" => "%" . $_POST["itemCategory"] . "%"]);
+        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
-            $results = $r;
+            $resultsName = $r;
         }
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+}
+if (isset($_POST["itemCategory"])) {
+    $db = getDB();
+    $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE category like :category";
+    $stmt = $db->prepare($sqlstr);
+    try {
+        $stmt->execute([":category" => "%" . $_POST["itemCategory"] . "%"]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $resultsCategory = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+}
+if(count($resultsName) > 0 and count($resultsCategory) > 0){
+    foreach($resultsName as $nameResult){
+        foreach($resultsCategory as $categoryResult){
+            if($nameResult == $categoryResult){
+                array_push($results, $categoryResult);
+                if(count($results) >= 10){
+                    break;
+                }
+            }
+            if(count($results) >= 10){
+                break;
+            }
+        }
     }
 }
 ?>
