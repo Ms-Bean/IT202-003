@@ -2,11 +2,21 @@
 require(__DIR__ . "/../../../partials/nav.php");
 
 $results = [];
-if (isset($_POST["itemName"])) {
+if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT id, name, description, stock, cost, image from Products WHERE name like :name AND visibility=1 LIMIT 50");
+    $sqlString = "";
+    if (isset($_POST["itemName"]) and isset($_POST["itemCategory"])){
+        $sqlString = "SELECT id, name, description, category, stock, cost from Products WHERE (name like :name AND category like :category) AND visibility='true' LIMIT 10";
+    }
+    elseif (isset($_POST["itemName"])){
+        $sqlString = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name AND visibility='true' LIMIT 10";
+    }
+    else {
+        $sqlString = "SELECT id, name, description, category, stock, cost from Products WHERE category like :category AND visibility='true' LIMIT 10";
+    }
+    $stmt = $db->prepare($sqlString);
     try {
-        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
+        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%", ":category" => "%" . $_POST["itemCategory"] . "%"]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
@@ -37,7 +47,7 @@ if (isset($_POST["itemName"])) {
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
         <div class="input-group mb-3">
             <input class="form-control" type="search" name="itemName" placeholder="Item Filter" />
-            <input type="search" name="category" placeholder="Category" />
+            <input class="form-control" type="search" name="itemCategory" placeholder="Category Filter" />
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     </form>
@@ -58,13 +68,7 @@ if (isset($_POST["itemName"])) {
                     <?php foreach ($record as $column => $value) : ?>
                         <td><?php 
                             $v = se($value, null, "N/A", false);
-                            $searched = 'http';
-                            if(strpos($v, $searched) === 0){
-                                echo '<img src = "' . $v . '" class = "image">';
-                            }
-                            else {
-                                echo $v;
-                            }
+                            echo $v
                             ?></td>
                     <?php endforeach; ?>
 
