@@ -87,7 +87,11 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
                                 se($record, "id");
                                 echo('">Edit</a>');
                             }
+                            echo('<a href="admin/item_info.php?id=');
+                            se($record, "id");
+                            echo('">Info</a>');
                         ?>
+                        
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -62,13 +62,7 @@ if (isset($_POST["itemName"])) {
                     <?php foreach ($record as $column => $value) : ?>
                         <td><?php 
                             $v = se($value, null, "N/A", false);
-                            $searched = 'http';
-                            if(strpos($v, $searched) === 0){
-                                echo '<img src = "' . $v . '" class = "image">';
-                            }
-                            else {
                                 echo $v;
-                            }
                             ?></td>
                     <?php endforeach; ?>
 
