@@ -71,21 +71,16 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
                     <?php foreach ($record as $column => $value) : ?>
                         <td><?php 
                             $v = se($value, null, "N/A", false);
-                            $searched = 'http';
-                            if(strpos($v, $searched) === 0){
-                                echo '<img src = "' . $v . '" class = "image">';
-                            }
-                            else {
-                                echo $v;
-                            }
+                            echo $v;
                             ?></td>
                     <?php endforeach; ?>
 
 
                     <td>
                         <?php
+                            $editLink = '<a href="Admin/edit_item.php?id=<?php se($record, "id"); ?>">Edit</a>';
                             if(has_role("Admin")){
-                                echo('<a href="edit_item.php?id=<?php se($record, "id"); ?>">Edit</a>');
+                                echo($editLink);
                             }
                         ?>
                     </td>
