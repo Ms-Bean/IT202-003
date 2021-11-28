@@ -1,8 +1,5 @@
 <?php
-if (!is_logged_in()) {
-    flash("You must be logged in to view your cart", "warning");
-    die(header("Location: $BASE_PATH" . "home.php"));
-}
+
 require(__DIR__ . "/../../partials/nav.php");
 
 $user_id = $_SESSION["user"]["id"];
