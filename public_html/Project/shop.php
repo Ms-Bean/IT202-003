@@ -10,11 +10,11 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $itemName = se($_POST, "itemName", "", false);
     $params = [];
     $sqlstr = "SELECT * FROM Products WHERE 1=1";
-    if(!empty($cat)){
+    if(!empty($itemCategory)){
         $sqlstr = $sqlstr . " AND category = :cat";
         $params[":cat"] = $cat;
     }
-    if(!empty($name)){
+    if(!empty($itemName)){
         $sqlstr = $sqlstr . " AND name like :name";
         $params[":name"] = $name;
     }
