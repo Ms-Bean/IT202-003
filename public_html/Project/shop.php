@@ -1,13 +1,23 @@
 <?php
-require(__DIR__ . "/../../../partials/nav.php");
+require(__DIR__ . "/../../partials/nav.php");
 
 
 $results = [];
-if (isset($_POST["itemName"])) {
+if (isset($_POST["itemName"]) or isset($_POST["categoryName"])) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT id, name, description, category, stock, cost from Products WHERE name like :name LIMIT 50");
+    $sqlstr = "";
+    if(isset($_POST["categoryName"]) and isset($_POST["itemName"])){
+        $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name AND category like :category LIMIT 10";
+    }
+    elseif(isset($_POST["categoryName"])){
+        $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE category like :category LIMIT 10";
+    }
+    else{
+        $sqlstr = "SELECT id, name, description, category, stock, cost from Products WHERE name like :name LIMIT 10";
+    }
+    $stmt = $db->prepare($sqlstr);
     try {
-        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
+        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%", ":category" => "%" . $_POST["itemCategory"] . "%"]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
@@ -38,6 +48,7 @@ if (isset($_POST["itemName"])) {
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
         <div class="input-group mb-3">
             <input class="form-control" type="search" name="itemName" placeholder="Item Filter" />
+            <input class="form-control" type="search" name="itemCategory" placeholder="Category Filter" />
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     </form>
@@ -78,5 +89,5 @@ if (isset($_POST["itemName"])) {
     <?php endif; ?>
 </div>
 <?php
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>
