@@ -1,21 +1,41 @@
 <?php
 
 require(__DIR__ . "/../../partials/nav.php");
-
+$product_id = se($_GET, "id", -1, false);
 $user_id = $_SESSION["user"]["id"];
-echo($user_id);
-
-if (isset($_POST["submit"])) {
-    $db = getDB();
-    $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
-    try {
-        $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
-        flash("Added to cart");
-    } catch (Exception $e) {
-            
-    } 
+if(isset($_POST['desired_quantity'])){
+    $desired_quantity = $_POST['desired_quantity'];
 }
-
+$result = [];
+$columns = get_columns("Products");
+$db = getDB();
+$id = se($_GET, "id", -1, false);
+$stmt = $db->prepare("SELECT * FROM Products where id =:id");
+try {
+    $stmt->execute([":id" => $id]);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($r) {
+        $result = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+$unit_cost = $result["cost"];
+if (isset($_POST["submit"])) {   
+    if(empty($desired_quantity)){
+        flash("Please enter quantity");
+    }
+    else {
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
+        try {
+            $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
+            flash("Added to cart");
+        } catch (Exception $e) {
+            
+        } 
+    }
+}
 ?>
 <style>
     .container-fluid{
