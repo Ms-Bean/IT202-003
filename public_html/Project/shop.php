@@ -16,6 +16,9 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         $sqlstr = $sqlstr . " AND name like :itemName";
         $params[":itemName"] = "%" . $itemName . "%";
     }
+    if(isset($_POST['sortPrice'])){
+        $sqlstr = $sqlstr . " ORDER BY cost";
+    }
     $db = getDB();
     $stmt = $db->prepare($sqlstr);
     try {
@@ -49,8 +52,9 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     <h1>List Items</h1>
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
         <div class="input-group mb-3">
-            <input class="form-control" type="search" name="itemName" placeholder="Item Filter" />
-            <input class="form-control" type="search" name="itemCategory" placeholder="Category Filter" />
+            <input class="form-control" type="search" name="itemName" placeholder="Item Filter" /><br>
+            <input class="form-control" type="search" name="itemCategory" placeholder="Category Filter" /><br>
+            <input type="checkbox" name="sortPrice" value="Sort by price"/> Sort by price<br>
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     </form>
