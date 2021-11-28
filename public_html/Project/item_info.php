@@ -30,7 +30,7 @@ function mapColumn($col)
 <div class="container-fluid">
     <?php foreach ($result as $column => $value) : ?>
     <?php 
-        $v = se($value, null, "N/A", false);
+        $v = se($column) . ": " . se($value, null, "N/A", false) . "<br>";
         echo $v;
     ?>
     <?php endforeach; ?>
