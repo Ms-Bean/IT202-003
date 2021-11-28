@@ -10,7 +10,7 @@ $result = [];
 $db = getDB();
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");
 try {
-    $stmt->execute([":id" => $id]);
+    $stmt->execute([":id" => $product_id]);
     $r = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($r) {
         $result = $r;
