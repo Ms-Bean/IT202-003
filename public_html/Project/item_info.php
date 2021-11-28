@@ -3,7 +3,6 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $result = [];
 $columns = get_columns("Products");
-$ignore = ["id", "modified", "created"];
 $db = getDB();
 $id = se($_GET, "id", -1, false);
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");
@@ -16,16 +15,7 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
-function mapColumn($col)
-{
-    global $columns;
-    foreach ($columns as $c) {
-        if ($c["Field"] === $col) {
-            return inputMap($c["Type"]);
-        }
-    }
-    return "text";
-}
+
 ?>
 <style>
     .container-fluid{
@@ -53,6 +43,12 @@ function mapColumn($col)
             echo($id);
             echo('">Edit</a><br>');
         }
+        if(is_logged_in()){
+            echo('<a href="cart.php?id=');
+            echo($id);
+            echo('">Add to cart</a><br>');
+        }
+        
     ?>
 </div>
 
