@@ -28,7 +28,7 @@ function mapColumn($col)
 }
 ?>
 <div class="container-fluid">
-    <?php foreach ($record as $column => $value) : ?>
+    <?php foreach ($result as $column => $value) : ?>
     <?php 
         $v = se($value, null, "N/A", false);
         echo $v;
