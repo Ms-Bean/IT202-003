@@ -19,20 +19,17 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $unit_cost = $result["cost"];
-if (isset($_POST["submit"])) {   
-    if(empty($desired_quantity)){
-        flash("Please enter quantity");
-    }
-    else {
-        $db = getDB();
-        $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
-        try {
-            $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
-            flash("Added to cart");
-        } catch (Exception $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
-        } 
-    }
+if (isset($_POST["submit"])) {
+    echo($product_id . $user_id . $desired_quantity . $unit_cost);
+    $db = getDB();
+    $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
+    try {
+        $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
+        flash("Added to cart");
+    } catch (Exception $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    } 
+
 }
 ?>
 <style>
