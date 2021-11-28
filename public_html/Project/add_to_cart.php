@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
             $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
             flash("Added to cart");
         } catch (Exception $e) {
-            
+            flash("<pre>" . var_export($e, true) . "</pre>");
         } 
     }
 }
@@ -56,7 +56,7 @@ if (isset($_POST["submit"])) {
     <form method="POST">
         <div>
             <label for="desired_quantity">Quantity</label>
-            <input type="number" name="desired_quantity" required />
+            <input type="number" min="0" name="desired_quantity" required />
         </div>
         <div>
             <input type="submit" value="Add to cart" />
