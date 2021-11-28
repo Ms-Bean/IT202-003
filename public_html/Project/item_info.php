@@ -50,7 +50,7 @@ function mapColumn($col)
     <?php
         if(has_role("Admin")){
             echo('<a href="admin/edit_item.php?id=');
-            se($record, "id");
+            echo($id);
             echo('">Edit</a><br>');
         }
     ?>
