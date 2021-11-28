@@ -21,6 +21,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $unit_cost = $result["cost"];
+echo($unit_cost);
 if (isset($_POST["submit"])) {   
     if(empty($desired_quantity)){
         flash("Please enter quantity");

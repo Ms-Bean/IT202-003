@@ -44,7 +44,7 @@ try {
             echo('">Edit</a><br>');
         }
         if(is_logged_in()){
-            echo('<a href="cart.php?id=');
+            echo('<a href="add_to_cart.php?id=');
             echo($id);
             echo('">Add to cart</a><br>');
         }
