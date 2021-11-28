@@ -27,6 +27,19 @@ function mapColumn($col)
     return "text";
 }
 ?>
+<style>
+    .container-fluid{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+        height: 200px;
+    }
+</style>
 <div class="container-fluid">
     <?php foreach ($result as $column => $value) : ?>
     <?php 
@@ -34,6 +47,13 @@ function mapColumn($col)
         echo $v;
     ?>
     <?php endforeach; ?>
+    <?php
+        if(has_role("Admin")){
+            echo('<a href="admin/edit_item.php?id=');
+            se($record, "id");
+            echo('">Edit</a><br>');
+        }
+    ?>
 </div>
 
 <?php
