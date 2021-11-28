@@ -15,7 +15,7 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
-
+$ignore = ["id", "modified", "created"];
 ?>
 <style>
     .container-fluid{

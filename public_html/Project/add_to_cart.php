@@ -7,9 +7,7 @@ if(isset($_POST['desired_quantity'])){
     $desired_quantity = $_POST['desired_quantity'];
 }
 $result = [];
-$columns = get_columns("Products");
 $db = getDB();
-$id = se($_GET, "id", -1, false);
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");
 try {
     $stmt->execute([":id" => $id]);
@@ -21,7 +19,6 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $unit_cost = $result["cost"];
-echo($unit_cost);
 if (isset($_POST["submit"])) {   
     if(empty($desired_quantity)){
         flash("Please enter quantity");
