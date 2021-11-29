@@ -1,6 +1,9 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
-
+if(!is_logged_in()){
+    flash("You must log in to view cart.");
+    die(header("Location: login.php"));
+}
 $results = [];
 $db = getDB();
 $stmt = $db->prepare("SELECT id, product_id, unit_cost, desired_quantity from CartItems WHERE user_id = :user_id");
@@ -43,6 +46,7 @@ try {
                     array_push($ids, $id);
                 }
                 else if($column === 'product_id'){
+                    $product_id = $value;
                     $results_products = [];
                     $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
                     try {
@@ -66,11 +70,13 @@ try {
                     echo($value);
                 }
             }
+            
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
             echo("<input type='submit' name='submit" . $id . "' /><br>");
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
             echo("Total cost: " . $cost*$quantity . "<br>");
+            echo("<a href='item_info.php?id='" . $product_id . "'>Product info</a>");
             echo("</div><br>");
         }
         echo("</form>")
