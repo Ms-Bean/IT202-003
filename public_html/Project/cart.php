@@ -39,7 +39,7 @@ try {
                 if($column === 'id'){
                     $id = $value;
                 }
-                if($column === 'product_id'){
+                else if($column === 'product_id'){
                     $results_products = [];
                     $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
                     try {
