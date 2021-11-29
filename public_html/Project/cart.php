@@ -86,9 +86,9 @@ try {
                         flash("Updated value");
                     } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
+                    }
                 }
             }
-
         }
     ?>
 </div>
