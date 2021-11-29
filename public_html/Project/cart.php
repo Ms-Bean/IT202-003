@@ -67,7 +67,7 @@ try {
                 }
             }
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
-            echo("<input type='submit' name='submit' value=" . $id . " /><br>");
+            echo("<input type='submit' name='submit" . $id . "' /><br>");
             echo('</form><br>');
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
@@ -76,17 +76,15 @@ try {
         }
     ?>
     <?php
-        if(isset($_POST["submit"])){
-            foreach($ids as $current_id){
-                if($_POST["submit"] == $current_id){
-                    $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
-                    $stmt = $db->prepare("UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id");
-                    try {
-                        $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
-                        flash("Updated value");
-                    } catch (Exception $e) {
+        foreach($ids as $current_id){
+            if(isset($_POST["submit" . $current_id])){
+            $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
+                $stmt = $db->prepare("UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id");
+                try {
+                    $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
+                    flash("Updated value");
+                } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
-                    }
                 }
             }
         }
