@@ -41,7 +41,7 @@ try {
                         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($r) {
                             $results_products = $r;
-                            echo("Product: " . $results_products["name"] . "<br>");
+                            echo("Product: " . $results_products[0]["name"] . "<br>");
                         }
                     } catch (PDOException $e) {
                         flash("<pre>" . var_export($e, true) . "</pre>");
