@@ -78,7 +78,7 @@ try {
     <?php
         foreach($ids as $current_id){
             if(isset($_POST["submit" . $current_id])){
-            $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
+                $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
                 $stmt = $db->prepare("UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id");
                 try {
                     $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
@@ -87,6 +87,10 @@ try {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                 }
             }
+        }
+        
+        if(isset($_POST["submit2"])){
+            flash("Button for 2 clicked");
         }
     ?>
 </div>
