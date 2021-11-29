@@ -84,7 +84,7 @@ try {
                 if($quantity_to_insert == 0){
                     $sqlstr = "DELETE FROM CartItems WHERE id= :id";
                 }
-                $stmt = $db->prepare("UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id");
+                $stmt = $db->prepare($sqlstr);
                 try {
                     $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
                     flash("Updated value");
