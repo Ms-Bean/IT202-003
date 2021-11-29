@@ -51,7 +51,7 @@ try {
                     echo("<div class='cart_item'>Cost: " . $value . "</div><br>");
                 }
                 else if($column === 'desired_quantity'){
-                    echo("<div class='cart_item'>Quantity: " . $value . "<br></div>");
+                    echo("<div class='cart_item'>Quantity: " . $value . "</div><br>");
                 }
                 else{
                     echo($value);
