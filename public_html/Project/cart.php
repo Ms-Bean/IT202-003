@@ -49,11 +49,14 @@ try {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                 }
             }
-            if($column === 'unit_cost'){
+            else if($column === 'unit_cost'){
                 echo("Cost: " . $value . "<br>");
             }
-            if($column === 'desired_quantity'){
+            else if($column === 'desired_quantity'){
                 echo("Quantity: " . $value . "<br>");
+            }
+            else{
+                echo($value);
             }
         ?>
     </div>
