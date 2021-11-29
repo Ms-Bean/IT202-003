@@ -58,7 +58,7 @@ try {
                     echo($value);
                 }
             }
-            $sum += $quantity*$value;
+            $sum += $quantity*$cost;
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
             echo("<input type='submit' value='Submit' name='submit" . $id . "' /><br>");
             echo("<input type='submit' value='Remove' name = 'remove" . $id . "' /><br>");
