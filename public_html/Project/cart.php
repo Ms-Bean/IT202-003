@@ -80,10 +80,10 @@ try {
             if(isset($_POST["submit" . $current_id])){
                 if(isset($_POST["quantity" . $current_id])){
                     $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
-                    $stmt = $db->prepare("UPDATE CartItems SET desired_quantity=$quantity_to_insert WHERE id=$current_id");
+                    $stmt = $db->prepare("UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id");
                     try {
-                        $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
-                        flash("Added to cart");
+                        $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
+                        flash("Updated value");
                     } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                     } 
