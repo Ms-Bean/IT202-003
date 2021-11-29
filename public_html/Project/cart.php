@@ -24,6 +24,7 @@ if (isset($_POST["itemName"])) {
 <style>
 </style>
 <div class="container-fluid">
+    <h1>Cart</h1>
     <?php
         foreach($results as $index => $record){
             foreach($record as $column => $value){
