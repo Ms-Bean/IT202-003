@@ -44,9 +44,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         height: 100px;
         width: 100px;
     }
-    td{
-
-    }
+    
 </style>
 <div class="container-fluid">
     <h1>List Items</h1>

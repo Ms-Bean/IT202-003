@@ -36,6 +36,9 @@ require_once(__DIR__ . "/../lib/functions.php");
         width: 100%;
         margin-bottom: 30px;
     }
+    html{
+        font-family: verdana;
+    }
 </style>
 <nav class="nav_bar">
 <ul>

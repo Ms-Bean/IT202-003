@@ -31,13 +31,30 @@ try {
         background-color: #a2eda1;
         width: 300px;
         height: 200px;
+        text-align: left;
     }
+    .delete_button{
+        position: center;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        margin-bottom: 50px;
+        background-color:rgba(255, 85, 107, 0.867);
+        border: 2px solid black
+       
+    }
+    .form{
+        text-align: center;
+    }
+
 </style>
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
         $ids = [];
-        echo("<form method='POST'><br>");
+        echo("<form method='POST' class='form'><br>");
         echo("<input type='submit' name='clear_all' value='Empty cart'/>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
