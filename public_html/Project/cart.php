@@ -88,6 +88,7 @@ try {
                 try {
                     $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
                     flash("Updated value");
+                    header("Refresh:0");
                 } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                 }
