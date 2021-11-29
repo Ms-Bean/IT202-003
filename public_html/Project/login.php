@@ -1,28 +1,15 @@
 <?php
 require(__DIR__."/../../partials/nav.php");?>
-<style>
-    .input_section{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 300px;
-        height: 200px;
-    }
 
-</style>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
-        <input type="email" name="email" required />
-    </div>
+        <input type="email" name="email" maxlength="30"/>
+    </div><br>
     <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
-    </div>
+    </div><br>
     <input type="submit" value="Login" />
 </form>
 <script>
@@ -66,7 +53,9 @@ require(__DIR__."/../../partials/nav.php");?>
      }
      else{
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email");
+        if(isset($_POST["email"])){
+            $stmt = $db->prepare("SELECT id, email, username, password from Users where email = :email or username = :email LIMIT 1");
+        }
         try {
             $r = $stmt->execute([":email" => $email]);
             if ($r) {
@@ -77,24 +66,22 @@ require(__DIR__."/../../partials/nav.php");?>
                     if (password_verify($password, $hash)) {
                         flash("Welcome $email");
                         $_SESSION["user"] = $user;
-                        //lookup potential roles
                         $stmt = $db->prepare("SELECT Roles.name FROM Roles 
                         JOIN UserRoles on Roles.id = UserRoles.role_id 
                         where UserRoles.user_id = :user_id and Roles.is_active = 1 and UserRoles.is_active = 1");
                         $stmt->execute([":user_id" => $user["id"]]);
-                        $roles = $stmt->fetchAll(PDO::FETCH_ASSOC); //fetch all since we'll want multiple
-                        //save roles or empty array
+                        $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($roles) {
-                            $_SESSION["user"]["roles"] = $roles; //at least 1 role
+                            $_SESSION["user"]["roles"] = $roles; 
                         } else {
-                            $_SESSION["user"]["roles"] = []; //no roles
+                            $_SESSION["user"]["roles"] = [];
                         }
                         die(header("Location: home.php"));
                     } else {
-                        flash("Invalid password", "danger");
+                        flash("Incorrect password");
                     }
                 } else {
-                    flash("Email not found", "danger");
+                    flash("User not found", "danger");
                 }
             }
         } catch (Exception $e) {
@@ -102,4 +89,7 @@ require(__DIR__."/../../partials/nav.php");?>
         }
      } 
  }
+?>
+<?php
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>

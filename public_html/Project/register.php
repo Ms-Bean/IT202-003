@@ -1,18 +1,15 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
-<style>
-    .input_section{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 300px;
-    }
-</style>
+<?php //Prevent username and password from being erased on error
+$confirm = ''; $password = '';
+if(isset($_POST['confirm'])){
+    $confirm = $_POST['confirm'];
+}
+if(isset($_POST['password'])){
+    $password = $_POST['password'];
+}
+?>
 <form class="input_section" onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email</label>
@@ -24,11 +21,11 @@ require(__DIR__ . "/../../partials/nav.php");
     </div>
     <div>
         <label for="pw">Password</label>
-        <input type="password" id="pw" name="password" required minlength="8" />
+        <input value = "<?php echo $password;?>"type="password" id="pw" name="password" required minlength="8" />
     </div>
     <div>
         <label for="confirm">Confirm</label>
-        <input type="password" name="confirm" required minlength="8" />
+        <input value = "<?php echo $confirm;?>"type="password" name="confirm" required minlength="8" />
     </div>
     <input type="submit" value="Register" />
 </form>
@@ -44,6 +41,7 @@ require(__DIR__ . "/../../partials/nav.php");
  //TODO 2: add PHP Code
  if(isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])){
      $email = se($_POST, "email", "", false);
+     $username = se($_POST, "username", "", false);
      $password = se($_POST, "password", "", false);
      $confirm = se($_POST, "confirm", "", false);
 
@@ -80,17 +78,30 @@ require(__DIR__ . "/../../partials/nav.php");
     if($hasErrors){
     }
     else {
-        flash("Welcome, $email");
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
             flash("You've registered");
         } catch (Exception $e) {
-            flash("There was a problem registering");
-            flash("<pre>" . var_export($e, true) . "</pre>");
+            $error = var_export($e, true);
+            if ($e->errorInfo[1] === 1062) {
+                preg_match("/Users.(\w+)/", $e->errorInfo[2], $matches);
+                if (isset($matches[1])) {
+                    flash("The chosen " . $matches[1] . " is not available.");
+                } else {
+                    flash("Duplicate information was found.");
+                }
+            } 
+            else {
+                flash("There was a problem registering");
+                flash("<pre>" . $error . "</pre>");
+            }
         }
     }
  }
+?>
+<?php
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>
