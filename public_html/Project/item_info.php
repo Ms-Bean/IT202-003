@@ -21,10 +21,16 @@ $ignore = ["id", "modified", "created"];
 
 </style>
 <div class="item_info">
+    <h1><?php echo($result[0]["name"])?></h1>
     <?php foreach ($result as $column => $value) : ?>
     <?php 
-        $v = se($column) . ": " . se($value, null, "N/A", false) . "<br>";
-        echo $v;
+        if($column === "name"){
+            
+        }
+        else{
+            $v = se($column) . ": " . se($value, null, "N/A", false) . "<br>";
+            echo $v;
+        }
     ?>
     <?php endforeach; ?>
     <?php
