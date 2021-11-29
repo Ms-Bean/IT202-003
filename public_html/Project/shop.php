@@ -20,7 +20,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         $sqlstr = $sqlstr . " ORDER BY cost";
     }
     $db = getDB();
-    $stmt = $db->prepare($sqlstr);
+    $stmt = $db->prepare($sqlstr . "LIMIT 10");
     try {
         $stmt->execute($params);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);

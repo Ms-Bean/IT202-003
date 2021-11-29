@@ -37,7 +37,7 @@ require(__DIR__."/../../partials/nav.php");?>
      //sanitize
      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
      //validate
-     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+     if(!filter_var($email, FILTER_VALIDATE_EMAIL) || !isset($_POST["email"])){
          flash("Invalid email", "warning");
          $hasErrors = true;
      }
