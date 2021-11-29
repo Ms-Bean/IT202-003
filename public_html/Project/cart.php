@@ -65,7 +65,7 @@ try {
                 }
             }
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
-            echo("<input type='submit' name='submit' value='Submit' " . $id . "<br>");
+            echo("<input type='submit' name='submit' value='Submit' " . $id . "/><br>");
             echo('</form>');
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
