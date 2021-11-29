@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT product_id, unit_cost, quantity from CartItems WHERE user_id = :user_id");
+$stmt = $db->prepare("SELECT product_id, unit_cost, desired_quantity from CartItems WHERE user_id = :user_id");
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ try {
             if($column === 'unit_cost'){
                 echo("Cost: " . $value . "<br>");
             }
-            if($column === 'quantity'){
+            if($column === 'desired_quantity'){
                 echo("Quantity: " . $value . "<br>");
             }
         ?>
