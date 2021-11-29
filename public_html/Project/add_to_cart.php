@@ -1,5 +1,8 @@
 <?php
-
+if(!is_logged_in()){
+    flash("You must log in to add to cart.");
+    die(header("Location: login.php"));
+}
 require(__DIR__ . "/../../partials/nav.php");
 $product_id = se($_GET, "id", -1, false);
 $user_id = $_SESSION["user"]["id"];
@@ -20,6 +23,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $unit_cost = $result["cost"];
+$product_name = $result["name"];
 if (isset($_POST["submit"])) {
     $stmt = $db->prepare("INSERT INTO CartItems (product_id, user_id, desired_quantity, unit_cost) VALUES(:product_id, :user_id, :desired_quantity, :unit_cost)");
     try {
@@ -46,11 +50,11 @@ if (isset($_POST["submit"])) {
 
 </style>
 <div class="container-fluid">
-    <h1>Add To Cart</h1>
+    <h1>Add <?php echo($name)?> To Cart</h1>
     <form method="POST">
         <div>
             <label for="desired_quantity">Quantity</label>
-            <input type="number" min="0" name="desired_quantity" required />
+            <input type="number" min="1" name="desired_quantity" required />
         </div>
         <div>
         <input class="btn btn-primary" type="submit" value="Add to cart" name="submit" />
