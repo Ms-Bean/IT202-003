@@ -31,34 +31,33 @@ try {
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
-        foreach($results as $index => $record) : 
-            foreach($record as $column => $value) :
-    ?>
-    <div class="cart_item">
-        <?php
-            if($column === 'product_id'){
-                $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
-                try {
-                    $stmt->execute([":product_id" => $product_column]);
-                    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    if ($r) {
-                        $results_products = $r;
-                        echo("Product: " . $results_products["name"] . "<br>");
+        foreach($results as $index => $record){ 
+            foreach($record as $column => $value){
+                if($column === 'product_id'){
+                    $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
+                    try {
+                        $stmt->execute([":product_id" => $product_column]);
+                        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if ($r) {
+                            $results_products = $r;
+                            echo("Product: " . $results_products["name"] . "<br>");
+                        }
+                    } catch (PDOException $e) {
+                        flash("<pre>" . var_export($e, true) . "</pre>");
                     }
-                } catch (PDOException $e) {
-                    flash("<pre>" . var_export($e, true) . "</pre>");
+                }
+                else if($column === 'unit_cost'){
+                    echo("Cost: " . $value . "<br>");
+                }
+                else if($column === 'desired_quantity'){
+                    echo("Quantity: " . $value . "<br>");
+                }
+                else{
+                    echo($value);
                 }
             }
-            else if($column === 'unit_cost'){
-                echo("Cost: " . $value . "<br>");
-            }
-            else if($column === 'desired_quantity'){
-                echo("Quantity: " . $value . "<br>");
-            }
-            else{
-                echo($value);
-            }
-        ?>
+        }
+    ?>
     </div>
     <?php endforeach; endforeach;?>
 </div>
