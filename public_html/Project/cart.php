@@ -41,17 +41,17 @@ try {
                         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($r) {
                             $results_products = $r;
-                            echo("Product: " . $results_products[0]["name"] . "<br>");
+                            echo("<div class='cart_item'>Product: " . $results_products[0]["name"] . "</div><br>");
                         }
                     } catch (PDOException $e) {
                         flash("<pre>" . var_export($e, true) . "</pre>");
                     }
                 }
                 else if($column === 'unit_cost'){
-                    echo("Cost: " . $value . "<br>");
+                    echo("<div class='cart_item'>Cost: " . $value . "</div><br>");
                 }
                 else if($column === 'desired_quantity'){
-                    echo("Quantity: " . $value . "<br>");
+                    echo("<div class='cart_item'>Quantity: " . $value . "<br></div>");
                 }
                 else{
                     echo($value);
