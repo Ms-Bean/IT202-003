@@ -59,17 +59,17 @@ try {
                 }
                 else if($column === 'desired_quantity'){
                     $quantity = $value;
-                    echo("Quantity: <input class='number' min='0' value='" . $value . "'/><br>'");
+                    echo("Quantity: <input class='number' min='0' value='" . $value . "'/><br>");
                 }
                 else{
                     echo($value);
                 }
             }
             echo('</form>');
-            echo("Name: " . $name);
-            echo("Unit price: " . $cost);
-            echo("Total cost: " . $cost*$quantity);
-            echo($id);
+            echo("Name: " . $name . "<br>");
+            echo("Unit price: " . $cost . "<br>");
+            echo("Total cost: " . $cost*$quantity . "<br>");
+            echo($id . "<br>");
             echo("</div><br>");
         }
     ?>
