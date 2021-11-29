@@ -37,7 +37,7 @@ try {
                     $results_products = [];
                     $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
                     try {
-                        $stmt->execute([":product_id" => $column]);
+                        $stmt->execute([":product_id" => $value]);
                         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($r) {
                             $results_products = $r;
