@@ -71,9 +71,9 @@ try {
                     echo($value);
                 }
             }
-            
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
-            echo("<input type='submit' value='submit' name='submit" . $id . "' /><br>");
+            echo("<input type='submit' value='Submit' name='submit" . $id . "' /><br>");
+            echo("<input type='submit' value 'Remove' name 'remove'" . $id . "/><br>");
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
             echo("Total cost: " . $cost*$quantity . "<br>");
@@ -93,6 +93,15 @@ try {
             }
         }
         foreach($ids as $current_id){
+            if(isset($_POST["remove" . $current_id])){
+                $stmt = $db->prepare("DELETE FROM CartItems WHERE id= :id");
+                try {
+                    $stmt->execute([":id" => $current_id]);
+                    flash("Updated value (refresh page)");
+                } catch (Exception $e) {
+                    flash("<pre>" . var_export($e, true) . "</pre>");
+                }
+            }
             if(isset($_POST["submit" . $current_id])){
                 $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
                 $sqlstr = "UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id";
@@ -102,7 +111,7 @@ try {
                 $stmt = $db->prepare($sqlstr);
                 try {
                     $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
-                    flash("Updated value");
+                    flash("Updated value (refresh page)");
                 } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                 }
