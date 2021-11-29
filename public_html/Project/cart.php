@@ -23,6 +23,7 @@ try {
     <h1>Cart</h1>
     <?php
         $ids = [];
+        $sum = 0;
         echo("<form method='POST' class='form'><br>");
         echo("<input type='submit' name='clear_all' value='Empty cart' class='delete_button'/>");
         foreach($results as $index => $record){
@@ -57,6 +58,7 @@ try {
                     echo($value);
                 }
             }
+            $sum += $quantity*$value;
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
             echo("<input type='submit' value='Submit' name='submit" . $id . "' /><br>");
             echo("<input type='submit' value='Remove' name = 'remove" . $id . "' /><br>");
@@ -66,6 +68,7 @@ try {
             echo("<a href='item_info.php?id=" . $product_id . "'>Product info</a>");
             echo("</div><br>");
         }
+        echo("Sum: " . $sum);
         echo("</form>")
     ?>
     <?php
