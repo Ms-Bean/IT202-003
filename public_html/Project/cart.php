@@ -35,7 +35,6 @@ try {
     <?php
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
-            echo("Product: " . $record['name']);
             echo("<form method='POST' data-cartid='" . $record['id'] . "'><br>");
             foreach($record as $column => $value){
                 if($column === 'id'){
@@ -67,6 +66,7 @@ try {
                 }
             }
             echo('</form>');
+            echo("Name: " . $name);
             echo("Unit price: " . $cost);
             echo("Total cost: " . $cost*$quantity);
             echo($id);
