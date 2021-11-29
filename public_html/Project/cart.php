@@ -38,6 +38,7 @@ try {
     <?php
         $ids = [];
         echo("<form method='POST'><br>");
+        echo("<input type='submit' name='clear_all' value='Empty cart'/>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
             foreach($record as $column => $value){
@@ -82,6 +83,15 @@ try {
         echo("</form>")
     ?>
     <?php
+        if(isset($_POST["clear_all"])){
+            $stmt = $db->prepare("DELETE FROM CartItems WHERE user_id = :user_id");
+            try {
+                $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+                flash("Updated value");
+            } catch (Exception $e) {
+                flash("<pre>" . var_export($e, true) . "</pre>");
+            }
+        }
         foreach($ids as $current_id){
             if(isset($_POST["submit" . $current_id])){
                 $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
