@@ -18,19 +18,9 @@ try {
 $ignore = ["id", "modified", "created"];
 ?>
 <style>
-    .container-fluid{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 300px;
-        height: 200px;
-    }
+
 </style>
-<div class="container-fluid">
+<div class="item_info">
     <?php foreach ($result as $column => $value) : ?>
     <?php 
         $v = se($column) . ": " . se($value, null, "N/A", false) . "<br>";

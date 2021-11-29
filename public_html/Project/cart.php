@@ -24,7 +24,7 @@ try {
     <?php
         $ids = [];
         echo("<form method='POST' class='form'><br>");
-        echo("<input type='submit' name='clear_all' value='Empty cart'/>");
+        echo("<input type='submit' name='clear_all' value='Empty cart' class='delete_button'/>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
             foreach($record as $column => $value){

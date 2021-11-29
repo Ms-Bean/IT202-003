@@ -28,6 +28,20 @@ require_once(__DIR__ . "/../lib/functions.php");
         display: inline;
         margin-right: 50px;
     }
+    .item_info{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        position: relative;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 400px;
+        height: 600px;
+        text-align: left;
+    }
     .nav_bar{
         border: 1px solid black;
         box-shadow: 5px 5px black;
@@ -69,7 +83,18 @@ require_once(__DIR__ . "/../lib/functions.php");
     .form{
         text-align: center;
     }
-
+    .input_section{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 300px;
+        height: 200px;
+    }
+    
 </style>
 <nav class="nav_bar">
 <ul>
