@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT product_id, unit_cost, desired_quantity from CartItems WHERE user_id = :user_id");
+$stmt = $db->prepare("SELECT id, product_id, unit_cost, desired_quantity from CartItems WHERE user_id = :user_id");
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -36,6 +36,9 @@ try {
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
             foreach($record as $column => $value){
+                if($column === 'id'){
+                    $id = $value;
+                }
                 if($column === 'product_id'){
                     $results_products = [];
                     $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
@@ -60,6 +63,9 @@ try {
                     echo($value);
                 }
             }
+            echo("<a href='admin/edit_item.php?id='");
+            echo($id);
+            echo('">Edit</a><br>');
             echo("</div><br>");
         }
     ?>
