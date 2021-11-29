@@ -97,7 +97,7 @@ try {
                 $stmt = $db->prepare("DELETE FROM CartItems WHERE id= :id");
                 try {
                     $stmt->execute([":id" => $current_id]);
-                    flash("Updated value (refresh page)");
+                    header("Refresh:0");
                 } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                 }
@@ -111,7 +111,7 @@ try {
                 $stmt = $db->prepare($sqlstr);
                 try {
                     $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
-                    flash("Updated value (refresh page)");
+                    header("Refresh:0");
                 } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
                 }
