@@ -15,13 +15,12 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
-$ignore = ["id", "modified", "created"];
 ?>
 <style>
 
 </style>
 <div class="item_info">
-    <h1><?php echo($result[0]["name"])?></h1>
+    <h1><?php echo($result["name"])?></h1>
     <?php foreach ($result as $column => $value) : ?>
     <?php 
         if($column === "name"){
