@@ -136,7 +136,7 @@
               ![image](https://user-images.githubusercontent.com/89927037/141157242-9cf80035-ad52-4e5e-ac09-f41dc9580216.png)
 
 - Milestone 2
-<table><tr><td>milestone 1</td></tr><tr><td><table><tr><td>F1 - User with an admin role or shop owner role will be able to add products to inventory</td></tr><tr><td>Links:<p>
+<table><tr><td>milestone 2</td></tr><tr><td><table><tr><td>F1 - User with an admin role or shop owner role will be able to add products to inventory</td></tr><tr><td>Links:<p>
 
  [https://sdc2-prod.herokuapp.com/Project/admin/add_item.php](https://sdc2-prod.herokuapp.com/Project/admin/add_item.php)</p></td></tr><tr><td>PRs:<p>
 
