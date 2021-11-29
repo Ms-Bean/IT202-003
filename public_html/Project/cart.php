@@ -50,7 +50,7 @@ try {
                     }
                 }
                 else if($column === 'unit_cost'){
-                    echo("Cost: " . $value . "br>");
+                    echo("Cost: " . $value . "<br>");
                 }
                 else if($column === 'desired_quantity'){
                     echo("Quantity: " . $value . "<br>");
@@ -59,7 +59,7 @@ try {
                     echo($value);
                 }
             }
-            echo("</div>");
+            echo("</div><br>");
         }
     ?>
 </div>
