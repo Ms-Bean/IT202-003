@@ -35,6 +35,7 @@ try {
     <?php
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
+            echo("<form method='POST' data-cartid='" . $record['id'] . "'>");
             foreach($record as $column => $value){
                 if($column === 'id'){
                     $id = $value;
@@ -47,28 +48,27 @@ try {
                         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($r) {
                             $results_products = $r;
-                            echo("Product: " . $results_products[0]["name"] . "<br>");
+                            $name = $results_products[0]["name"];
                         }
                     } catch (PDOException $e) {
                         flash("<pre>" . var_export($e, true) . "</pre>");
                     }
                 }
                 else if($column === 'unit_cost'){
-                    $a = $value;
-                    echo("Cost: " . $value . "<br>");
+                    $cost = $value;
+                    echo("<input class='text' value='" . $value . "'/><br>");
                 }
                 else if($column === 'desired_quantity'){
-                    $b = $value;
-                    echo("Quantity: " . $value . "<br>");
+                    $quantity = $value;
+                    echo("<input class='number' min='0' value='" . $value . '/>');
                 }
                 else{
                     echo($value);
                 }
             }
             echo("Total cost: " . $a*$b);
-            echo("<a href='admin/edit_item.php?id='");
             echo($id);
-            echo('">Edit</a><br>');
+            echo('</form>');
             echo("</div><br>");
         }
     ?>
