@@ -142,6 +142,7 @@
       - ![image](https://user-images.githubusercontent.com/89927037/142854709-7991e061-d996-4701-9404-45c042e25f58.png)
       - Image of inventory database
       - ![image](https://user-images.githubusercontent.com/89927037/142854760-c78f90a3-877f-481e-a204-e81a94360f03.png)
+
     - [ ] Any user will be able to see products with visibility = true on the Shop page
       - Product list page will be public (i.e. doesn’t require login)
       - For now limit results to 10 most recent
