@@ -7,18 +7,16 @@ if (!has_role("Admin")) {
 }
 
 $results = [];
-if (isset($_POST["itemName"])) {
-    $db = getDB();
-    $stmt = $db->prepare("SELECT product_id, cost from CartItems WHERE id = :id");
-    try {
-        $stmt->execute([":id" => $_SESSION['user']['id']]);
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $results = $r;
-        }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+$db = getDB();
+$stmt = $db->prepare("SELECT product_id, cost from CartItems WHERE id = :id");
+try {
+    $stmt->execute([":id" => $_SESSION["user"]["id"]]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $results = $r;
     }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
 }
 ?>
 <style>
