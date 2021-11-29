@@ -59,7 +59,7 @@ try {
                 }
                 else if($column === 'desired_quantity'){
                     $quantity = $value;
-                    echo("Quantity: <input class='number' min='0' value='" . $value . '/><br>');
+                    echo("Quantity: <input class='number' min='0' value='" . $value . "'/><br>'");
                 }
                 else{
                     echo($value);
