@@ -27,7 +27,7 @@ try {
         padding: 10px;
         background-color: #a2eda1;
         width: 300px;
-        height: 100px;
+        height: 200px;
     }
 </style>
 <div class="container-fluid">
@@ -35,7 +35,8 @@ try {
     <?php
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
-            echo("<form method='POST' data-cartid='" . $record['id'] . "'>");
+            echo("Product: " . $record['name']);
+            echo("<form method='POST' data-cartid='" . $record['id'] . "'><br>");
             foreach($record as $column => $value){
                 if($column === 'id'){
                     $id = $value;
@@ -56,19 +57,19 @@ try {
                 }
                 else if($column === 'unit_cost'){
                     $cost = $value;
-                    echo("<input class='text' value='" . $value . "'/><br>");
                 }
                 else if($column === 'desired_quantity'){
                     $quantity = $value;
-                    echo("<input class='number' min='0' value='" . $value . '/>');
+                    echo("Quantity: <input class='number' min='0' value='" . $value . '/><br>');
                 }
                 else{
                     echo($value);
                 }
             }
-            echo("Total cost: " . $a*$b);
-            echo($id);
             echo('</form>');
+            echo("Unit price: " . $cost);
+            echo("Total cost: " . $cost*$quantity);
+            echo($id);
             echo("</div><br>");
         }
     ?>
