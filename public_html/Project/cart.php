@@ -87,7 +87,7 @@ try {
             $stmt = $db->prepare("DELETE FROM CartItems WHERE user_id = :user_id");
             try {
                 $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
-                flash("Updated value");
+                header("Refresh:0");
             } catch (Exception $e) {
                 flash("<pre>" . var_export($e, true) . "</pre>");
             }
