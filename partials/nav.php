@@ -26,13 +26,14 @@ require_once(__DIR__ . "/../lib/functions.php");
 <style>
     li{
         display: inline;
+        margin-right: 50px;
     }
     .nav_bar{
         border: 1px solid black;
         box-shadow: 5px 5px black;
         padding: 10px;
         background-color: #a2eda1;
-        width: 300px;
+        width: 100%;
         margin-bottom: 30px;
     }
 </style>
@@ -41,6 +42,8 @@ require_once(__DIR__ . "/../lib/functions.php");
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php echo get_url('home.php'); ?>">Home</a></li>
             <li><a href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
+            <li><a href="<?php echo get_url('shop.php'); ?>">Shop</a></li>
+            <li><a href="<?php echo get_url('cart.php'); ?>">Cart</a></li>
         <?php endif; ?>
         <?php if (!is_logged_in()) : ?>
             <li><a href="<?php echo get_url('login.php'); ?>">Login</a></li>
@@ -51,6 +54,7 @@ require_once(__DIR__ . "/../lib/functions.php");
             <li><a href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
             <li><a href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
             <li><a href="<?php echo get_url('admin/add_item.php'); ?>">Add Items</a></li>
+            <li><a href="<?php echo get_url('admin/list_items.php'); ?>">List Items</a></li>
         <?php endif; ?>
         <?php if (is_logged_in()) : ?>
             <li><a href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
