@@ -24,8 +24,10 @@ require_once(__DIR__ . "/../lib/functions.php");
 
 ?>
 <style>
-    .nav_bar{
+    li{
         display: inline;
+    }
+    .nav_bar{
         border: 1px solid black;
         box-shadow: 5px 5px black;
         padding: 10px;
