@@ -34,7 +34,18 @@ try {
         foreach($results as $index => $record){ 
             foreach($record as $column => $value){
                 if($column === 'product_id'){
-                   echo("id: " . $value);
+                    $results_products = [];
+                    $stmt = $db->prepare("SELECT name from Products WHERE id = :product_id");
+                    try {
+                        $stmt->execute([":product_id" => $column]);
+                        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if ($r) {
+                            $results_products = $r;
+                            echo("Product: " . $results_products["name"] . "<br>");
+                        }
+                    } catch (PDOException $e) {
+                        flash("<pre>" . var_export($e, true) . "</pre>");
+                    }
                 }
                 else if($column === 'unit_cost'){
                     echo("Cost: " . $value . "<br>");
