@@ -20,6 +20,7 @@ try {
         position: fixed;
         left: 50%;
         margin-left: -150px;
+        margin-bottom: 100px;
         border: 1px solid black;
         box-shadow: 5px 5px black;
         padding: 10px;
@@ -31,7 +32,8 @@ try {
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
-        foreach($results as $index => $record){ 
+        foreach($results as $index => $record){
+            echo("<div class='cart_item'>");
             foreach($record as $column => $value){
                 if($column === 'product_id'){
                     $results_products = [];
@@ -41,22 +43,23 @@ try {
                         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         if ($r) {
                             $results_products = $r;
-                            echo("<div class='cart_item'>Product: " . $results_products[0]["name"] . "</div><br>");
+                            echo("Product: " . $results_products[0]["name"] . "<br>");
                         }
                     } catch (PDOException $e) {
                         flash("<pre>" . var_export($e, true) . "</pre>");
                     }
                 }
                 else if($column === 'unit_cost'){
-                    echo("<div class='cart_item'>Cost: " . $value . "</div><br>");
+                    echo("Cost: " . $value . "br>");
                 }
                 else if($column === 'desired_quantity'){
-                    echo("<div class='cart_item'>Quantity: " . $value . "</div><br>");
+                    echo("Quantity: " . $value . "<br>");
                 }
                 else{
                     echo($value);
                 }
             }
+            echo("</div>");
         }
     ?>
 </div>
