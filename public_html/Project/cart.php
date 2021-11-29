@@ -73,7 +73,7 @@ try {
             }
             
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
-            echo("<input type='submit' onclick='location.reload();' name='submit" . $id . "' /><br>");
+            echo("<input type='submit' value='submit' name='submit" . $id . "' /><br>");
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
             echo("Total cost: " . $cost*$quantity . "<br>");
