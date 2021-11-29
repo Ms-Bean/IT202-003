@@ -18,27 +18,13 @@ try {
 }
 
 ?>
-<style>
-    .cart_item{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 300px;
-        height: 200px;
-    }
-</style>
+
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
         $ids = [];
-        echo("<form method='POST'><br>");
-        echo("<input type='submit' name='clear_all' value='Empty cart'/>");
+        echo("<form method='POST' class='form'><br>");
+        echo("<input type='submit' name='clear_all' value='Empty cart' class='delete_button'/>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
             foreach($record as $column => $value){

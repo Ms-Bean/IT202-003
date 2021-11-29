@@ -1,18 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 ?>
-<style>
-    .input_section{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 300px;
-    }
-</style>
 <?php //Prevent username and password from being erased on error
 $confirm = ''; $password = '';
 if(isset($_POST['confirm'])){

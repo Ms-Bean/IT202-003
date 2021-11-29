@@ -44,12 +44,10 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         height: 100px;
         width: 100px;
     }
-    td{
-
-    }
+    
 </style>
 <div class="container-fluid">
-    <h1>List Items</h1>
+    <h1>Shop</h1>
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
         <div class="input-group mb-3">
             <input class="form-control" type="search" name="itemName" placeholder="Item Filter" /><br>
