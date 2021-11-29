@@ -33,9 +33,9 @@ try {
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
+        echo("<form method='POST' data-cartid='" . $record['id'] . "'><br>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
-            echo("<form method='POST' data-cartid='" . $record['id'] . "'><br>");
             foreach($record as $column => $value){
                 if($column === 'id'){
                     $id = $value;
@@ -59,12 +59,13 @@ try {
                 }
                 else if($column === 'desired_quantity'){
                     $quantity = $value;
-                    echo("Quantity: <input class='number' min='0' value='" . $value . "'/><br>");
                 }
                 else{
                     echo($value);
                 }
             }
+            echo("Quantity: <input type='number' name='quantity". $id . "' min='0' value='" . $quantity . "'/><br>");
+            echo("<input type='submit' name='submit'" . $id);
             echo('</form>');
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
