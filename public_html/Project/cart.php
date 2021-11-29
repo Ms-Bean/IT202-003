@@ -58,8 +58,6 @@ try {
             }
         }
     ?>
-    </div>
-    <?php endforeach; endforeach;?>
 </div>
 <?php
 require_once(__DIR__ . "/../../partials/flash.php");
