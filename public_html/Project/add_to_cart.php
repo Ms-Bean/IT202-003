@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
 
 </style>
 <div class="container-fluid">
-    <h1>Add <?php echo($name)?> To Cart</h1>
+    <h1>Add To Cart</h1>
     <form method="POST">
         <div>
             <label for="desired_quantity">Quantity</label>
