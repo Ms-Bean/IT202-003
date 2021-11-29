@@ -1,9 +1,9 @@
 <?php
+require(__DIR__ . "/../../partials/nav.php");
 if(!is_logged_in()){
     flash("You must log in to add to cart.");
     die(header("Location: login.php"));
 }
-require(__DIR__ . "/../../partials/nav.php");
 $product_id = se($_GET, "id", -1, false);
 $user_id = $_SESSION["user"]["id"];
 $desired_quantity = 4;
@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
 
 </style>
 <div class="container-fluid">
-    <h1>Add To Cart</h1>
+    <h1>Add <?php echo($product_name)?> To Cart</h1>
     <form method="POST">
         <div>
             <label for="desired_quantity">Quantity</label>
