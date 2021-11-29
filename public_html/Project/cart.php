@@ -33,12 +33,14 @@ try {
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
+        $ids = [];
         echo("<form method='POST'><br>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
             foreach($record as $column => $value){
                 if($column === 'id'){
                     $id = $value;
+                    array_push($ids, $id);
                 }
                 else if($column === 'product_id'){
                     $results_products = [];
@@ -65,13 +67,28 @@ try {
                 }
             }
             echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
-            echo("<input type='submit' name='submit' value='Submit' " . $id . "/><br>");
-            echo('</form>');
+            echo("<input type='submit' name='submit" . $id . "' value='Submit'/><br>");
+            echo('</form><br>');
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
             echo("Total cost: " . $cost*$quantity . "<br>");
-            echo($id . "<br>");
             echo("</div><br>");
+        }
+    ?>
+    <?php
+        foreach($ids as $current_id){
+            if(isset($_POST["submit" . $current_id])){
+                if(isset($_POST["quantity" . $current_id])){
+                    $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
+                    $stmt = $db->prepare("UPDATE CartItems SET desired_quantity=$quantity_to_insert WHERE id=$current_id");
+                    try {
+                        $stmt->execute([":product_id" => $product_id, ":user_id" => $user_id, ":desired_quantity" => $desired_quantity, ":unit_cost" => $unit_cost]);
+                        flash("Added to cart");
+                    } catch (Exception $e) {
+                    flash("<pre>" . var_export($e, true) . "</pre>");
+                    } 
+                }
+            }
         }
     ?>
 </div>
