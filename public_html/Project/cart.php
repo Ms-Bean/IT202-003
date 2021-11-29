@@ -54,15 +54,18 @@ try {
                     }
                 }
                 else if($column === 'unit_cost'){
+                    $a = $value;
                     echo("Cost: " . $value . "<br>");
                 }
                 else if($column === 'desired_quantity'){
+                    $b = $value;
                     echo("Quantity: " . $value . "<br>");
                 }
                 else{
                     echo($value);
                 }
             }
+            echo("Total cost: " . $a*$b);
             echo("<a href='admin/edit_item.php?id='");
             echo($id);
             echo('">Edit</a><br>');
