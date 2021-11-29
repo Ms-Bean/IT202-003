@@ -1,6 +1,5 @@
 <?php
-require(__DIR__ . "/../../../partials/nav.php");
-
+require(__DIR__ . "/../../partials/nav.php");
 
 $results = [];
 $db = getDB();
@@ -28,5 +27,5 @@ try {
     ?>
 </div>
 <?php
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>
