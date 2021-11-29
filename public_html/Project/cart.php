@@ -76,7 +76,7 @@ try {
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
             echo("Total cost: " . $cost*$quantity . "<br>");
-            echo("<a href='item_info.php?id='" . $product_id . "'>Product info</a>");
+            echo("<a href='item_info.php?id=" . $product_id . "'>Product info</a>");
             echo("</div><br>");
         }
         echo("</form>")
