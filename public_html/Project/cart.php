@@ -20,7 +20,8 @@ try {
         position: fixed;
         left: 50%;
         margin-left: -150px;
-        margin-bottom: 100px;
+        position: relative;
+        margin-bottom: 50px;
         border: 1px solid black;
         box-shadow: 5px 5px black;
         padding: 10px;
