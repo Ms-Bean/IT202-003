@@ -82,7 +82,7 @@ try {
                 $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
                 $sqlstr = "UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id";
                 if($quantity_to_insert == 0){
-                    $sqlstr = "DELETE FROM CartItems WHERE id= :id";
+                    $sqlstr = "DELETE FROM CartItems WHERE id= :id AND :desired_quantity=:desired_quantity";
                 }
                 $stmt = $db->prepare($sqlstr);
                 try {
