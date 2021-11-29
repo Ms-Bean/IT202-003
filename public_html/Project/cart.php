@@ -1,16 +1,12 @@
 <?php
 require(__DIR__ . "/../../../partials/nav.php");
 
-if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");
-    die(header("Location: $BASE_PATH" . "login.php"));
-}
 
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT product_id, cost from CartItems WHERE id = :id");
+$stmt = $db->prepare("SELECT product_id, unit_cost from CartItems WHERE user_id = :user_id");
 try {
-    $stmt->execute([":id" => $_SESSION["user"]["id"]]);
+    $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $results = $r;
