@@ -85,8 +85,7 @@ try {
                 }
                 $stmt = $db->prepare($sqlstr);
                 try {
-                    $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);;
-                    header("Refresh:0");
+                    $stmt->execute([":desired_quantity" => $quantity_to_insert, ":id" => $current_id]);
                     flash("Updated value");
                 } catch (Exception $e) {
                     flash("<pre>" . var_export($e, true) . "</pre>");
