@@ -76,9 +76,9 @@ try {
         }
     ?>
     <?php
-    flash(print_r($ids, true));
         foreach($ids as $current_id){
             if(isset($_POST["submit" . $current_id])){
+                flash('You pressed' . $current_id);
                 if(isset($_POST["quantity" . $current_id])){
                     $quantity_to_insert = se($_POST, "quantity" . $current_id, "", false);
                     $stmt = $db->prepare("UPDATE CartItems SET desired_quantity= :desired_quantity WHERE id= :id");
