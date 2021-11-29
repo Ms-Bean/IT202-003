@@ -33,7 +33,7 @@ try {
 <div class="container-fluid">
     <h1>Cart</h1>
     <?php
-        echo("<form method='POST' data-cartid='" . $record['id'] . "'><br>");
+        echo("<form method='POST'><br>");
         foreach($results as $index => $record){
             echo("<div class='cart_item'>");
             foreach($record as $column => $value){
@@ -64,8 +64,8 @@ try {
                     echo($value);
                 }
             }
-            echo("Quantity: <input type='number' name='quantity". $id . "' min='0' value='" . $quantity . "'/><br>");
-            echo("<input type='submit' name='submit'" . $id);
+            echo("Quantity: <input type='number' min='0' name='quantity". $id . "' value='" . $quantity . "'/><br>");
+            echo("<input type='submit' name='submit' value='Submit' " . $id . "<br>");
             echo('</form>');
             echo("Name: " . $name . "<br>");
             echo("Unit price: " . $cost . "<br>");
