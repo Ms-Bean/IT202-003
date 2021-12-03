@@ -55,7 +55,7 @@ if(isset($_POST['password'])){
         $hasErrors = true;
         flash("Email is invalid");
      }
-    if(!preg_match('/^[a-z0-9_-]{3,30}$/', $username)){
+    if(!preg_match('/^[a-z0-9_-]{3,30}$/', strtolower($username))){
         $hasErrors = true;
         flash("Invalid username, must be alphanumeric");
     }
