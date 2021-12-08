@@ -230,37 +230,6 @@
     - For now limit to 10 most recent orders
     - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
 - Milestone 4
-  - [ ] User can set their profile to be public or private (will need another column in Users table)
-    - If public, hide email address from other users
-  - [ ] User will be able to rate a product they purchased
-    - Create table called Ratings (id, product_id, user_id, rating, comment, created)
-    - 1-5 rating
-    - Text Comment (use TEXT data type in sql)
-    - Must be done on the Product Details Page
-    - Ratings and Rating Comments will be visible on the Product Details page
-      - Show the latest 10 reviews
-      - Paginate anything beyond 10
-    - Show the average rating on the Product Details Page
-  - [ ] User’s Purchase History Changes
-    - Filter by date range
-    - Filter by category
-    - Sort by total, date purchased, etc
-    - Add pagination
-      - Any filter/sort applied must be followed during the pagination process
-    - Store Owner Purchase History Changes
-    - Filter by Date Range
-    - Filter by Category
-    - Sort by total, date purchased, etc
-    - Add pagination
-      - Any filter/sort applied must be followed during the pagination process
-    - The result page should show the accurate total price of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)
-    - Add pagination to Shop Page (and any other product lists not yet mentioned)
-  - [ ] Store Owner will be able to see all products out of stock
-    - This will be added as a filter to their product list page from Milestone 2
-    - Pagination should account for this new filter
-    - Recommended to have the filter applied as a given value (i.e., where quantity is <= value)
-    - User can sort products by average rating on the Shop Page
-      - Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product
 
 ### Intructions
 #### Don't delete this
@@ -296,8 +265,6 @@
   8. Merge the updated dev branch into your production branch via a pull request
   9. Close any related issues that didn't auto close
     - You can edit the dropdown on the issue or drag/drop it to the proper column on the project board
-- Milestone 3
-- Milestone 4
 ### Intructions
 #### Don't delete this
 1. Pick one project type
