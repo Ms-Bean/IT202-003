@@ -289,19 +289,19 @@
     - Sort by total, date purchased, etc
     - Add pagination
       - Any filter/sort applied must be followed during the pagination process
-    - Store Owner Purchase History Changes
+  - [ ] Store Owner Purchase History Changes
     - Filter by Date Range
     - Filter by Category
     - Sort by total, date purchased, etc
     - Add pagination
       - Any filter/sort applied must be followed during the pagination process
     - The result page should show the accurate total price of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)
-    - Add pagination to Shop Page (and any other product lists not yet mentioned)
+  - [ ] Add pagination to Shop Page (and any other product lists not yet mentioned)
   - [ ] Store Owner will be able to see all products out of stock
     - This will be added as a filter to their product list page from Milestone 2
     - Pagination should account for this new filter
     - Recommended to have the filter applied as a given value (i.e., where quantity is <= value)
-    - User can sort products by average rating on the Shop Page
+  - [ ] User can sort products by average rating on the Shop Page
       - Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product
 
 ### Intructions
