@@ -191,7 +191,7 @@
  [https://github.com/Spencer-Clarke/IT202-003/pull/92](https://github.com/Spencer-Clarke/IT202-003/pull/92)</p></td></tr><tr><td><table><tr><td>F11 - User will be able to clear entire cart via button click (11/29/2021)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143958034-1b260968-18d0-4a53-8e61-b8d567c8e22f.png"><p>Cart after saguaro cactus removed via empty cart button (empty)</td></tr></td></tr></table></td></tr></td></tr></table>
 
 - Milestone 3
-   - [ ] User will be able to purchase items in their Cart
+ - [ ] User will be able to purchase items in their Cart
     - Create an Orders table (id, user_id, created, total_price, address, payment_method)
       - Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will not be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
       - Hint: This must be inserted first before you can insert into the OrderItems table
