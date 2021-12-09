@@ -5,20 +5,20 @@ if(!is_logged_in()){
     die(header("Location: login.php"));
 }
 $user_id = $_SESSION["user"]["id"];
-$result = [];
+$results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT unit_cost, desired_quantity FROM CartItems where user_id =:user_id");
+$stmt = $db->prepare("SELECT unit_cost, desired_quantity from CartItems WHERE user_id = :user_id");
 try {
-    $stmt->execute([":user_id" => $user_id]);
-    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
-        $result = $r;
+        $results = $r;
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $grand_sum = 0;
-foreach($result as $index => $record){
+foreach($results as $index => $record){
     foreach($record as $column => $value){
         if($grand_sum == 0){
             $grand_sum += $value;
