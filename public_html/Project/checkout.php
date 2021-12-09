@@ -19,14 +19,7 @@ try {
 }
 $grand_sum = 0;
 foreach($results as $index => $record){
-    foreach($record as $column => $value){
-        if($grand_sum == 0){
-            $grand_sum += $value;
-        }
-        else{
-            $grand_sum *= $value;
-        }
-    }
+    $grand_sum += $record["desired_quantity"] + $record["unit_cost"];
 }
 
 ?>
@@ -46,7 +39,15 @@ foreach($results as $index => $record){
 </style>
 <div class="container-fluid">
     <h1><?php echo($grand_sum)?></h1>
-    
+    <form method="POST">
+        <div>
+            <label for="desired_quantity">Quantity</label>
+            <input type="number" min="1" name="desired_quantity" required />
+        </div>
+        <div>
+        <input class="btn btn-primary" type="submit" value="Add to cart" name="submit" />
+        </div>
+    </form>
 
 </div>
 <?php
