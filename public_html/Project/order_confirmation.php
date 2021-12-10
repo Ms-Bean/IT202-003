@@ -40,7 +40,7 @@ try {
 <div class="container-fluid">
     <?php
         foreach($orders_results as $index => $record){
-            echo("<div class='cart_item'>");
+            echo("<div class='order_info'>");
             echo("<h1>Order Info</h1>");
             foreach ($record as $column => $value){
                 echo($column . ": " . $value . "<br>");
