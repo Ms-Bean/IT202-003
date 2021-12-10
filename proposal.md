@@ -136,6 +136,137 @@
               ![image](https://user-images.githubusercontent.com/89927037/141157242-9cf80035-ad52-4e5e-ac09-f41dc9580216.png)
 
 - Milestone 2
+<table><tr><td>milestone 2</td></tr><tr><td><table><tr><td>F1 - User with an admin role or shop owner role will be able to add products to inventory (11/22/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/admin/add_item.php](https://sdc2-prod.herokuapp.com/Project/admin/add_item.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/82](https://github.com/Spencer-Clarke/IT202-003/pull/82)</p></td></tr><tr><td><table><tr><td>F1 - Table should be called Products<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143949593-79b5886a-0076-43e3-895a-1764987064f7.png"><p>New item form</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143949772-ed849527-c1bb-424f-a8fb-e119542bfbba.png"><p>Products table</td></tr></td></tr></table></td></tr><table><tr><td>F2 - Any user will be able to see products with visibility = true (11/28/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/shop.php](https://sdc2-prod.herokuapp.com/Project/shop.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/85](https://github.com/Spencer-Clarke/IT202-003/pull/85)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/96](https://github.com/Spencer-Clarke/IT202-003/pull/96)</p></td></tr><tr><td><table><tr><td>F2 - Product list page will be public (doesn't require login)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143950858-01928ecd-8d7f-4cb8-aa87-52445c7b2ed1.png"><p>Image of absence of login check on shop page</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - User will be able to search by category and partial string match on name<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143950353-3f772041-640a-44bc-8b95-5a4b590c6d89.png"><p>Partial string and category search</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - For now limit results to 10 most recent<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143951995-2f76083c-6626-4b8b-822a-2e3594b72239.png"><p>Limiter passed into sql string</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F2 - User will be able to sort by price<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143950520-441620be-ec30-49bd-a411-b120669d13c1.png"><p>Items sorted by price</td></tr></td></tr></table></td></tr><table><tr><td>F3 - Admin/Shop Owner will be able to see products with any visibility (11/24/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/admin/list_items.php](https://sdc2-prod.herokuapp.com/Project/admin/list_items.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/admin/list_items.php](https://github.com/Spencer-Clarke/IT202-003/pull/83)</p></td></tr><tr><td><table><tr><td>F3 - This page should be separate from shop, but similar<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143952420-408059c3-7542-446a-80fd-ba92998e531a.png"><p>All items listed on list items page</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143952594-6d15ea88-d620-40fa-9a6f-981a6433ae99.png"><p>San pedro cactus, with visibility=false, listed on list items page but not on shop page</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F3 - Page should only be accessible by admn<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143953253-f6a8364f-e9ac-450f-9390-7ba815856d70.png"><p>Admin role check</td></tr></td></tr></table></td></tr><table><tr><td>F4 - Admin will be able to edit any product (11/27/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/admin/edit_item.php?id=1](https://sdc2-prod.herokuapp.com/Project/admin/edit_item.php?id=1)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/84](https://github.com/Spencer-Clarke/IT202-003/pull/84)</p></td></tr><tr><td><table><tr><td>F4 - Edit button will be accessible anywhere a product is shown for users with correct roles<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143953750-594c1de6-829f-48f7-9802-df7e59ce2425.png"><p>Edit page</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143953826-40b40a55-8763-40ad-b723-b8912f0c0525.png"><p>Edit links echoed when user has admin role</td></tr></td></tr></table></td></tr><table><tr><td>F5 - User will be able to click an item from a list and get more info (11/28/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/item_info.php?id=1](https://sdc2-prod.herokuapp.com/Project/item_info.php?id=1)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/86](https://github.com/Spencer-Clarke/IT202-003/pull/86)</p></td></tr><tr><td><table><tr><td>F5 - Info page<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143954271-228dd42c-a343-403e-9341-07ca360f67ea.png"><p>Information page for succulent, visited by clicking link seen alongside edit button in shop</td></tr></td></tr></table></td></tr><table><tr><td>F6 - User must be logged in for any cart related activity</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/add_to_cart.php?id=3](https://sdc2-prod.herokuapp.com/Project/add_to_cart.php?id=3)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/87](https://github.com/Spencer-Clarke/IT202-003/pull/87)</p></td></tr><tr><td><table><tr><td>F6 - User must be logged in for cart related activity<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143954641-022899ac-064b-4020-b428-3de1a2a878eb.png"><p>Die if user is not logged in</td></tr></td></tr></table></td></tr><table><tr><td>F7 - User will be able to add items to cart</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/add_to_cart.php?id=3](https://sdc2-prod.herokuapp.com/Project/add_to_cart.php?id=3)</p></td></tr><tr><td>PRs:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/add_to_cart.php?id=3](https://sdc2-prod.herokuapp.com/Project/add_to_cart.php?id=3)</p></td></tr><tr><td><table><tr><td>F7 - Cart will be table based (id, product_id, user_id, desired_quantity, unit_cost, date-created, date-modified)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143954915-bffba0b1-4999-4ae4-98af-01f53b6f9a02.png"><p>Cart database</td></tr></td></tr></table></td></tr><tr><td><table><tr><td>F7 - Adding items to cart will not affect products table<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143956232-1d8da3fe-b430-41fa-a446-09e8fcf91d07.png"><p>Add to cart page which doesn't do anything to the products table</td></tr></td></tr></table></td></tr><table><tr><td>F8 - User will be able to see their cart</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/cart.php](https://sdc2-prod.herokuapp.com/Project/cart.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/88](https://github.com/Spencer-Clarke/IT202-003/pull/88)</p></td></tr><tr><td><table><tr><td>F8 - List all the items, show sub total, show cart total, link to product info (all four shown in same image)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143956535-a6c42bdb-dfb3-406d-831f-70ceb65f68cc.png"><p>Item list, sub total, cart total, link to product info</td></tr></td></tr></table></td></tr><table><tr><td>F9 - User will be able to change quantity of items in cart (11/28/2021)</td></tr><tr><td>Links:<p>
+
+ [https://user-images.githubusercontent.com/89927037/143956535-a6c42bdb-dfb3-406d-831f-70ceb65f68cc.png](https://user-images.githubusercontent.com/89927037/143956535-a6c42bdb-dfb3-406d-831f-70ceb65f68cc.png)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/89](https://github.com/Spencer-Clarke/IT202-003/pull/89)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/90](https://github.com/Spencer-Clarke/IT202-003/pull/90)</p></td></tr><tr><td><table><tr><td>F9 - Quantity of 0 should also remove from cart<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143957074-519fe28f-e2ad-476a-95e4-355bb995ee97.png"><p>Saguaro cactus quantity changed from 17 to 13, subtotal and grand total changed themselves accordingly</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143957342-416eb8d9-9ee9-42fe-9b9f-4f5a7549b8c8.png"><p>Deletion if quantity is set to 0</td></tr></td></tr></table></td></tr><table><tr><td>F10 - User will be able to remove a single cart item via button click (11/29/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/cart.php](https://sdc2-prod.herokuapp.com/Project/cart.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/91](https://github.com/Spencer-Clarke/IT202-003/pull/91)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/92](https://github.com/Spencer-Clarke/IT202-003/pull/92)</p></td></tr><tr><td><table><tr><td>F10 - User will be able to remove item via button click<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143957729-5dc2080f-dc81-4686-80f4-382cd98b4406.png"><p>Cart after succulent removed by remove button</td></tr></td></tr></table></td></tr><table><tr><td>F11 - User will be able to clear their entire cart via button click (11/29/2021)</td></tr><tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/cart.php](https://sdc2-prod.herokuapp.com/Project/cart.php)</p></td></tr><tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/91](https://github.com/Spencer-Clarke/IT202-003/pull/91)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/92](https://github.com/Spencer-Clarke/IT202-003/pull/92)</p></td></tr><tr><td><table><tr><td>F11 - User will be able to clear entire cart via button click (11/29/2021)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143958034-1b260968-18d0-4a53-8e61-b8d567c8e22f.png"><p>Cart after saguaro cactus removed via empty cart button (empty)</td></tr></td></tr></table></td></tr></td></tr></table>
+
+
+- Milestone 3
+ - [ ] User will be able to purchase items in their Cart
+    - Create an Orders table (id, user_id, created, total_price, address, payment_method)
+      - Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will not be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
+      - Hint: This must be inserted first before you can insert into the OrderItems table
+    - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)
+      - Hint: This is basically a copy of the data from the Cart table, just persisted as a purchase
+    - Checkout Form
+      - Ask for payment method (Cash, Visa, MasterCard, Amex, etc)
+      - Do not ask for credit card number, this is just a sample
+      - Ask for a numerical value to be entered (this will be a fake payment check to compare against the cart total to determine if the payment succeeds)
+      - Ask for Address/shipping information
+    - User will be asked for their Address for shipping purposes
+      - Address form should validate correctly
+        - Use this as a rough guide (likely you’ll want to prefill some of the data you already have about the user)
+
+    - Order process:
+      - Calculate Cart Items
+      - Verify the current product price against the Products table
+        - Since our Cart is table based it can be long lived so if a user added a Product at a sale and they attempt to purchase afterwards, it should pull the true Product cost.
+        - You can also show the Cart.unit_price vs Product.unit_price to show a sale or an increase in price
+      - Verify desired product and desired quantity are still available in the Products table
+        - Users can’t purchase more than what’s in stock
+        - Show an error message and prevent order from going through if something isn’t available
+        - Let the user update their cart and try again
+        - Clearly show what the issue is (which product isn’t available, how much quantity is available if the cart exceeds it)
+      - Make an entry into the Orders table
+      - Get last Order ID from Orders table
+      - Copy the cart details into the OrderItems tables with the Order ID from the previous step
+      - Update the Products table Stock for each item to deduct the Ordered Quantity
+      - Clear out the user’s cart after successful order
+      - Redirect user to Order Confirmation Page
+  - [ ] Order Confirmation Page
+    - Show the entire order details from the Order and OrderItems table (similar to cart)
+    - Displays a Thank you message
+  - [ ] User will be able to see their Purchase History
+    - For now limit to 10 most recent orders
+    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
+  - [ ] Store Owner will be able to see all Purchase History
+    - For now limit to 10 most recent orders
+    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
+- Milestone 4
+### Intructions
+#### Don't delete this
+1. Pick one project type
+2. Create a proposal.md file in the root of your project directory of your GitHub repository
+3. Copy the contents of the Google Doc into this readme file
+4. Convert the list items to markdown checkboxes (apply any other markdown for organizational purposes)
+5. Create a new Project Board on GitHub
+   - Choose the Automated Kanban Board Template
+   - For each major line item (or sub line item if applicable) create a GitHub issue
+   - The title should be the line item text
+   - The first comment should be the acceptance criteria (i.e., what you need to accomplish for it to be "complete")
+   - Leave these in "to do" status until you start working on them
+   - Assign each issue to your Project Board (the right-side panel)
+   - Assign each issue to yourself (the right-side panel)
+6. As you work
+  1. As you work on features, create separate branches for the code in the style of Feature-ShortDescription (using the Milestone branch as the source)
+  2. Add, commit, push the related file changes to this branch
+  3. Add evidence to the PR (Feat to Milestone) conversation view comments showing the feature being implemented
+     - Screenshot(s) of the site view (make sure they clearly show the feature)
+     - Screenshot of the database data if applicable
+     - Describe each screenshot to specify exactly what's being shown
+     - A code snippet screenshot or reference via GitHub markdown may be used as an alternative for evidence that can't be captured on the screen
+  4. Update the checklist of the proposal.md file for each feature this is completing (ideally should be 1 branch/pull request per feature, but some cases may have multiple)
+    - Basically add an x to the checkbox markdown along with a date after
+      - (i.e.,   - [x] (mm/dd/yy) ....) See Template above
+    - Add the pull request link as a new indented line for each line item being completed
+    - Attach any related issue items on the right-side panel
+  5. Merge the Feature Branch into your Milestone branch (this should close the pull request and the attached issues)
+    - Merge the Milestone branch into dev, then dev into prod as needed
+    - Last two steps are mostly for getting it to prod for delivery of the assignment 
+  7. If the attached issues don't close wait until the next step
+  8. Merge the updated dev branch into your production branch via a pull request
+  9. Close any related issues that didn't auto close
+    - You can edit the dropdown on the issue or drag/drop it to the proper column on the project board
     - [ ] User with an admin role or shop owner role will be able to add products to inventory
       - Table should be called Products (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])
     - [ ] Any user will be able to see products with visibility = true on the Shop page
@@ -207,40 +338,6 @@
     - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
 
 - Milestone 4
-### Intructions
-#### Don't delete this
-1. Pick one project type
-2. Create a proposal.md file in the root of your project directory of your GitHub repository
-3. Copy the contents of the Google Doc into this readme file
-4. Convert the list items to markdown checkboxes (apply any other markdown for organizational purposes)
-5. Create a new Project Board on GitHub
-   - Choose the Automated Kanban Board Template
-   - For each major line item (or sub line item if applicable) create a GitHub issue
-   - The title should be the line item text
-   - The first comment should be the acceptance criteria (i.e., what you need to accomplish for it to be "complete")
-   - Leave these in "to do" status until you start working on them
-   - Assign each issue to your Project Board (the right-side panel)
-   - Assign each issue to yourself (the right-side panel)
-6. As you work
-  1. As you work on features, create separate branches for the code in the style of Feature-ShortDescription (using the Milestone branch as the source)
-  2. Add, commit, push the related file changes to this branch
-  3. Add evidence to the PR (Feat to Milestone) conversation view comments showing the feature being implemented
-     - Screenshot(s) of the site view (make sure they clearly show the feature)
-     - Screenshot of the database data if applicable
-     - Describe each screenshot to specify exactly what's being shown
-     - A code snippet screenshot or reference via GitHub markdown may be used as an alternative for evidence that can't be captured on the screen
-  4. Update the checklist of the proposal.md file for each feature this is completing (ideally should be 1 branch/pull request per feature, but some cases may have multiple)
-    - Basically add an x to the checkbox markdown along with a date after
-      - (i.e.,   - [x] (mm/dd/yy) ....) See Template above
-    - Add the pull request link as a new indented line for each line item being completed
-    - Attach any related issue items on the right-side panel
-  5. Merge the Feature Branch into your Milestone branch (this should close the pull request and the attached issues)
-    - Merge the Milestone branch into dev, then dev into prod as needed
-    - Last two steps are mostly for getting it to prod for delivery of the assignment 
-  7. If the attached issues don't close wait until the next step
-  8. Merge the updated dev branch into your production branch via a pull request
-  9. Close any related issues that didn't auto close
-    - You can edit the dropdown on the issue or drag/drop it to the proper column on the project board
 ### Intructions
 #### Don't delete this
 1. Pick one project type

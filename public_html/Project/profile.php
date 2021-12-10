@@ -8,7 +8,20 @@ if (!is_logged_in()) {
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
-
+    $hasErrors = false;
+    if(empty($email)){
+        $hasErrors = true;
+        flash("Email must be set");
+    }
+    $email = sanitize_email($email);
+    if(!is_valid_email($email)){
+        $hasErrors = true;
+        flash("Email is invalid");
+     }
+    if(!preg_match('/^[a-z0-9_-]{3,30}$/', $username)){
+        $hasErrors = true;
+        flash("Invalid username, must be alphanumeric");
+    }
     $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
     $db = getDB();
     $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
@@ -22,11 +35,11 @@ if (isset($_POST["save"])) {
                 flash("The chosen " . $matches[1] . " is not available.", "warning");
             } else {
                 //TODO come up with a nice error message
-                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                flash("Duplicate information was found.");
             }
         } else {
             //TODO come up with a nice error message
-            echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            flash("There was an unknown error.");
         }
     }
     //select fresh data from table
@@ -130,7 +143,7 @@ $username = get_username();
         let con = form.confirmPassword.value;
         let isValid = true;
         //TODO add other client side validation....
-
+        
         //example of using flash via javascript
         //find the flash container, create a new element, appendChild
         if (pw !== con) {
