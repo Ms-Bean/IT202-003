@@ -45,7 +45,9 @@ if (isset($_POST['submit'])) {
     }
     $order_id = 0;
     foreach($results as $index => $record){
-        $order_id = $record["id"];
+        foreach($record as $column => $value){
+            $order_id = $value;
+        }
     }
     //Get information from cart items
     $stmt = $db->prepare("SELECT product_id, desired_quantity, unit_cost FROM CartItems WHERE id = :id");
@@ -58,14 +60,29 @@ if (isset($_POST['submit'])) {
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
+    $product_id;
+    $desired_quantity;
+    $unit_cost;
     foreach($results as $index => $record){
+        foreach($record as $column => $value){
+            if($column === "product_id"){
+                $product_id = $value;
+            }
+            else if($column === "desired_quantity"){
+                $desired_quantity = $value;
+            }
+            else if($column == "unit_cost"){
+                $unit_cost = $value;
+            }
+        }
         $stmt = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES(:order_id, :product_id, :quantity, :unit_price)");
         try {
-            $stmt->execute([":order_id" => $order_id, ":product_id" => $record["product_id"], ":quantity" => $record["desired_quantity"], ":unit_price" => $record["unit_cost"]]);
+            $stmt->execute([":order_id" => $order_id, ":product_id" => $product_id, ":quantity" => $desired_quantity, ":unit_price" => $unit_cost]);
         } catch (Exception $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
-        } 
+        }
     }
+
     $stmt = $db->prepare("DELETE FROM CartItems WHERE user_id = :user_id");
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
