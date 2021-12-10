@@ -7,17 +7,7 @@ if(!is_logged_in()){
 $order_id = se($_GET, "id", -1, false);
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT id, product_id, unit_price, quantity from OrderItems WHERE order_id = :order_id AND user_id = :user_id");
-try {
-    $stmt->execute([":order_id" => $order_id, ":user_id" => $_SESSION["user"]["id"]]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($r) {
-        $orderitems_results = $r;
-    }
-} catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
-}
-$stmt = $db->prepare("SELECT id, user_id, total_price, created, payment_method from Orders WHERE id = :order_id AND user_id = :user_id");
+$stmt = $db->prepare("SELECT id, user_id, total_price, created, payment_method from Orders WHERE id = :order_id");
 try {
     $stmt->execute([":order_id" => $order_id, ":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,6 +17,23 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+
+if($orders_results[0]["user_id"] !== $_SESSION["user"]["id"]){
+    flash("This is not your order!");
+    die(header("Location: home.php"));
+}
+
+$stmt = $db->prepare("SELECT id, product_id, unit_price, quantity from OrderItems WHERE (order_id = :order_id");
+try {
+    $stmt->execute([":order_id" => $order_id, ":user_id" => $_SESSION["user"]["id"]]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $orderitems_results = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+
 ?>
 
 <div class="container-fluid">
