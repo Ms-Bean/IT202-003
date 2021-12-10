@@ -89,6 +89,7 @@ if (isset($_POST['submit'])) {
         }
         header("Refresh:0");
     }
+    else {
     //Get information from form and insert into Orders
     $address_string = $_POST['fname'] . ', ' . $_POST['lname'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ', ' . $_POST['zip'] . ', ' . $_POST['apart'] . ', ' . $_POST['address'];
     $payment_method = $_POST['payment_method'];
@@ -138,6 +139,7 @@ if (isset($_POST['submit'])) {
     }
     flash("Order placed");
     die(header("Location: order_confirmation.php?id=" . $new_order_id));
+}
 }
 ?>
 <style>
