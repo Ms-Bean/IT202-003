@@ -95,14 +95,21 @@ if (isset($_POST['submit'])) {
     foreach($results as $index => $record){
         $new_order_id = $record["id"];
     }
-    //Insert purchased items into OrderItems table using new order id and arrays from cart table
     for($i = 0; $i < count($incart_product_ids); $i++){
+        //Insert purchased items into OrderItems table using new order id and arrays from cart table
         $stmt = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES(:order_id, :product_id, :quantity, :unit_price)");
         try {
             $stmt->execute([":order_id" => $new_order_id, ":product_id" => $incart_product_ids[$i], ":quantity" => $incart_desired_quantities[$i], ":unit_price" => $inproducts_costs[$i]]);
         } catch (Exception $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         } 
+        //Subtract from Products table
+        $stmt = $db->prepare("UPDATE Products SET stock = :stock WHERE id = :id");
+        try {
+            $stmt->execute([":stock" => $inproducts_stocks[$i]-$incart_desired_quantities[$i], ":id" => $incart_product_ids[$i]]);
+        } catch (Exception $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
     }
     //Clear user's cart
     $stmt = $db->prepare("DELETE FROM CartItems WHERE user_id = :user_id");
