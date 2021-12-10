@@ -23,7 +23,7 @@ foreach($results as $index => $record){
 }
 
 if (isset($_POST['submit'])) {
-    $address_string = $_POST['fname'] . ', ' . $_POST['lname'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ', ' . $_POST["zip"] . ', ' . $_POST['apart'];
+    $address_string = $_POST['fname'] . ', ' . $_POST['lname'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ', ' . $_POST['zip'] . ', ' . $_POST['apart'] . ', ' . $_POST['address'];
     $payment_method = $_POST['payment_method'];
     $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, payment_method, address) VALUES(:user_id, :total_price, :payment_method, :address)");
     try {
@@ -60,6 +60,7 @@ if (isset($_POST['submit'])) {
             <input type="text" placeholder="Country" name="country" required/>
             <input type="text" placeholder="Zip/Postal code" name="zip" required/>
             <input type="text" placeholder="Apartment, suite, etc" name="apart" required/>
+            <input type="text" placeholder="Street address" name="address" required/>
         </div>
         <div>
             <label>Payment Method</label>
