@@ -8,7 +8,7 @@ $order_id = se($_GET, "id", -1, false);
 $orders_results = [];
 $orderitems_results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT id, user_id, total_price, created, payment_method from Orders WHERE id = :order_id");
+$stmt = $db->prepare("SELECT id, user_id, total_price, created, payment_method, address from Orders WHERE id = :order_id");
 try {
     $stmt->execute([":order_id" => $order_id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
