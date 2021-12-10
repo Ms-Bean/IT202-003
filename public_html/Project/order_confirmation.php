@@ -48,7 +48,7 @@ try {
         }
     ?>
     <?php
-        foreach($order_itemsresults as $index => $record){
+        foreach($orderitems_results as $index => $record){
             echo("<div class='cart_item'>");
             echo("<h1>Item info</h1>");
             foreach ($result as $column => $value){
