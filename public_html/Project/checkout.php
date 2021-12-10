@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, payment_method, address) VALUES(:user_id, :total_price, :payment_method, :address)");
     try {
         $stmt->execute([":user_id" => $user_id, ":total_price" => $grand_sum, ":payment_method" => $payment_method, ":address" => $address_string]);
-        flash("Added to cart");
+        flash("Order placed");
     } catch (Exception $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     } 
@@ -44,23 +44,24 @@ if (isset($_POST['submit'])) {
         padding: 10px;
         background-color: #a2eda1;
         width: 300px;
-        height: 300px;
+        height: 500px;
     }
 
 </style>
 <div class="container-fluid">
-    <h1><?php echo($grand_sum)?></h1>
+    <h1>Total: $<?php echo($grand_sum)?></h1>
     <form method="POST">
         <div>
-            <label>Address Information</label>
+            <label>Required Address Information</label>
             <input type="text" placeholder="First name" name="fname" required/>
             <input type="text" placeholder="Last name" name="lname" required/>
             <input type="text" placeholder="City" name="city"required />
             <input type="text" placeholder="State/Province" name="state"required/>
             <input type="text" placeholder="Country" name="country" required/>
-            <input type="text" placeholder="Zip/Postal code" name="zip" required/>
-            <input type="text" placeholder="Apartment, suite, etc" name="apart" required/>
             <input type="text" placeholder="Street address" name="address" required/>
+            <label>Optional Address Information</label>
+            <input type="text" placeholder="Zip/Postal code" name="zip" value=""/>
+            <input type="text" placeholder="Apartment, suite, etc" name="apart" value=""/>
         </div>
         <div>
             <label>Payment Method</label>
