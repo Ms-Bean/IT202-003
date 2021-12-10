@@ -19,7 +19,7 @@ try {
 }
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
-    echo("<br>Order . " . $record["id"] . "placed on " . $record["created"]);
+    echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
     echo("<br>Total price: " . $record["total_price"]);
     echo("<br>Payment Method: " . $record["payment_method"]);
     echo("<br>Address: " . $record["address"]);

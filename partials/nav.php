@@ -38,7 +38,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         box-shadow: 5px 5px black;
         padding: 10px;
         background-color: #a2eda1;
-        width: 400px;
+        width: 800px;
         height: 600px;
         text-align: left;
     }
