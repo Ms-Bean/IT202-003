@@ -51,9 +51,9 @@ if (isset($_POST['submit'])) {
     }
     //Get information from cart items
     $results = [];
-    $stmt = $db->prepare("SELECT product_id, desired_quantity, unit_cost FROM CartItems WHERE id = :id");
+    $stmt = $db->prepare("SELECT product_id, desired_quantity, unit_cost FROM CartItems WHERE user_id = :user_id");
     try {
-        $stmt->execute([":id" => $_SESSION["user"]["id"]]);
+        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
