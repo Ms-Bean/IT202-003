@@ -71,6 +71,24 @@ if (isset($_POST['submit'])) {
         die(header("Location: cart.php"));
     }
     
+
+    //Address validation
+    $errors = [];
+    $has_error = false;
+    if(isset($_POST['zip']) and (!is_numeric($_POST['zip']) or strlen($_POST['zip']) !== 5)){
+        $has_error = true;
+        array_push($errors, "Please enter a valid zip code");
+    }
+    if(strpos($_POST['fname'] . $_POST['lname'] . $_POST['city'] . $_POST['state'] . $_POST['country'] . $_POST['zip'] . $_POST['apart'] . $_POST['address'], ', ' ) !== false){
+        $has_error = true;
+        array_push($errors, "Please don't have a comma and a space like ', ' in to your address info");
+    }
+    if($has_error){
+        foreach($errors as $error){
+            flash($error);
+        }
+    }
+    else {
     //Get information from form and insert into Orders
     $address_string = $_POST['fname'] . ', ' . $_POST['lname'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ', ' . $_POST['zip'] . ', ' . $_POST['apart'] . ', ' . $_POST['address'];
     $payment_method = $_POST['payment_method'];
@@ -120,6 +138,7 @@ if (isset($_POST['submit'])) {
     }
     flash("Order placed");
     die(header("Location: order_confirmation.php?id=" . $new_order_id));
+}
 }
 ?>
 <style>
