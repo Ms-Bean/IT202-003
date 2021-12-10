@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
     //Address validation
     $errors = [];
     $has_error = false;
-    if(isset($_POST['zip']) and (!is_numeric($_POST['zip']) or strlen($_POST['zip']) !== 5)){
+    if(isset($_POST['zip']) and $_POST['zip'] !== '' and (!is_numeric($_POST['zip']) or strlen($_POST['zip']) !== 5)){
         $has_error = true;
         array_push($errors, "Please enter a valid zip code");
     }
