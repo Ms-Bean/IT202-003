@@ -267,7 +267,76 @@
   8. Merge the updated dev branch into your production branch via a pull request
   9. Close any related issues that didn't auto close
     - You can edit the dropdown on the issue or drag/drop it to the proper column on the project board
+    - [ ] User with an admin role or shop owner role will be able to add products to inventory
+      - Table should be called Products (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])
+    - [ ] Any user will be able to see products with visibility = true on the Shop page
+      - Product list page will be public (i.e. doesn’t require login)
+      - For now limit results to 10 most recent
+      - User will be able to filter results by category
+      - User will be able to filter results by partial matches on the name
+      - User will be able to sort results by price
+  - [ ] Admin/Shop owner will be able to see products with any visibility
+    - This should be a separate page from Shop, but will be similar
+    - This page should only be accessible to the appropriate role(s)
+  - [ ] Admin/Shop owner will be able to edit any product
+    - Edit button should be accessible for the appropriate role(s) anywhere a product is shown (Shop list, Product Details Page, etc)
+  - User will be able to click an item from a list and view a full page with more info about the item (Product Details Page)
+  - [ ] User must be logged in for any Cart related activity below
+  - [ ] User will be able to add items to Cart
+    - Cart will be table-based (id, product_id, user_id, desired_quantity, unit_cost, created, modified)
+    - Adding items to Cart will not affect the Product's quantity in the Products table
+  - [ ] User will be able to see their cart
+    - List all the items
+    - Show subtotal for each line item based on desired_quantity * unit_cost
+    - Show total cart value (sum of line item subtotals)
+    - Will be able to click an item to see more details (Product Details Page)
+  - [ ] User will be able to change quantity of items in their cart
+    - Quantity of 0 should also remove from cart
+  - [ ] User will be able to remove a single item from their cart vai button click
+  - [ ] User will be able to clear their entire cart via a button click
+
 - Milestone 3
+ - [ ] User will be able to purchase items in their Cart
+    - Create an Orders table (id, user_id, created, total_price, address, payment_method)
+      - Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will not be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
+      - Hint: This must be inserted first before you can insert into the OrderItems table
+    - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)
+      - Hint: This is basically a copy of the data from the Cart table, just persisted as a purchase
+    - Checkout Form
+      - Ask for payment method (Cash, Visa, MasterCard, Amex, etc)
+      - Do not ask for credit card number, this is just a sample
+      - Ask for a numerical value to be entered (this will be a fake payment check to compare against the cart total to determine if the payment succeeds)
+      - Ask for Address/shipping information
+    - User will be asked for their Address for shipping purposes
+      - Address form should validate correctly
+        - Use this as a rough guide (likely you’ll want to prefill some of the data you already have about the user)
+
+    - Order process:
+      - Calculate Cart Items
+      - Verify the current product price against the Products table
+        - Since our Cart is table based it can be long lived so if a user added a Product at a sale and they attempt to purchase afterwards, it should pull the true Product cost.
+        - You can also show the Cart.unit_price vs Product.unit_price to show a sale or an increase in price
+      - Verify desired product and desired quantity are still available in the Products table
+        - Users can’t purchase more than what’s in stock
+        - Show an error message and prevent order from going through if something isn’t available
+        - Let the user update their cart and try again
+        - Clearly show what the issue is (which product isn’t available, how much quantity is available if the cart exceeds it)
+      - Make an entry into the Orders table
+      - Get last Order ID from Orders table
+      - Copy the cart details into the OrderItems tables with the Order ID from the previous step
+      - Update the Products table Stock for each item to deduct the Ordered Quantity
+      - Clear out the user’s cart after successful order
+      - Redirect user to Order Confirmation Page
+  - [ ] Order Confirmation Page
+    - Show the entire order details from the Order and OrderItems table (similar to cart)
+    - Displays a Thank you message
+  - [ ] User will be able to see their Purchase History
+    - For now limit to 10 most recent orders
+    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
+  - [ ] Store Owner will be able to see all Purchase History
+    - For now limit to 10 most recent orders
+    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
+
 - Milestone 4
 ### Intructions
 #### Don't delete this
