@@ -192,6 +192,7 @@
 
 
 
+
 <table>
 <tr><td>milestone 3</td></tr><tr><td>
 <table>
@@ -262,8 +263,8 @@
 <img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
 
 <tr><td>
-<img width="768px" src="">
-<p></p>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145651345-7ea39508-344b-47e3-a22b-40ac8152f514.png">
+<p>Address Validation from form, can also be seen in orders table</p>
 </td></tr>
 
 </td>
