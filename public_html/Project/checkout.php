@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
     //Get information from cart items
     $stmt = $db->prepare("SELECT * FROM CartItems WHERE id = :id");
     try {
-        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+        $stmt->execute([":id" => $_SESSION["user"]["id"]]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
@@ -93,20 +93,20 @@ if (isset($_POST['submit'])) {
     <h1>Total: $<?php echo($grand_sum)?></h1>
     <form method="POST">
         <div>
-            <label>Required Address Information</label>
-            <input type="text" placeholder="First name" name="fname" required/>
-            <input type="text" placeholder="Last name" name="lname" required/>
-            <input type="text" placeholder="City" name="city"required />
-            <input type="text" placeholder="State/Province" name="state"required/>
-            <input type="text" placeholder="Country" name="country" required/>
-            <input type="text" placeholder="Street address" name="address" required/>
-            <label>Optional Address Information</label>
-            <input type="text" placeholder="Zip/Postal code" name="zip" value=""/>
-            <input type="text" placeholder="Apartment, suite, etc" name="apart" value=""/>
+            <label>Required Address Information</label><br>
+            <input type="text" placeholder="First name" name="fname" required/><br>
+            <input type="text" placeholder="Last name" name="lname" required/><br>
+            <input type="text" placeholder="City" name="city"required /><br>
+            <input type="text" placeholder="State/Province" name="state"required/><br>
+            <input type="text" placeholder="Country" name="country" required/><br>
+            <input type="text" placeholder="Street address" name="address" required/><br>
+            <label>Optional Address Information</label><br>
+            <input type="text" placeholder="Zip/Postal code" name="zip" value=""/><br>
+            <input type="text" placeholder="Apartment, suite, etc" name="apart" value=""/><br>
         </div>
         <div>
-            <label>Payment Method</label>
-            <select name="payment_method" value="Visa">
+            <label>Payment Method</label><br>
+            <select name="payment_method" value="Visa"><br>
                 <option value="Visa">Visa</option>
                 <option value="Master Card">Master card</option>
                 <option value="American Express">American Express</option>
