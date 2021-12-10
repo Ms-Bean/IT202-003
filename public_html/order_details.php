@@ -36,7 +36,7 @@ try {
 }
 
 ?>
-<h1>Confirmation</h1>
+<h1>Order Details</h1>
 <div class="container-fluid">
     <?php
         foreach($orders_results as $index => $record){
@@ -57,7 +57,6 @@ try {
             }
             echo("</div><br>");
         }
-        echo("<h1>Thank you.</h1>");
     ?>
 </div>
 <?php

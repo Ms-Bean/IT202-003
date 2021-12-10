@@ -1,4 +1,4 @@
-<?php
+a<?php
 require(__DIR__ . "/../../partials/nav.php");
 if(!is_logged_in()){
     flash("You must log in to view this page.");
@@ -7,7 +7,7 @@ if(!is_logged_in()){
 $orders_results = [];
 $orderitems_results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT id, total_price, created, payment_method, address from Orders WHERE user_id = :user_id");
+$stmt = $db->prepare("SELECT id, total_price, created, payment_method, address from Orders WHERE user_id = :user_id LIMIT 10");
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -26,6 +26,7 @@ foreach($orders_results as $index => $record){
     echo("<br>Total price: " . $record["total_price"]);
     echo("<br>Payment Method: " . $record["payment_method"]);
     echo("<br>Address: " . $record["address"]);
+    echo("<br><a href='add_to_cart.php?id=" . $record["id"] . ">Order Info</a>");
     echo("</div><br>");
 }
 ?>
