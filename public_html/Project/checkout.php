@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
                 <option value="Discover">
                 <option value="Amex">
                 <option value="Cash">
-            </datalist>
+            </select>
         </div>
         <div>
         <input type="submit" value="Purchase" name="submit" />
