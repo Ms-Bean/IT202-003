@@ -5,7 +5,8 @@ if(!is_logged_in()){
     die(header("Location: login.php"));
 }
 $order_id = se($_GET, "id", -1, false);
-$results = [];
+$orders_results = [];
+$orderitems_results = [];
 $db = getDB();
 $stmt = $db->prepare("SELECT id, user_id, total_price, created, payment_method from Orders WHERE id = :order_id");
 try {
