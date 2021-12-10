@@ -7,7 +7,7 @@ if(!is_logged_in()){
 $orders_results = [];
 $orderitems_results = [];
 $db = getDB();
-if($has_role("Owner")){
+if(has_role("Owner")){
     $sql_str = "SELECT id, total_price, created, payment_method, address from Orders LIMIT 10";
 }
 else{
