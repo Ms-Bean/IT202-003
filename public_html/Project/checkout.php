@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
         //Subtract from Products table
         $stmt = $db->prepare("UPDATE Products SET stock = :stock WHERE id = :id");
         try {
-            $stmt->execute([":stock" => $inproducts_stocks[$i], ":id" => $incart_product_ids[$i]]);
+            $stmt->execute([":stock" => $inproducts_stocks[$i]-$incart_desired_quantities[$i], ":id" => $incart_product_ids[$i]]);
         } catch (Exception $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
