@@ -58,6 +58,9 @@ if (isset($_POST['submit'])) {
         if ($r) {
             $results = $r;
         }
+        else{
+            echo("Big sad");
+        }
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
