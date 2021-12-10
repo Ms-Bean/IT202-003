@@ -18,6 +18,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 $grand_sum = 0;
+
 foreach($results as $index => $record){
     $grand_sum += $record["desired_quantity"] * $record["unit_cost"];
 }
@@ -28,10 +29,50 @@ if (isset($_POST['submit'])) {
     $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, payment_method, address) VALUES(:user_id, :total_price, :payment_method, :address)");
     try {
         $stmt->execute([":user_id" => $user_id, ":total_price" => $grand_sum, ":payment_method" => $payment_method, ":address" => $address_string]);
-        flash("Order placed");
     } catch (Exception $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     } 
+    //Get id of order that was just inserted
+    $stmt = $db->prepare("SELECT id from Orders ORDER BY id LIMIT 1");
+    try {
+        $stmt->execute([]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    $order_id = 0;
+    foreach($results as $index => $record){
+        $order_id = $record["id"];
+    }
+    //Get information from cart items
+    $stmt = $db->prepare("SELECT * FROM CartItems WHERE id = :id");
+    try {
+        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    foreach($results as $index => $record){
+        $stmt = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES(:order_id, :product_id, :quantity, :unit_price)");
+        try {
+            $stmt->execute([":order_id" => $order_id, ":product_id" => $record['product_id'], ":quantity" => $record['desired_quantity'], ":unit_price" => $record['unit_cost']]);
+        } catch (Exception $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        } 
+    }
+    $stmt = $db->prepare("DELETE FROM CartItems WHERE user_id = :user_id");
+    try {
+        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+    } catch (Exception $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    flash("Order placed");
 }
 ?>
 <style>
@@ -43,7 +84,7 @@ if (isset($_POST['submit'])) {
         box-shadow: 5px 5px black;
         padding: 10px;
         background-color: #a2eda1;
-        width: 300px;
+        width: 450px;
         height: 500px;
     }
 
