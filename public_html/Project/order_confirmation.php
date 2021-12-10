@@ -42,7 +42,7 @@ try {
         foreach($orders_results as $index => $record){
             echo("<div class='cart_item'>");
             echo("<h1>Order Info</h1>");
-            foreach ($result as $column => $value){
+            foreach ($record as $column => $value){
                 echo($coluimn . ": " . $value . "<br>");
             }
             echo("</div><br>");
@@ -52,7 +52,7 @@ try {
         foreach($orderitems_results as $index => $record){
             echo("<div class='cart_item'>");
             echo("<h1>Item info</h1>");
-            foreach ($result as $column => $value){
+            foreach ($record as $column => $value){
                 echo($column . ": " . $value . "<br>");
             }
             echo("</div><br>");
