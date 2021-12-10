@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     $payment_method = $_POST['payment_method'];
     $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, payment_method, address) VALUES(:user_id, :total_price, :payment_method, :address)");
     try {
-        $stmt->execute([":user_id" => $user_id, ":total_price" => $grand_sum, ":payment_method" => $payment_method, ":address"]);
+        $stmt->execute([":user_id" => $user_id, ":total_price" => $grand_sum, ":payment_method" => $payment_method, ":address" => $address_string]);
         flash("Added to cart");
     } catch (Exception $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
