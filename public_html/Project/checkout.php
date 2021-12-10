@@ -87,7 +87,6 @@ if (isset($_POST['submit'])) {
         foreach($errors as $error){
             flash($error);
         }
-        header("Refresh:0");
     }
     else {
     //Get information from form and insert into Orders
