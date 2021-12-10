@@ -14,6 +14,10 @@ try {
     if ($r) {
         $results = $r;
     }
+    else{
+        flash("You must add something to your cart to checkout.");
+        die(header("Location: shop.php"));
+    }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
@@ -33,7 +37,7 @@ if (isset($_POST['submit'])) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     } 
     //Get id of order that was just inserted
-    $stmt = $db->prepare("SELECT id from Orders ORDER BY id LIMIT 1");
+    $stmt = $db->prepare("SELECT id from Orders ORDER BY id DESC LIMIT 1");
     try {
         $stmt->execute([]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,9 +61,6 @@ if (isset($_POST['submit'])) {
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($r) {
             $results = $r;
-        }
-        else{
-            echo("Big sad");
         }
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
