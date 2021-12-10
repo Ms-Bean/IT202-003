@@ -19,9 +19,20 @@ try {
 }
 $grand_sum = 0;
 foreach($results as $index => $record){
-    $grand_sum += $record["desired_quantity"] + $record["unit_cost"];
+    $grand_sum += $record["desired_quantity"] * $record["unit_cost"];
 }
 
+if (isset($_POST['submit'])) {
+    $address_string = $_POST['fname'] . ', ' . $_POST['lname'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ', ' . $_POST["zip"] . ', ' . $_POST['apart'];
+    $payment_method = $_POST['payment_method'];
+    $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, payment_method, address) VALUES(:user_id, :total_price, :payment_method, :address)");
+    try {
+        $stmt->execute([":user_id" => $user_id, ":total_price" => $grand_sum, ":payment_method" => $payment_method, ":address"]);
+        flash("Added to cart");
+    } catch (Exception $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    } 
+}
 ?>
 <style>
     .container-fluid{
@@ -41,11 +52,28 @@ foreach($results as $index => $record){
     <h1><?php echo($grand_sum)?></h1>
     <form method="POST">
         <div>
-            <label for="desired_quantity">Quantity</label>
-            <input type="number" min="1" name="desired_quantity" required />
+            <label>Address Information</label>
+            <input type="text" placeholder="First name" name="fname" required/>
+            <input type="text" placeholder="Last name" name="lname" required/>
+            <input type="text" placeholder="City" name="city"required />
+            <input type="text" placeholder="State/Province" name="state"required/>
+            <input type="text" placeholder="Country" name="country" required/>
+            <input type="text" placeholder="Zip/Postal code" name="zip" required/>
+            <input type="text" placeholder="Apartment, suite, etc" name="apart" required/>
         </div>
         <div>
-        <input class="btn btn-primary" type="submit" value="Add to cart" name="submit" />
+            <label>Payment Method</label>
+            <select name="payment_method" value="Visa">
+                <option value="Visa">
+                <option value="Master Card">
+                <option value="American Express">
+                <option value="Discover">
+                <option value="Amex">
+                <option value="Cash">
+            </datalist>
+        </div>
+        <div>
+        <input type="submit" value="Purchase" name="submit" />
         </div>
     </form>
 
