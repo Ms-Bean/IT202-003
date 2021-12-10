@@ -50,7 +50,6 @@ if (isset($_POST['submit'])) {
         }
     }
     //Get information from cart items
-    $results = [];
     $stmt = $db->prepare("SELECT product_id, desired_quantity, unit_cost FROM CartItems WHERE id = :id");
     try {
         $stmt->execute([":id" => $_SESSION["user"]["id"]]);
@@ -66,7 +65,6 @@ if (isset($_POST['submit'])) {
     $unit_cost;
     foreach($results as $index => $record){
         foreach($record as $column => $value){
-            echo($column . " " . $value);
             if($column === 'product_id'){
                 $product_id = $value;
             }
