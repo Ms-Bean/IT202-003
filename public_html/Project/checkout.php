@@ -7,7 +7,8 @@ if(!is_logged_in()){
 $user_id = $_SESSION["user"]["id"];
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT unit_cost, desired_quantity from CartItems WHERE user_id = :user_id");
+//Get each cost of each item in user's cart
+$stmt = $db->prepare("SELECT product_id, desired_quantity from CartItems WHERE user_id = :user_id");
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,13 +22,56 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
-$grand_sum = 0;
-
+//Get arrays for quantities and ids of products in user's cart
+$incart_product_ids = [];
+$incart_desired_quantities = [];
 foreach($results as $index => $record){
-    $grand_sum += $record["desired_quantity"] * $record["unit_cost"];
+    array_push($incart_product_ids, $record["product_id"]);
+    array_push($incart_desired_quantities, $record["desired_quantity"]);
 }
 
+//Get arrays for names, costs, and stocks of items in user's cart from products table
+$inproducts_stocks = [];
+$inproducts_costs = [];
+$inproducts_names = [];
+for($i = 0; $i < count($incart_product_ids); $i++){
+    $stmt = $db->prepare("SELECT stock, cost, name from Products WHERE id = :id");
+    try {
+        $stmt->execute([":id" => $incart_product_ids[$i]]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    foreach($results as $index => $record){
+        array_push($inproducts_stocks, $record["stock"]);
+        array_push($inproducts_costs, $record["cost"]);
+        array_push($inproducts_names, $record["name"]);
+    }
+}
+$grand_sum = 0;
+//For each entry in the users cart...
+for($i = 0; $i < count($incart_product_ids); $i++){
+    //Reject if desired quantity is more than quantity in stock
+    if($incart_desired_quantities[$i] > $inproducts_stocks[$i]){
+        flash("Quantity of " . $inproducts_names[$i] . " exceeds stock. Please reduce to " . $inproducts_stocks[$i] . " or less.");
+        die(header("Location: cart.php"));
+    }
+    //Add product of quantity from cart, and price from products table, to grand sum
+    $grand_sum += $incart_desired_quantities[$i] * $inproducts_costs[$i];
+}
+
+//On submit
 if (isset($_POST['submit'])) {
+    //Reject if user lacks sufficient funds
+    if($grand_sum > $_POST['users_money']){
+        flash("Insufficient funds");
+        die(header("Location: cart.php"));
+    }
+    
+    //Get information from form and insert into Orders
     $address_string = $_POST['fname'] . ', ' . $_POST['lname'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ', ' . $_POST['zip'] . ', ' . $_POST['apart'] . ', ' . $_POST['address'];
     $payment_method = $_POST['payment_method'];
     $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, payment_method, address) VALUES(:user_id, :total_price, :payment_method, :address)");
@@ -36,7 +80,8 @@ if (isset($_POST['submit'])) {
     } catch (Exception $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     } 
-    //Get id of order that was just inserted
+    //Get order id of order that was just inserted
+    $new_order_id = 0;
     $stmt = $db->prepare("SELECT id from Orders ORDER BY id DESC LIMIT 1");
     try {
         $stmt->execute([]);
@@ -47,48 +92,19 @@ if (isset($_POST['submit'])) {
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-    $order_id = 0;
     foreach($results as $index => $record){
-        foreach($record as $column => $value){
-            $order_id = $value;
-        }
+        $new_order_id = $record["id"];
     }
-    //Get information from cart items
-    $results = [];
-    $stmt = $db->prepare("SELECT product_id, desired_quantity, unit_cost FROM CartItems WHERE user_id = :user_id");
-    try {
-        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $results = $r;
-        }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
-    }
-    $product_id;
-    $desired_quantity;
-    $unit_cost;
-    foreach($results as $index => $record){
-        foreach($record as $column => $value){
-            echo($column . " " . $value);
-            if($column === 'product_id'){
-                $product_id = $value;
-            }
-            else if($column === 'desired_quantity'){
-                $desired_quantity = $value;
-            }
-            else if($column == 'unit_cost'){
-                $unit_cost = $value;
-            }
-        }
+    //Insert purchased items into OrderItems table using new order id and arrays from cart table
+    for($i = 0; $i < count($incart_product_ids); $i++){
         $stmt = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES(:order_id, :product_id, :quantity, :unit_price)");
         try {
-            $stmt->execute([":order_id" => $order_id, ":product_id" => $product_id, ":quantity" => $desired_quantity, ":unit_price" => $unit_cost]);
+            $stmt->execute([":order_id" => $new_order_id, ":product_id" => $incart_product_ids[$i], ":quantity" => $incart_desired_quantities[$i], ":unit_price" => $inproducts_costs[$i]]);
         } catch (Exception $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
-        }
+        } 
     }
-
+    //Clear user's cart
     $stmt = $db->prepare("DELETE FROM CartItems WHERE user_id = :user_id");
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
@@ -139,6 +155,7 @@ if (isset($_POST['submit'])) {
             </select>
         </div>
         <div>
+        <input type="number" placeholder="Money" name="users_money"/>
         <input type="submit" value="Purchase" name="submit" />
         </div>
     </form>
