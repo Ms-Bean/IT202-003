@@ -26,7 +26,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <style>
     li{
         display: inline;
-        margin-right: 30px;
+        margin-right: 10px;
     }
     .item_info{
         position: fixed;
@@ -118,6 +118,7 @@ require_once(__DIR__ . "/../lib/functions.php");
             <li><a href="<?php echo __DIR__ . "/../../Project/shop.php"; ?>">Shop</a></li>
             <li><a href="<?php echo __DIR__ . "/../../Project/cart.php"; ?>">Cart</a></li>
             <li><a href="<?php echo __DIR__ . "/../../Project/checkout.php"; ?>">Checkout</a></li>
+            <li><a href="<?php echo __DIR__ . "/../../Project/purchase_history.php"; ?>">History</a></li>
         <?php endif; ?>
         <?php if (!is_logged_in()) : ?>
             <li><a href="<?php echo __DIR__ . "/../../Project/login.php"; ?>">Login</a></li>
