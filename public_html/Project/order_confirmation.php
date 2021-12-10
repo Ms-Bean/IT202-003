@@ -25,7 +25,7 @@ if($orders_results[0]["user_id"] !== $_SESSION["user"]["id"]){
 
 $stmt = $db->prepare("SELECT id, product_id, unit_price, quantity from OrderItems WHERE (order_id = :order_id");
 try {
-    $stmt->execute([":order_id" => $order_id, ":user_id" => $_SESSION["user"]["id"]]);
+    $stmt->execute([":order_id" => $order_id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $orderitems_results = $r;
