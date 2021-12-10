@@ -19,7 +19,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 
-if($orders_results[0]["user_id"] !== $_SESSION["user"]["id"]){
+if($orders_results[0]["user_id"] !== $_SESSION["user"]["id"] and !has_role("Owner")){
     flash("This is not your order!");
     die(header("Location: home.php"));
 }

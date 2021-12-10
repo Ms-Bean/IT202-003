@@ -7,7 +7,13 @@ if(!is_logged_in()){
 $orders_results = [];
 $orderitems_results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT id, total_price, created, payment_method, address from Orders WHERE user_id = :user_id LIMIT 10");
+if($has_role("Owner")){
+    $sql_str = "SELECT id, total_price, created, payment_method, address from Orders LIMIT 10";
+}
+else{
+    $sql_str = "SELECT id, total_price, created, payment_method, address from Orders WHERE user_id = :user_id LIMIT 10";
+}
+$stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
