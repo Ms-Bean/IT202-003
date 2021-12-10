@@ -9,12 +9,11 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders LIMIT 10";
+    $sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE 1=1 LIMIT 10";
 }
 else{
     $sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
 }
-$sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
 $stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
