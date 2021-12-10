@@ -65,13 +65,13 @@ if (isset($_POST['submit'])) {
     $unit_cost;
     foreach($results as $index => $record){
         foreach($record as $column => $value){
-            if($column === "product_id"){
+            if($column === 'product_id'){
                 $product_id = $value;
             }
-            else if($column === "desired_quantity"){
+            else if($column === 'desired_quantity'){
                 $desired_quantity = $value;
             }
-            else if($column == "unit_cost"){
+            else if($column == 'unit_cost'){
                 $unit_cost = $value;
             }
         }
