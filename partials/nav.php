@@ -26,7 +26,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <style>
     li{
         display: inline;
-        margin-right: 50px;
+        margin-right: 30px;
     }
     .item_info{
         position: fixed;
