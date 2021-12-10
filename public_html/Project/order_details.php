@@ -19,7 +19,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 
-if($orders_results[0]["user_id"] !== $_SESSION["user"]["id"]){
+if($orders_results[0]["user_id"] !== $_SESSION["user"]["id"] and !has_role("Owner")){
     flash("This is not your order!");
     die(header("Location: home.php"));
 }
@@ -36,7 +36,7 @@ try {
 }
 
 ?>
-<h1>Confirmation</h1>
+<h1>Order Details</h1>
 <div class="container-fluid">
     <?php
         foreach($orders_results as $index => $record){
@@ -57,7 +57,6 @@ try {
             }
             echo("</div><br>");
         }
-        echo("<h1>Thank you.</h1>");
     ?>
 </div>
 <?php

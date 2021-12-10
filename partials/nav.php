@@ -26,7 +26,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <style>
     li{
         display: inline;
-        margin-right: 50px;
+        margin-right: 10px;
     }
     .item_info{
         position: fixed;
@@ -70,15 +70,15 @@ require_once(__DIR__ . "/../lib/functions.php");
     }
     .order_info{
         position: fixed;
-        left: 50%;
-        margin-left: -150px;
+        margin-left: auto;
+        margin-right: auto;
         position: relative;
         margin-bottom: 50px;
         border: 1px solid black;
         box-shadow: 5px 5px black;
         padding: 10px;
         background-color: #a2eda1;
-        width: 300px;
+        width: 800px;
         height: 300px;
         text-align: left;
     }
@@ -118,6 +118,7 @@ require_once(__DIR__ . "/../lib/functions.php");
             <li><a href="<?php echo __DIR__ . "/../../Project/shop.php"; ?>">Shop</a></li>
             <li><a href="<?php echo __DIR__ . "/../../Project/cart.php"; ?>">Cart</a></li>
             <li><a href="<?php echo __DIR__ . "/../../Project/checkout.php"; ?>">Checkout</a></li>
+            <li><a href="<?php echo __DIR__ . "/../../Project/purchase_history.php"; ?>">History</a></li>
         <?php endif; ?>
         <?php if (!is_logged_in()) : ?>
             <li><a href="<?php echo __DIR__ . "/../../Project/login.php"; ?>">Login</a></li>
