@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
     foreach($results as $index => $record){
         $stmt = $db->prepare("INSERT INTO OrderItems (order_id, product_id, quantity, unit_price) VALUES(:order_id, :product_id, :quantity, :unit_price)");
         try {
-            $stmt->execute([":order_id" => $order_id, ":product_id" => $record['product_id'], ":quantity" => $record['desired_quantity'], ":unit_price" => $record['unit_cost']]);
+            $stmt->execute([":order_id" => $order_id, ":product_id" => $record["product_id"], ":quantity" => $record["desired_quantity"], ":unit_price" => $record["unit_cost"]]);
         } catch (Exception $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         } 
