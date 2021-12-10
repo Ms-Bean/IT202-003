@@ -64,12 +64,12 @@ if (isset($_POST['submit'])) {
         <div>
             <label>Payment Method</label>
             <select name="payment_method" value="Visa">
-                <option value="Visa">
-                <option value="Master Card">
-                <option value="American Express">
-                <option value="Discover">
-                <option value="Amex">
-                <option value="Cash">
+                <option value="Visa">Visa</option>
+                <option value="Master Card">Master card</option>
+                <option value="American Express">American Express</option>
+                <option value="Discover">Discover</option>
+                <option value="Amex">Amex</option>
+                <option value="Cash">Cash</option>
             </select>
         </div>
         <div>
