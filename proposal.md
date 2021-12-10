@@ -191,47 +191,257 @@
  [https://github.com/Spencer-Clarke/IT202-003/pull/92](https://github.com/Spencer-Clarke/IT202-003/pull/92)</p></td></tr><tr><td><table><tr><td>F11 - User will be able to clear entire cart via button click (11/29/2021)<tr><td>Status: completed</td></tr><tr><td><img width="100%" src="https://user-images.githubusercontent.com/89927037/143958034-1b260968-18d0-4a53-8e61-b8d567c8e22f.png"><p>Cart after saguaro cactus removed via empty cart button (empty)</td></tr></td></tr></table></td></tr></td></tr></table>
 
 
-- Milestone 3
- - [ ] User will be able to purchase items in their Cart
-    - Create an Orders table (id, user_id, created, total_price, address, payment_method)
-      - Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will not be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
-      - Hint: This must be inserted first before you can insert into the OrderItems table
-    - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)
-      - Hint: This is basically a copy of the data from the Cart table, just persisted as a purchase
-    - Checkout Form
-      - Ask for payment method (Cash, Visa, MasterCard, Amex, etc)
-      - Do not ask for credit card number, this is just a sample
-      - Ask for a numerical value to be entered (this will be a fake payment check to compare against the cart total to determine if the payment succeeds)
-      - Ask for Address/shipping information
-    - User will be asked for their Address for shipping purposes
-      - Address form should validate correctly
-        - Use this as a rough guide (likely you’ll want to prefill some of the data you already have about the user)
 
-    - Order process:
-      - Calculate Cart Items
-      - Verify the current product price against the Products table
-        - Since our Cart is table based it can be long lived so if a user added a Product at a sale and they attempt to purchase afterwards, it should pull the true Product cost.
-        - You can also show the Cart.unit_price vs Product.unit_price to show a sale or an increase in price
-      - Verify desired product and desired quantity are still available in the Products table
-        - Users can’t purchase more than what’s in stock
-        - Show an error message and prevent order from going through if something isn’t available
-        - Let the user update their cart and try again
-        - Clearly show what the issue is (which product isn’t available, how much quantity is available if the cart exceeds it)
-      - Make an entry into the Orders table
-      - Get last Order ID from Orders table
-      - Copy the cart details into the OrderItems tables with the Order ID from the previous step
-      - Update the Products table Stock for each item to deduct the Ordered Quantity
-      - Clear out the user’s cart after successful order
-      - Redirect user to Order Confirmation Page
-  - [ ] Order Confirmation Page
-    - Show the entire order details from the Order and OrderItems table (similar to cart)
-    - Displays a Thank you message
-  - [ ] User will be able to see their Purchase History
-    - For now limit to 10 most recent orders
-    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
-  - [ ] Store Owner will be able to see all Purchase History
-    - For now limit to 10 most recent orders
-    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
+
+<table>
+<tr><td>milestone 3</td></tr><tr><td>
+<table>
+<tr><td>F1 - User will be able to purchase items in their cart (2021-12-09)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/checkout.php](https://sdc2-prod.herokuapp.com/Project/checkout.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/109](https://github.com/Spencer-Clarke/IT202-003/pull/109)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/113](https://github.com/Spencer-Clarke/IT202-003/pull/113)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/116](https://github.com/Spencer-Clarke/IT202-003/pull/116)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an Orders Table</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145649282-1d661806-94dd-43c7-9791-2510ca405dee.png">
+<p>Orders Table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Create an OrderItems table</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145646285-388e2864-e2a9-4fc6-89c3-b5a74ad4abd3.png">
+<p>OrderItems table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Checkout form</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145646621-f58d4de0-b0c1-4d94-8418-e2c451afe5ed.png">
+<p>Checkout form, with proper html value types</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - User should be asked for their address for shipping purposes</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145651345-7ea39508-344b-47e3-a22b-40ac8152f514.png">
+<p>Address Validation from form, can also be seen in orders table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F1 - Order Process</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145646812-d869c907-fca2-47bd-8d24-3ccad0116b02.png">
+<p>Array operations used to determine if any item in cart exceeds its counterpart in Products table, or if the user has insufficient funds</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145650321-b0a63e71-e799-4069-ad05-0bb94e693104.png">
+<p>Update products and cart table with new information</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - Order Confirmation page (2021-12-09)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/order_confirmation.php?id=9](https://sdc2-prod.herokuapp.com/Project/order_confirmation.php?id=9)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/111](https://github.com/Spencer-Clarke/IT202-003/pull/111)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show the entire order details from Orders and OrderItems tables</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145651697-1bf978f9-4006-4189-b1a0-f099b198c3af.png">
+<p>Order confirmation page for Order 9</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652047-fb5094a9-c4ac-492e-ba57-63e1a92647eb.png">
+<p>Checks if order id is associated with user trying to access page, redirects to home.php otherwise</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Displays a thank you message</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145651697-1bf978f9-4006-4189-b1a0-f099b198c3af.png">
+<p>It says "Thank you"</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User will be able to see their purchase history (2021-12-09)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/purchase_history.php](https://sdc2-prod.herokuapp.com/Project/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/112](https://github.com/Spencer-Clarke/IT202-003/pull/112)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - For now limit to 10 most recent</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652332-4b8e01f6-a1b7-4abe-9675-a4a69fe4b606.png">
+<p>purchase history page</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652413-68004d45-62b6-479c-b234-7d9491b23665.png">
+<p>Limit to 10</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - A list item can be clicked to view order details</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652486-be73c034-802c-42bc-a333-4b54de4e09f3.png">
+<p>Order details page with no thank you message</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store Owner will be able to see all purchase history (2021-12-09)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/purchase_history.php](https://sdc2-prod.herokuapp.com/Project/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/112](https://github.com/Spencer-Clarke/IT202-003/pull/112)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - For now limit to 10 most recent orders</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652629-a56c9eb0-ebb9-4908-8db8-c759671963aa.png">
+<p>Role created for store owner</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652770-6b829ae3-894f-45e8-9ecd-bd50962ce43b.png">
+<p>Owner can see everyone's past orders on purchase_history.php</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145653395-bb631d70-c01d-46b2-a42b-88fef3ce1657.png">
+<p>Order placed by user 19 available to user 6 (owner) in purchase_history.php</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - A list item can be clicked to view order details</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145652978-86167242-d50c-4e3b-a86e-d631f8a5945f.png">
+<p>order_details.php redirects users if the order id is not associated with the user, but it makes an exception for the owner, allowing them to view the details of any order</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/145653493-76ea448c-d8b5-4336-a41a-f1c7f9833636.png">
+<p>Order details from user 19 available to user 6</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
+
 - Milestone 4
 ### Intructions
 #### Don't delete this
@@ -295,80 +505,4 @@
   - [ ] User will be able to remove a single item from their cart vai button click
   - [ ] User will be able to clear their entire cart via a button click
 
-- Milestone 3
- - [ ] User will be able to purchase items in their Cart
-    - Create an Orders table (id, user_id, created, total_price, address, payment_method)
-      - Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will not be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
-      - Hint: This must be inserted first before you can insert into the OrderItems table
-    - Create an OrderItems table (id, order_id, product_id, quantity, unit_price)
-      - Hint: This is basically a copy of the data from the Cart table, just persisted as a purchase
-    - Checkout Form
-      - Ask for payment method (Cash, Visa, MasterCard, Amex, etc)
-      - Do not ask for credit card number, this is just a sample
-      - Ask for a numerical value to be entered (this will be a fake payment check to compare against the cart total to determine if the payment succeeds)
-      - Ask for Address/shipping information
-    - User will be asked for their Address for shipping purposes
-      - Address form should validate correctly
-        - Use this as a rough guide (likely you’ll want to prefill some of the data you already have about the user)
 
-    - Order process:
-      - Calculate Cart Items
-      - Verify the current product price against the Products table
-        - Since our Cart is table based it can be long lived so if a user added a Product at a sale and they attempt to purchase afterwards, it should pull the true Product cost.
-        - You can also show the Cart.unit_price vs Product.unit_price to show a sale or an increase in price
-      - Verify desired product and desired quantity are still available in the Products table
-        - Users can’t purchase more than what’s in stock
-        - Show an error message and prevent order from going through if something isn’t available
-        - Let the user update their cart and try again
-        - Clearly show what the issue is (which product isn’t available, how much quantity is available if the cart exceeds it)
-      - Make an entry into the Orders table
-      - Get last Order ID from Orders table
-      - Copy the cart details into the OrderItems tables with the Order ID from the previous step
-      - Update the Products table Stock for each item to deduct the Ordered Quantity
-      - Clear out the user’s cart after successful order
-      - Redirect user to Order Confirmation Page
-  - [ ] Order Confirmation Page
-    - Show the entire order details from the Order and OrderItems table (similar to cart)
-    - Displays a Thank you message
-  - [ ] User will be able to see their Purchase History
-    - For now limit to 10 most recent orders
-    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
-  - [ ] Store Owner will be able to see all Purchase History
-    - For now limit to 10 most recent orders
-    - A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
-
-- Milestone 4
-### Intructions
-#### Don't delete this
-1. Pick one project type
-2. Create a proposal.md file in the root of your project directory of your GitHub repository
-3. Copy the contents of the Google Doc into this readme file
-4. Convert the list items to markdown checkboxes (apply any other markdown for organizational purposes)
-5. Create a new Project Board on GitHub
-   - Choose the Automated Kanban Board Template
-   - For each major line item (or sub line item if applicable) create a GitHub issue
-   - The title should be the line item text
-   - The first comment should be the acceptance criteria (i.e., what you need to accomplish for it to be "complete")
-   - Leave these in "to do" status until you start working on them
-   - Assign each issue to your Project Board (the right-side panel)
-   - Assign each issue to yourself (the right-side panel)
-6. As you work
-  1. As you work on features, create separate branches for the code in the style of Feature-ShortDescription (using the Milestone branch as the source)
-  2. Add, commit, push the related file changes to this branch
-  3. Add evidence to the PR (Feat to Milestone) conversation view comments showing the feature being implemented
-     - Screenshot(s) of the site view (make sure they clearly show the feature)
-     - Screenshot of the database data if applicable
-     - Describe each screenshot to specify exactly what's being shown
-     - A code snippet screenshot or reference via GitHub markdown may be used as an alternative for evidence that can't be captured on the screen
-  4. Update the checklist of the proposal.md file for each feature this is completing (ideally should be 1 branch/pull request per feature, but some cases may have multiple)
-    - Basically add an x to the checkbox markdown along with a date after
-      - (i.e.,   - [x] (mm/dd/yy) ....) See Template above
-    - Add the pull request link as a new indented line for each line item being completed
-    - Attach any related issue items on the right-side panel
-  5. Merge the Feature Branch into your Milestone branch (this should close the pull request and the attached issues)
-    - Merge the Milestone branch into dev, then dev into prod as needed
-    - Last two steps are mostly for getting it to prod for delivery of the assignment 
-  7. If the attached issues don't close wait until the next step
-  8. Merge the updated dev branch into your production branch via a pull request
-  9. Close any related issues that didn't auto close
-    - You can edit the dropdown on the issue or drag/drop it to the proper column on the project board
