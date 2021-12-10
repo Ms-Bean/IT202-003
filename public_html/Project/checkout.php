@@ -77,11 +77,11 @@ if (isset($_POST['submit'])) {
     $has_error = false;
     if(isset($_POST['zip']) and (!is_numeric($_POST['zip']) or strlen($_POST['zip']) !== 5)){
         $has_error = true;
-        array_push($errors("Please enter a valid zip code"));
+        array_push($errors, "Please enter a valid zip code");
     }
     if(strpos($_POST['fname'] . $_POST['lname'] . $_POST['city'] . $_POST['state'] . $_POST['country'] . $_POST['zip'] . $_POST['apart'] . $_POST['address'], ', ' ) !== false){
         $has_error = true;
-        array_push($errors("Please don't have a comma and a space like ', ' in to your address info"));
+        array_push($errors, "Please don't have a comma and a space like ', ' in to your address info");
     }
     if($has_error){
         foreach($errors as $error){
