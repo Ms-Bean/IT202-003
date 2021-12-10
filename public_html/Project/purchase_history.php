@@ -14,6 +14,7 @@ if(has_role("Owner")){
 else{
     $sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
 }
+$sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
 $stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
