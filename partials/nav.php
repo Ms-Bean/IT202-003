@@ -70,8 +70,8 @@ require_once(__DIR__ . "/../lib/functions.php");
     }
     .order_info{
         position: fixed;
-        left: 50%;
-        margin-left: -150px;
+        margin-left: auto;
+        margin-right: auto;
         position: relative;
         margin-bottom: 50px;
         border: 1px solid black;

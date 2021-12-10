@@ -17,6 +17,9 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+?>
+<h1>Order History</h1>
+<?php
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
