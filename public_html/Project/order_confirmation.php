@@ -9,7 +9,7 @@ $results = [];
 $db = getDB();
 $stmt = $db->prepare("SELECT id, user_id, total_price, created, payment_method from Orders WHERE id = :order_id");
 try {
-    $stmt->execute([":order_id" => $order_id, ":user_id" => $_SESSION["user"]["id"]]);
+    $stmt->execute([":order_id" => $order_id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $orders_results = $r;
