@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
         $order_id = $record["id"];
     }
     //Get information from cart items
-    $stmt = $db->prepare("SELECT * FROM CartItems WHERE id = :id");
+    $stmt = $db->prepare("SELECT product_id, desired_quantity, unit_cost FROM CartItems WHERE id = :id");
     try {
         $stmt->execute([":id" => $_SESSION["user"]["id"]]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
