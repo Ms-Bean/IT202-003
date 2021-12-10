@@ -43,7 +43,7 @@ try {
             echo("<div class='cart_item'>");
             echo("<h1>Order Info</h1>");
             foreach ($record as $column => $value){
-                echo($coluimn . ": " . $value . "<br>");
+                echo($column . ": " . $value . "<br>");
             }
             echo("</div><br>");
         }
