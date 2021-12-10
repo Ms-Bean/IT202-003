@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     } 
     //Get id of order that was just inserted
-    $stmt = $db->prepare("SELECT id from Orders ORDER BY id DESC LIMIT 1");
+    $stmt = $db->prepare("SELECT id from Orders ORDER BY id LIMIT 1");
     try {
         $stmt->execute([]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
