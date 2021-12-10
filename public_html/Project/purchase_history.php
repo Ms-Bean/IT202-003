@@ -26,7 +26,7 @@ foreach($orders_results as $index => $record){
     echo("<br>Total price: " . $record["total_price"]);
     echo("<br>Payment Method: " . $record["payment_method"]);
     echo("<br>Address: " . $record["address"]);
-    echo("<br><a href='add_to_cart.php?id=" . $record["id"] . "'>Order Info</a>");
+    echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
 ?>
