@@ -9,10 +9,10 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10";
 }
 else{
-    $sql_str = "SELECT id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
 }
 $stmt = $db->prepare($sql_str);
 try {
@@ -30,6 +30,7 @@ try {
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
+    echo("<br>User ID: " . $record["user_id"]);
     echo("<br>Total price: " . $record["total_price"]);
     echo("<br>Payment Method: " . $record["payment_method"]);
     echo("<br>Address: " . $record["address"]);
