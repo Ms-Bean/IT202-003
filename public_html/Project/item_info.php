@@ -20,7 +20,7 @@ try {
 
 </style>
 <div class="item_info">
-    <h1><?php echo($result["name"])?></h1>
+    <h2><?php echo($result["name"])?></h2>
     <?php foreach ($result as $column => $value) : ?>
     <?php 
         if($column === "name"){
