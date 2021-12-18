@@ -18,6 +18,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 //Get ratings and comments
+$ratings_result = null;
 $stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
 try {
     $stmt->execute([":id" => $id]);
