@@ -64,7 +64,9 @@ if(is_logged_in()){echo<<<KEIYOUDOUSHI
     </form>
 KEIYOUDOUSHI;}
 else{
-    echo("<h1>Log in to rate item</h1>;");
+    echo<<<A
+    <h1>Log in to rate item</h1>
+    A;
 }
 ?>
 </div>
