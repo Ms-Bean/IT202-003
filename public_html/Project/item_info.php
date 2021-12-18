@@ -32,6 +32,7 @@ try {
         }
     ?>
     <?php endforeach; ?>
+    <h1 id = "avrating">Average Rating: </h1>
     <?php
         if(has_role("Admin")){
             echo('<a href="admin/edit_item.php?id=');
@@ -153,6 +154,12 @@ if(isset($rating_result)){
         </div><br>
         ");
     }
+    $average_rating /= $count;
+    echo("
+    <script>
+    document.getElementById('avrating').innerHTML = 'Average Rating: ". $average_rating . "'
+    </script>
+    ");
 }
 ?>
 <?php
