@@ -7,13 +7,14 @@ if(!is_logged_in()){
 ?>
 <form method="POST">
     <div>
-        <input type="checkbox" name="by_date"/>
+        <input type="radio" name="sorter" value="value_by_date"/>
         <label>Sort by date</label><br>
-        <input type="checkbox" name="by_total"/>
+        <input type="radio" name="sorter" value="value_by_total"/>
         <label>Sort by total</label<br><br>
         <input type="text" name="by_category" placeholder="category"/><br><br>
         <input type="date" name="start_date_range" placeholder="start date"/><br>
         <input type="date" name="end_date_range" placeholder="end date"/><br>
+        <input type="submit" name="submit" value="submit"/><br>
     </div>
 </form>
 <?php
@@ -22,10 +23,20 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10 ";
 }
 else{
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10 ";
+}
+if(isset($_POST["submit"])){
+    if(isset($_POST["sorter"])){
+        if($_POST["sorter"] === 'value_by_total'){
+            $sql_str .= "ORDER BY total_price ";
+        }
+        else{
+            $sql_str .= "ORDER BY created ";
+        }
+    }
 }
 $stmt = $db->prepare($sql_str);
 try {
