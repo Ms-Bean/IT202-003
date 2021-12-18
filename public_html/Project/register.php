@@ -48,7 +48,7 @@ if(isset($_POST['password'])){
     $username = se($_POST, "username", "", false);
     $password = se($_POST, "password", "", false);
     $confirm = se($_POST, "confirm", "", false);
-    if($isset($_POST["visibility"])){
+    if(isset($_POST["visibility"])){
         $visibility = "true";
     }
     else{
