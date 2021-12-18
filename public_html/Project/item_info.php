@@ -126,45 +126,47 @@ if(is_logged_in()){
             $stmt = $db->prepare("INSERT INTO Ratings (product_id, user_id, rating, comment) VALUES(:product_id, :user_id, :rating, :comment)");
             try {
                 $stmt->execute([":product_id" => $id, ":user_id" => $_SESSION["user"]["id"], ":rating" => $rating, "comment" => $comment]);
-                flash("You've registered");
+                flash("Comment added");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
         }
+        header("Refresh:0");
     }
 }
 ?>
 <?php 
 //Add rating cards to page
-foreach($ratings_result as $index => $record){
-    //Get user info for each rating
-    $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
-    try {
-        $stmt->execute([":id" => $record["user_id"]]);
-        $r = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($r) {
-            $user_result = $r;
+if($ratings_result != null){
+    foreach($ratings_result as $index => $record){
+        //Get user info for each rating
+        $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
+        try {
+            $stmt->execute([":id" => $record["user_id"]]);
+            $r = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($r) {
+                $user_result = $r;
+            }
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
         }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+        echo("<div class='rating_card'>");
+        if($user_result["visibility"] !== 'false'){
+            echo("Email: " . $user_result["email"] . "<br>");
+        }
+        else{
+            echo("Private Email<br>");
+        }
+        echo("Rating: ");
+        for($x = 0; $x < $record["rating"]; $x++){
+            echo("⭐");
+        }
+        echo("<br><br>
+        <i>". $record["comment"] . "</i><br>
+        - ". $user_result["username"] . "<br>
+        </div><br>
+        ");
     }
-    echo("<div class='rating_card'>");
-    if($user_result["visibility"] !== 'false'){
-        echo("Email: " . $user_result["email"] . "<br>");
-    }
-    else{
-        echo("Private Email<br>");
-    }
-    echo("Rating: ");
-    for($x = 0; $x < $record["rating"]; $x++){
-        echo("⭐");
-    }
-    echo("<br><br>
-    <i>". $record["comment"] . "</i><br>
-    - ". $user_result["username"] . "<br>
-    </div><br>
-    ");
-
 }
 ?>
 <?php
