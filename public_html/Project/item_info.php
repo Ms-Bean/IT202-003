@@ -48,7 +48,8 @@ try {
 </div>
 <br>
 <?php
-$stmt = $db->prepare("SELECT rating, comment FROM Ratings WHERE product_id =:id");
+//Get ratings
+$stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
 try {
     $stmt->execute([":id" => $id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,11 +59,27 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+//Add rating cards to page
 foreach($result as $index => $record){
+    //Get user info for each rating
+    $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
+    try {
+        $stmt->execute([":id" => $record["user_id"]]);
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            $user_result = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    echo("<div class='cart_item'>");
+    if($user_result["visibility"] !== 'false'){
+        echo("Email: " . $user_result["email"]);
+    }
     echo("
-    <div class='cart_item'>
-    Rating: ". $record["rating"] . "<br>
-    Comment: ". $record["comment"] . "<br>
+    Rating: ". $record["rating"] . "<br><br>
+    <i>". $record["comment"] . "</i><br>
+    - ". $user_result["username"] . "<br>
     </div><br>
     ");
 }
