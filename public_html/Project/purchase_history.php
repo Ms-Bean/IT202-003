@@ -4,6 +4,8 @@ if(!is_logged_in()){
     flash("You must log in to view this page.");
     die(header("Location: login.php"));
 }
+
+$page = se($_GET, "page", -1, false);
 ?>
 <form method="POST">
     <div>
