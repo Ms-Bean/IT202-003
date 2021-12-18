@@ -20,7 +20,7 @@ try {
 
 </style>
 <div class="item_info">
-    <h2><?php echo($result["name"])?></h2>
+    <h1><?php echo($result["name"])?></h1>
     <?php foreach ($result as $column => $value) : ?>
     <?php 
         if($column === "name"){
@@ -32,7 +32,7 @@ try {
         }
     ?>
     <?php endforeach; ?>
-    <h1 id = "avrating">Average Rating: </h1>
+    <h2 id = "avrating">Average Rating: </h2>
     <?php
         if(has_role("Admin")){
             echo('<a href="admin/edit_item.php?id=');
@@ -142,7 +142,7 @@ if(isset($rating_result)){
             echo("Email: " . $user_result["email"] . "<br>");
         }
         else{
-            echo("Private Email");
+            echo("Private Email<br>");
         }
         echo("Rating: ");
         for($x = 0; $x < $record["rating"]; $x++){
