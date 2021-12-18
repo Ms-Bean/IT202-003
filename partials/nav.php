@@ -78,7 +78,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         padding: 10px;
         background-color: #a2eda1;
         width: 400px;
-        height: 400px;
+        height: 300px;
         text-align: left;
     }
     

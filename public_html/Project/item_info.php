@@ -49,25 +49,22 @@ try {
 <br>
 <div class="add_rating">
 <?php
-if(is_logged_in()){echo<<<A
+if(is_logged_in()){echo<<<KEIYOUDOUSHI
     <h1>Rate Item</h1>
     <form method="POST">
         <div>
-            <label for="rating_input">Rating</label>
-            <input type="number" min="1" max="5" name="rating_input" required />
+            <input type="number" min="1" max="5" name="rating_input" placeholder="Rating" required />
         </div>
         <div>
             <textarea name="comment_input" placeholder="Comment" maxlength="150" required></textarea>
         </div>
         <div>
-        <input type="submit" value="Add to cart" name="submit" />
+        <input type="submit" value="Submit" name="submit" />
         </div>
     </form>
-A;}
+KEIYOUDOUSHI;}
 else{
-    echo<<<A
-    <h1>Log in to rate item</h1>
-    A;
+    echo("<h1>Log in to rate item</h1>");
 }
 ?>
 </div>
@@ -97,7 +94,7 @@ if(is_logged_in()){
             $stmt = $db->prepare("INSERT INTO Ratings (product_id, user_id, rating, comment) VALUES(:product_id, :user_id, :rating, :comment)");
             try {
                 $stmt->execute([":product_id" => $id, ":user_id" => $_SESSION["user"]["id"], ":rating" => $rating, "comment" => $comment]);
-                flash("You've registered");
+                flash("Rating Added");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
