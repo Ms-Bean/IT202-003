@@ -23,10 +23,10 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id OR NOT user_id = :user_id LIMIT 10 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id OR NOT user_id = :user_id ";
 }
 else{
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id LIMIT 10 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id ";
 }
 if(isset($_POST["submit"])){
     if(isset($_POST["sorter"])){
