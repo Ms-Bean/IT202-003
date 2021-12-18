@@ -134,7 +134,7 @@ if(is_logged_in()){
     }
 }
 ?>
-<?php if($ratings_result != null){
+<?php 
 //Add rating cards to page
 foreach($ratings_result as $index => $record){
     //Get user info for each rating
@@ -164,7 +164,7 @@ foreach($ratings_result as $index => $record){
     - ". $user_result["username"] . "<br>
     </div><br>
     ");
-}
+
 }
 ?>
 <?php
