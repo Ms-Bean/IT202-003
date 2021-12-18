@@ -61,7 +61,7 @@ try {
 foreach($result as $index => $record){
     echo("
     <div>
-    ". $record["rating"] . "
+    ". $record . "
     </div><br>
     ");
 }
