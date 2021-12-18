@@ -30,7 +30,7 @@ $PER_PAGE = 5;
 if(isset($_GET['touched'])){
     echo("
     <script>
-        document.getElementById('submitForm').submit();
+        document.getElementById('submitForm').click();
     </script>
     ");
 }
