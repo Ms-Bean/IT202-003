@@ -46,7 +46,27 @@ try {
         
     ?>
 </div>
-
+<br>
+<?php
+$stmt = $db->prepare("SELECT * FROM Ratings where product_id =:id");
+try {
+    $stmt->execute([":id" => $id]);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($r) {
+        $result = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+foreach($result as $index => $record){
+    echo("
+    <div>
+    ". $record["rating"] . "
+    </div><br>
+    ");
+    $new_order_id = $record["id"];
+}
+?>
 <?php
 require_once(__DIR__ . "/../../partials/flash.php");
 ?>
