@@ -57,7 +57,7 @@ if(!empty($ratings_result)){
     ?>
     <?php endforeach; 
         if(!is_null($average_rating)){
-            echo("<br>Average Rating: " . $average_rating);
+            echo("<br>Average Rating: " . $average_rating . "<br>");
         }
     ?>
     <?php
@@ -82,13 +82,13 @@ if(is_logged_in()){echo<<<A
     <form method="POST">
         <div>
             <label for="rating_input">Rating</label>
-            <input type="number" min="1" max="5" name="rating_input" required />
+            <input type="number" min="1" max="5" name="rating_input" placeholder="Rating" required />
         </div>
         <div>
             <textarea name="comment_input" placeholder="Comment" maxlength="150" required></textarea>
         </div>
         <div>
-        <input type="submit" value="Add to cart" name="submit" />
+        <input type="submit" value="Submit" name="submit" />
         </div>
     </form>
 A;}
@@ -133,7 +133,7 @@ if(is_logged_in()){
     }
 }
 ?>
-<?php
+<?php if($ratings_result != null){
 //Add rating cards to page
 foreach($ratings_result as $index => $record){
     //Get user info for each rating
@@ -163,6 +163,7 @@ foreach($ratings_result as $index => $record){
     - ". $user_result["username"] . "<br>
     </div><br>
     ");
+}
 }
 ?>
 <?php
