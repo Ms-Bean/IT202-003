@@ -5,6 +5,8 @@ $result = [];
 $columns = get_columns("Products");
 $db = getDB();
 $id = se($_GET, "id", -1, false);
+
+//Get product info
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");
 try {
     $stmt->execute([":id" => $id]);
@@ -14,6 +16,27 @@ try {
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
+}
+//Get ratings and comments
+$stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
+try {
+    $stmt->execute([":id" => $id]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $ratings_result = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+//Get average rating
+if(!empty($ratings_result)){
+    $average_rating = 0;
+    $count = 0;
+    foreach($ratings_result as $index => $record){
+        $average_rating += $record["rating"];
+        $count++;
+    }
+    $average_rating /= $count;
 }
 ?>
 <style>
@@ -29,6 +52,9 @@ try {
         else{
             $v = se($column) . ": " . se($value, null, "N/A", false) . "<br>";
             echo $v;
+        }
+        if(!is_null($average_rating)){
+            echo("<br>Average Rating: " . $average_rating);
         }
     ?>
     <?php endforeach; ?>
@@ -104,22 +130,10 @@ if(is_logged_in()){
         }
     }
 }
-
 ?>
 <?php
-//Get ratings
-$stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
-try {
-    $stmt->execute([":id" => $id]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($r) {
-        $result = $r;
-    }
-} catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
-}
 //Add rating cards to page
-foreach($result as $index => $record){
+foreach($ratings_result as $index => $record){
     //Get user info for each rating
     $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
     try {
@@ -136,7 +150,7 @@ foreach($result as $index => $record){
         echo("Email: " . $user_result["email"] . "<br>");
     }
     else{
-        echo("Private Email");
+        echo("Private Email<br>");
     }
     echo("Rating: ");
     for($x = 0; $x < $record["rating"]; $x++){
