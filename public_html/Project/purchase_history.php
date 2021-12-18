@@ -70,6 +70,14 @@ if(isset($_POST["submit"])){
         $sql_str = substr($sql_str, 0, -1) . ") ";
         flash($sql_str);
     }
+    if(isset($_POST["start_date_range"]) and isset($_POST["end_date_range"])){
+        $start_timestamp = date($_POST["start_date_range"] . " 00:00:00");
+        $sql_str = $sql_str . "AND created >= " . $start_timestamp . " ";
+    }
+    if(isset($_POST["end_date_range"])){
+        $end_timestamp = date($_POST["end_date_range"] . " 23:59:59");
+        $sql_str = $sql_str . "AND created <= " . $end_timestamp . " ";
+    }
     $stmt = $db->prepare($sql_str);
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
