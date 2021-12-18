@@ -119,34 +119,36 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 //Add rating cards to page
-foreach($rating_result as $index => $record){
-    //Get user info for each rating
-    $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
-    try {
-        $stmt->execute([":id" => $record["user_id"]]);
-        $r = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($r) {
-            $user_result = $r;
+if($rating_result){
+    foreach($rating_result as $index => $record){
+        //Get user info for each rating
+        $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
+        try {
+            $stmt->execute([":id" => $record["user_id"]]);
+            $r = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($r) {
+                $user_result = $r;
+            }
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
         }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+        echo("<div class='rating_card'>");
+        if($user_result["visibility"] !== 'false'){
+            echo("Email: " . $user_result["email"] . "<br>");
+        }
+        else{
+            echo("Private Email");
+        }
+        echo("Rating: ");
+        for($x = 0; $x < $record["rating"]; $x++){
+            echo("⭐");
+        }
+        echo("<br><br>
+        <i>". $record["comment"] . "</i><br>
+        - ". $user_result["username"] . "<br>
+        </div><br>
+        ");
     }
-    echo("<div class='rating_card'>");
-    if($user_result["visibility"] !== 'false'){
-        echo("Email: " . $user_result["email"] . "<br>");
-    }
-    else{
-        echo("Private Email");
-    }
-    echo("Rating: ");
-    for($x = 0; $x < $record["rating"]; $x++){
-        echo("⭐");
-    }
-    echo("<br><br>
-    <i>". $record["comment"] . "</i><br>
-    - ". $user_result["username"] . "<br>
-    </div><br>
-    ");
 }
 ?>
 <?php
