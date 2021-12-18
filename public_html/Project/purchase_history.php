@@ -12,8 +12,8 @@ if(!is_logged_in()){
         <input type="radio" name="sorter" value="value_by_total"/>
         <label>Sort by total</label<br><br>
         <input type="text" name="by_category" placeholder="category" value=""/><br><br>
-        <input type="date" name="start_date_range" placeholder="start date"/><br>
-        <input type="date" name="end_date_range" placeholder="end date"/><br>
+        <input type="date" name="start_date_range" placeholder="start date" value=""/><br>
+        <input type="date" name="end_date_range" placeholder="end date" value=""/><br>
         <input type="submit" name="submit" value="submit"/><br>
     </div>
 </form>
@@ -70,11 +70,11 @@ if(isset($_POST["submit"])){
         $sql_str = substr($sql_str, 0, -1) . ") ";
         flash($sql_str);
     }
-    if(isset($_POST["start_date_range"]) and isset($_POST["end_date_range"])){
+    if($_POST["start_date_range"] !== ''){
         $start_timestamp = date($_POST["start_date_range"] . " 00:00:00");
         $sql_str = $sql_str . "AND created >= " . $start_timestamp . " ";
     }
-    if(isset($_POST["end_date_range"])){
+    if($_POST["end_date_range"] !== ''){
         $end_timestamp = date($_POST["end_date_range"] . " 23:59:59");
         $sql_str = $sql_str . "AND created <= " . $end_timestamp . " ";
     }
