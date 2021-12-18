@@ -29,6 +29,12 @@ else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10 ";
 }
 if(isset($_POST["submit"])){
+    if(has_role("Owner")){
+        $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10 ";
+    }
+    else{
+        $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10 ";
+    }
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
             $sql_str .= "ORDER BY :total_price ";
