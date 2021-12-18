@@ -132,6 +132,7 @@ if($_POST["start_date_range"] !== ''){
 if($_POST["end_date_range"] !== ''){
     echo("&end_date_range=" . $_POST["end_date_range"]);
 }
+echo('>Page 2</a>');
 ?>
 <?php require(__DIR__ . "/../../partials/flash.php");
 ?>
