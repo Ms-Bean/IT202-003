@@ -115,10 +115,8 @@ foreach($orders_results as $index => $record){
     echo("</div><br>");
 }
 if(has_role("Owner")){
-    echo("<h1>Total: " . $total);
+    echo("<h1>Total: " . $total . "</h1>");
 }
-?>
-<?php
 echo('<a href="purchase_history.php?page=1'); 
 if($isset($_POST["sorter"])){
     echo("&sorter=" . $_POST["sorter"]);
