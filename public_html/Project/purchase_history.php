@@ -83,3 +83,5 @@ foreach($orders_results as $index => $record){
     echo("</div><br>");
 }
 ?>
+<?php require(__DIR__ . "/../../partials/flash.php");
+?>
