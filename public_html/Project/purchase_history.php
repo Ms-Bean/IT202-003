@@ -27,13 +27,6 @@ $PER_PAGE = 5;
     </div>
 </form>
 <?php
-if(isset($_GET['touched'])){
-    echo("
-    <script>
-        document.getElementById('submitForm').click();
-    </script>
-    ");
-}
 ?>
 <?php
 $orders_results = [];
@@ -46,7 +39,7 @@ if(has_role("Owner")){
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (1=1 AND user_id = :user_id) ";
 }
-if(isset($_POST["submit"])){
+if(isset($_POST["submit"]) or isset($_GET["touched"])){
     
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
