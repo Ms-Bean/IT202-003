@@ -48,10 +48,10 @@ try {
 </div>
 <br>
 <?php
-$stmt = $db->prepare("SELECT rating, comment FROM Ratings where product_id =:id");
+$stmt = $db->prepare("SELECT rating, comment FROM Ratings WHERE product_id =:id");
 try {
     $stmt->execute([":id" => $id]);
-    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $result = $r;
     }
