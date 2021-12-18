@@ -86,7 +86,7 @@ if(isset($_POST["submit"])){
         $end_timestamp = date($_POST["end_date_range"] . " 23:59:59");
         $sql_str = $sql_str . "AND created <= '" . $end_timestamp . "' ";
     }
-    $sql_str = $sql_str . "LIMIT " . $page*$PER_PAGE . "," . ($page+1)*$PER_PAGE;
+    $sql_str = $sql_str . "LIMIT " . $page*$PER_PAGE . "," . $PER_PAGE;
     $stmt = $db->prepare($sql_str);
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
@@ -118,5 +118,6 @@ if(has_role("Owner")){
     echo("<h1>Total: " . $total);
 }
 ?>
+<a href="purchase_history.php?page=1">Page 2</a>
 <?php require(__DIR__ . "/../../partials/flash.php");
 ?>
