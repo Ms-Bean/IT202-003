@@ -97,9 +97,6 @@ if(isset($_POST["submit"])){
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-    if(has_role("Owner")){
-        echo("<h1>Total: " . $total . "</h1>");
-    }
     echo('<a href="purchase_history.php?page=1'); 
     
     if($_POST["start_date_range"] !== ''){
@@ -127,6 +124,9 @@ foreach($orders_results as $index => $record){
     echo("</div><br>");
 }
 
+if(has_role("Owner")){
+    echo("<h1>Total: " . $total . "</h1>");
+}
 ?>
 <?php require(__DIR__ . "/../../partials/flash.php");
 ?>
