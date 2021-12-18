@@ -4,6 +4,19 @@ if(!is_logged_in()){
     flash("You must log in to view this page.");
     die(header("Location: login.php"));
 }
+?>
+<form method="POST">
+    <div>
+        <input type="checkbox" name="by_date"/>
+        <label>Sort by date</label><br>
+        <input type="checkbox" name="by_total"/>
+        <label>Sort by total</label<br><br>
+        <input type="text" name="by_category" placeholder="category"/><br><br>
+        <input type="date" name="start_date_range" placeholder="start date"/><br>
+        <input type="date" name="end_date_range" placeholder="end date"/><br>
+    </div>
+</form>
+<?php
 $orders_results = [];
 $orderitems_results = [];
 $db = getDB();
