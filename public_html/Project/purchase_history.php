@@ -55,6 +55,7 @@ if(isset($_POST["submit"])){
             $sql_str = $sql_str . $record["id"] . ",";
         }
         $sql_str = substr($sql_str, 0, -1) . ") ";
+        flash($sql_str);
     }
     $stmt = $db->prepare($sql_str);
     try {
