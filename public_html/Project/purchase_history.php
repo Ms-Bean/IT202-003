@@ -95,7 +95,9 @@ if(isset($_POST["submit"])){
 ?>
 <h1>Order History</h1>
 <?php
+$total = 0;
 foreach($orders_results as $index => $record){
+    $total += $record["total_price"];
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
     echo("<br>User ID: " . $record["user_id"]);
@@ -104,6 +106,9 @@ foreach($orders_results as $index => $record){
     echo("<br>Address: " . $record["address"]);
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
+}
+if(has_role("Owner")){
+    echo("<h1>Total: " . $total);
 }
 ?>
 <?php require(__DIR__ . "/../../partials/flash.php");
