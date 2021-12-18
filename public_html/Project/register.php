@@ -28,7 +28,7 @@ if(isset($_POST['password'])){
         <input value = "<?php echo $confirm;?>"type="password" name="confirm" required minlength="8" />
     </div>
     <div>
-        <label for="visibility">Visibility</label>
+        <label for="visibility">Public</label>
         <input type="checkbox" value="visible" name="visibility"/>
     </div>
     <input type="submit" value="Register" />
