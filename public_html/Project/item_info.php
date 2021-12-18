@@ -5,8 +5,6 @@ $result = [];
 $columns = get_columns("Products");
 $db = getDB();
 $id = se($_GET, "id", -1, false);
-
-//Get product info
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");
 try {
     $stmt->execute([":id" => $id]);
@@ -16,29 +14,6 @@ try {
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
-}
-//Get ratings and comments
-$ratings_result = null;
-$stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
-try {
-    $stmt->execute([":id" => $id]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($r) {
-        $ratings_result = $r;
-    }
-} catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
-}
-//Get average rating
-$average_rating = null;
-if(!empty($ratings_result)){
-    $average_rating = 0;
-    $count = 0;
-    foreach($ratings_result as $index => $record){
-        $average_rating += $record["rating"];
-        $count++;
-    }
-    $average_rating /= $count;
 }
 ?>
 <style>
@@ -56,11 +31,7 @@ if(!empty($ratings_result)){
             echo $v;
         }
     ?>
-    <?php endforeach; 
-        if(!is_null($average_rating)){
-            echo("<br>Average Rating: " . $average_rating . "<br>");
-        }
-    ?>
+    <?php endforeach; ?>
     <?php
         if(has_role("Admin")){
             echo('<a href="admin/edit_item.php?id=');
@@ -83,13 +54,13 @@ if(is_logged_in()){echo<<<A
     <form method="POST">
         <div>
             <label for="rating_input">Rating</label>
-            <input type="number" min="1" max="5" name="rating_input" placeholder="Rating" required />
+            <input type="number" min="1" max="5" name="rating_input" required />
         </div>
         <div>
             <textarea name="comment_input" placeholder="Comment" maxlength="150" required></textarea>
         </div>
         <div>
-        <input type="submit" value="Submit" name="submit" />
+        <input type="submit" value="Add to cart" name="submit" />
         </div>
     </form>
 A;}
@@ -126,47 +97,56 @@ if(is_logged_in()){
             $stmt = $db->prepare("INSERT INTO Ratings (product_id, user_id, rating, comment) VALUES(:product_id, :user_id, :rating, :comment)");
             try {
                 $stmt->execute([":product_id" => $id, ":user_id" => $_SESSION["user"]["id"], ":rating" => $rating, "comment" => $comment]);
-                flash("Comment added");
+                flash("You've registered");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
         }
-        header("Refresh:0");
     }
 }
+
 ?>
-<?php 
-//Add rating cards to page
-if($ratings_result != null){
-    foreach($ratings_result as $index => $record){
-        //Get user info for each rating
-        $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
-        try {
-            $stmt->execute([":id" => $record["user_id"]]);
-            $r = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($r) {
-                $user_result = $r;
-            }
-        } catch (PDOException $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
-        }
-        echo("<div class='rating_card'>");
-        if($user_result["visibility"] !== 'false'){
-            echo("Email: " . $user_result["email"] . "<br>");
-        }
-        else{
-            echo("Private Email<br>");
-        }
-        echo("Rating: ");
-        for($x = 0; $x < $record["rating"]; $x++){
-            echo("⭐");
-        }
-        echo("<br><br>
-        <i>". $record["comment"] . "</i><br>
-        - ". $user_result["username"] . "<br>
-        </div><br>
-        ");
+<?php
+//Get ratings
+$stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
+try {
+    $stmt->execute([":id" => $id]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $result = $r;
     }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+//Add rating cards to page
+foreach($result as $index => $record){
+    //Get user info for each rating
+    $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
+    try {
+        $stmt->execute([":id" => $record["user_id"]]);
+        $r = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($r) {
+            $user_result = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
+    }
+    echo("<div class='rating_card'>");
+    if($user_result["visibility"] !== 'false'){
+        echo("Email: " . $user_result["email"] . "<br>");
+    }
+    else{
+        echo("Private Email");
+    }
+    echo("Rating: ");
+    for($x = 0; $x < $record["rating"]; $x++){
+        echo("⭐");
+    }
+    echo("<br><br>
+    <i>". $record["comment"] . "</i><br>
+    - ". $user_result["username"] . "<br>
+    </div><br>
+    ");
 }
 ?>
 <?php
