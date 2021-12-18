@@ -18,7 +18,7 @@ $PER_PAGE = 5;
         <label>Sort by date</label><br>
         <input type="radio" name="sorter" value="value_by_total" <?php if(isset($_GET["sorter"])){if($_GET["sorter"] === 'value_by_total'){echo("checked='checked'");}}?>/>
         <label>Sort by total</label<br><br>
-        <input type="text" name="by_category" placeholder="category" <?php if(isset($_GET["by_category"])){echo("value=" . $_GET["by_category"]);}else{echo("value=''");}?>/><br><br>
+        <input type="text" name="by_category" placeholder="category" <?php if(isset($_GET["by_category"])){echo("value=" . substr_replace($_GET["by_category"], "", -1));}else{echo("value=''");}?>/><br><br>
         <label>Start date</label>
         <input type="date" name="start_date_range" <?php if(isset($_GET["start_date_range"])){echo("value=" . $_GET["start_date_range"]);}else{echo("value=''");}?>/><br>
         <label>End date</label>
