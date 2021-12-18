@@ -64,7 +64,9 @@ if(is_logged_in()){echo<<<KEIYOUDOUSHI
     </form>
 KEIYOUDOUSHI;}
 else{
-    echo("<h1>Log in to rate item</h1><br>");
+    echo<<<A
+    <h1>Log in to rate item</h1>
+    A;
 }
 ?>
 </div>
@@ -133,7 +135,7 @@ foreach($result as $index => $record){
         echo("Email: " . $user_result["email"] . "<br>");
     }
     else{
-        echo("Private Email<br>");
+        echo("Private Email");
     }
     echo("Rating: ");
     for($x = 0; $x < $record["rating"]; $x++){
