@@ -1,4 +1,4 @@
-a<?php
+<?php
 require(__DIR__ . "/../../partials/nav.php");
 if(!is_logged_in()){
     flash("You must log in to view this page.");

@@ -53,6 +53,34 @@ require_once(__DIR__ . "/../lib/functions.php");
     html{
         font-family: verdana;
     }
+    .rating_card{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        position: relative;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 400px;
+        height: 200px;
+        text-align: left;
+    }
+    .add_rating{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        position: relative;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 400px;
+        height: 300px;
+        text-align: left;
+    }
     
     .cart_item{
         position: fixed;
@@ -123,6 +151,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         <?php if (!is_logged_in()) : ?>
             <li><a href="<?php echo __DIR__ . "/../../Project/login.php"; ?>">Login</a></li>
             <li><a href="<?php echo __DIR__ . "/../../Project/register.php"; ?>">Register</a></li>
+            <li><a href="<?php echo __DIR__ . "/../../Project/shop.php"; ?>">Shop</a></li>
         <?php endif; ?>
         <?php if (has_role("Admin")) : ?>
             <li><a href="<?php echo __DIR__ . "/../../Project/admin/create_role.php"; ?>">Create Role</a></li>
