@@ -14,15 +14,15 @@ $PER_PAGE = 5;
 ?>
 <form method="POST">
     <div>
-        <input type="radio" name="sorter" value="value_by_date"/>
+        <input type="radio" name="sorter" value="value_by_date" <?php if(isset($_GET["sorter"])){if($_GET["sorter"] === 'value_by_date'){echo("checked='checked'");}}?>/>
         <label>Sort by date</label><br>
-        <input type="radio" name="sorter" value="value_by_total"/>
+        <input type="radio" name="sorter" value="value_by_total" <?php if(isset($_GET["sorter"])){if($_GET["sorter"] === 'value_by_total'){echo("checked='checked'");}}?>/>
         <label>Sort by total</label<br><br>
-        <input type="text" name="by_category" placeholder="category" value=""/><br><br>
+        <input type="text" name="by_category" placeholder="category" <?php if(isset($_GET["by_category"])){echo("value=" . $_GET["by_category"]);}else{echo("value=''");}?>/><br><br>
         <label>Start date</label>
-        <input type="date" name="start_date_range" value=""/><br>
+        <input type="date" name="start_date_range" <?php if(isset($_GET["start_date_range"])){echo("value=" . $_GET["start_date_range"]);}else{echo("value=''");}?>/><br>
         <label>End date</label>
-        <input type="date" name="end_date_range" value=""/><br>
+        <input type="date" name="end_date_range" <?php if(isset($_GET["end_date_range"])){echo("value=" . $_GET["end_date_range"]);}else{echo("value=''");}?>/><br>
         <input type="submit" name="submit" value="submit"/><br>
     </div>
 </form>
@@ -118,6 +118,20 @@ if(has_role("Owner")){
     echo("<h1>Total: " . $total);
 }
 ?>
-<a href="purchase_history.php?page=1">Page 2</a>
+<?php
+echo('<a href="purchase_history.php?page=1'); 
+if($isset($_POST["sorter"])){
+    echo("&sorter=" . $_POST["sorter"]);
+}
+if($_POST["by_category"] !== ''){
+    echo("&by_category=" . $_POST["by_category"]);
+}
+if($_POST["start_date_range"] !== ''){
+    echo("&start_date_range=" . $_POST["start_date_range"]);
+}
+if($_POST["end_date_range"] !== ''){
+    echo("&end_date_range=" . $_POST["end_date_range"]);
+}
+?>
 <?php require(__DIR__ . "/../../partials/flash.php");
 ?>
