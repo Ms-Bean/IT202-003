@@ -53,11 +53,12 @@ if(!empty($ratings_result)){
             $v = se($column) . ": " . se($value, null, "N/A", false) . "<br>";
             echo $v;
         }
+    ?>
+    <?php endforeach; 
         if(!is_null($average_rating)){
             echo("<br>Average Rating: " . $average_rating);
         }
     ?>
-    <?php endforeach; ?>
     <?php
         if(has_role("Admin")){
             echo('<a href="admin/edit_item.php?id=');
