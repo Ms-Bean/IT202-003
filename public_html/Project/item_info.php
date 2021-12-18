@@ -119,7 +119,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 //Add rating cards to page
-if($rating_result){
+if(isset($rating_result)){
     foreach($rating_result as $index => $record){
         //Get user info for each rating
         $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
