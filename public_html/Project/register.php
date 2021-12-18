@@ -89,7 +89,7 @@ if(isset($_POST['password'])){
     else {
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password, username, visibility) VALUES(:email, :password, :username :visibility)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username, visibility) VALUES(:email, :password, :username, :visibility)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username, "visibility" => $visibility]);
             flash("You've registered");
