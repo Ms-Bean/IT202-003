@@ -54,13 +54,13 @@ if(is_logged_in()){echo<<<A
     <form method="POST">
         <div>
             <label for="rating_input">Rating</label>
-            <input type="number" min="1" max="5" name="rating_input" required />
+            <input type="number" min="1" max="5" name="rating_input" placeholder="rating" required />
         </div>
         <div>
             <textarea name="comment_input" placeholder="Comment" maxlength="150" required></textarea>
         </div>
         <div>
-        <input type="submit" value="Add to cart" name="submit" />
+        <input type="submit" value="Add rating" name="submit" />
         </div>
     </form>
 A;}
@@ -97,7 +97,7 @@ if(is_logged_in()){
             $stmt = $db->prepare("INSERT INTO Ratings (product_id, user_id, rating, comment) VALUES(:product_id, :user_id, :rating, :comment)");
             try {
                 $stmt->execute([":product_id" => $id, ":user_id" => $_SESSION["user"]["id"], ":rating" => $rating, "comment" => $comment]);
-                flash("You've registered");
+                flash("Rating submitted");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
@@ -113,13 +113,13 @@ try {
     $stmt->execute([":id" => $id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
-        $result = $r;
+        $rating_result = $r;
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 //Add rating cards to page
-foreach($result as $index => $record){
+foreach($rating_result as $index => $record){
     //Get user info for each rating
     $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
     try {
