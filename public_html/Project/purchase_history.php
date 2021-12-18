@@ -71,11 +71,11 @@ if(isset($_POST["submit"])){
     }
     if($_POST["start_date_range"] !== ''){
         $start_timestamp = date($_POST["start_date_range"] . " 00:00:00");
-        $sql_str = $sql_str . "AND created >= " . $start_timestamp . " ";
+        $sql_str = $sql_str . "AND created >= '" . $start_timestamp . "' ";
     }
     if($_POST["end_date_range"] !== ''){
         $end_timestamp = date($_POST["end_date_range"] . " 23:59:59");
-        $sql_str = $sql_str . "AND created <= " . $end_timestamp . " ";
+        $sql_str = $sql_str . "AND created <= '" . $end_timestamp . "' ";
     }
     
     flash($sql_str);
