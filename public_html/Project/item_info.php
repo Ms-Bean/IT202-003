@@ -120,7 +120,11 @@ try {
 }
 //Add rating cards to page
 if(isset($rating_result)){
+    $average_rating = 0;
+    $rating_count = 0;
     foreach($rating_result as $index => $record){
+        $average_rating += $record["rating"];
+        $rating_count++;
         //Get user info for each rating
         $stmt = $db->prepare("SELECT email, visibility, username FROM Users WHERE id =:id");
         try {
