@@ -48,7 +48,7 @@ try {
 </div>
 <br>
 <?php
-$stmt = $db->prepare("SELECT * FROM Ratings where product_id =:id");
+$stmt = $db->prepare("SELECT rating FROM Ratings where product_id =:id");
 try {
     $stmt->execute([":id" => $id]);
     $r = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,7 +64,6 @@ foreach($result as $index => $record){
     ". $record["rating"] . "
     </div><br>
     ");
-    $new_order_id = $record["id"];
 }
 ?>
 <?php
