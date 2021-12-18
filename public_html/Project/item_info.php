@@ -154,7 +154,7 @@ if(isset($rating_result)){
         </div><br>
         ");
     }
-    $average_rating /= $count;
+    $average_rating /= $rating_count;
     echo("
     <script>
     document.getElementById('avrating').innerHTML = 'Average Rating: ". $average_rating . "'
