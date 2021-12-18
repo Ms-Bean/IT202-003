@@ -80,7 +80,6 @@ if(isset($_POST["submit"])){
         $sql_str = $sql_str . "AND created <= '" . $end_timestamp . "' ";
     }
     
-    flash($sql_str);
     $stmt = $db->prepare($sql_str);
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
