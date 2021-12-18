@@ -48,7 +48,7 @@ try {
 </div>
 <br>
 <?php
-$stmt = $db->prepare("SELECT rating FROM Ratings where product_id =:id");
+$stmt = $db->prepare("SELECT rating, comment FROM Ratings where product_id =:id");
 try {
     $stmt->execute([":id" => $id]);
     $r = $stmt->fetch(PDO::FETCH_ASSOC);
