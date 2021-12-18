@@ -5,7 +5,7 @@ if(!is_logged_in()){
     die(header("Location: login.php"));
 }
 if(empty($_GET)){
-    $page = 1;
+    $page = 0;
 }
 else {
     $page = $_GET['page'];
@@ -98,7 +98,12 @@ if(isset($_POST["submit"])){
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
     echo('<a href="purchase_history.php?page=1'); 
-    
+    if($_POST["category"] !== ''){
+        echo("&by_category=" . $_POST["by_category"]);
+    }
+    if(isset($_POST["sorter"])){
+        echo("&sorter=" . $_POST["sorter"]);
+    }
     if($_POST["start_date_range"] !== ''){
         echo("&start_date_range=" . $_POST["start_date_range"]);
     }
