@@ -95,6 +95,7 @@ if(isset($_POST["submit"])){
 <h1>Order History</h1>
 <?php
 $total = 0;
+$current_page = 0;
 $pages = [[]]; //Store pages as a list of lists, each sublist being a list of order info cards
 foreach($orders_results as $index => $record){
     $total += $record["total_price"];
@@ -107,14 +108,34 @@ foreach($orders_results as $index => $record){
     "<br>Address: " . $record["address"] .
     "<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>
     </div><br>";
-    if(sizeof(end($pages)) > 5){ //Create new page after 5 cards are added to last page
+    if(sizeof(end($pages)) >= 5){ //Create new page after 5 cards are added to last page
         array_push($pages, []);
     }
     array_push($pages[sizeof($pages)-1], $card); 
 } //We should now have something that looks like this [[a, b, c, d, e], [f, g, h, i, j], [k, l]]
-foreach($pages[0] as $info_card){
+?>
+
+<div id="info_cards">
+<?php
+foreach($pages[$current_page] as $info_card){
     echo($info_card);
 }
+?>
+</div>
+
+<form method="post">
+    <input type="submit" name="nextPage" value="next" onclick = "document.getElementById('info_cards').outerHTML=('');"/>
+</form>
+<?php
+    if(isset($_POST["nextPage"])){ 
+        $current_page++;
+        echo("<div id='info_cards'>");
+        foreach($pages[$current_page] as $info_card){
+            echo($info_card);
+        }
+        echo("</div>");
+    }
+
 ?>
 <?php require(__DIR__ . "/../../partials/flash.php");
 ?>
