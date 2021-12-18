@@ -63,7 +63,7 @@ if(isset($_POST["submit"])){
                 flash("<pre>" . var_export($e, true) . "</pre>");
             }
             foreach($deep_results as $deep_index => $deep_record){
-                $sql_str = $sql_str . $deep_record . ", ";
+                $sql_str = $sql_str . $deep_record["order_id"] . ", ";
             }
         }
         $sql_str = substr($sql_str, 0, -1) . ") ";
