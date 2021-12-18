@@ -12,8 +12,10 @@ if(!is_logged_in()){
         <input type="radio" name="sorter" value="value_by_total"/>
         <label>Sort by total</label<br><br>
         <input type="text" name="by_category" placeholder="category" value=""/><br><br>
-        <input type="date" name="start_date_range" placeholder="start date" value=""/><br>
-        <input type="date" name="end_date_range" placeholder="end date" value=""/><br>
+        <label>Start date</label>
+        <input type="date" name="start_date_range" value=""/><br>
+        <label>End date</label>
+        <input type="date" name="end_date_range" value=""/><br>
         <input type="submit" name="submit" value="submit"/><br>
     </div>
 </form>
