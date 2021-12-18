@@ -23,9 +23,18 @@ $PER_PAGE = 5;
         <input type="date" name="start_date_range" <?php if(isset($_GET["start_date_range"])){echo("value=" . $_GET["start_date_range"]);}else{echo("value=''");}?>><br>
         <label>End date</label>
         <input type="date" name="end_date_range" <?php if(isset($_GET["end_date_range"])){echo("value=" . $_GET["end_date_range"]);}else{echo("value=''");}?>><br>
-        <input type="submit" name="submit" value="submit"/><br>
+        <input type="submit" name="submit" value="submit" id="submitForm"/><br>
     </div>
 </form>
+<?php
+if(isset($_GET['touched'])){
+    echo("
+    <script>
+        document.getElementById('submitForm').submit();
+    </script>
+    ");
+}
+?>
 <?php
 $orders_results = [];
 $orderitems_results = [];
@@ -110,7 +119,7 @@ if(isset($_POST["submit"])){
     if($_POST["end_date_range"] !== ''){
         echo("&end_date_range=" . $_POST["end_date_range"]);
     }
-    echo('">Page 2</a>');
+    echo('&touched=true">Page 2</a>');
 }
 
 ?>
