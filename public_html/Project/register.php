@@ -29,7 +29,7 @@ if(isset($_POST['password'])){
     </div>
     <div>
         <label for="visibility">Visibility</label>
-        <input type="checkbox" value="visible" name="visbility"/>
+        <input type="checkbox" value="visible" name="visibility"/>
     </div>
     <input type="submit" value="Register" />
 </form>
