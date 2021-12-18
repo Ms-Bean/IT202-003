@@ -107,7 +107,7 @@ foreach($orders_results as $index => $record){
     "<br>Address: " . $record["address"] .
     "<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>
     </div><br>";
-    if(sizeof(end($pages)) < 5){ //Create new page after 5 cards are added to last page
+    if(sizeof(end($pages)) > 5){ //Create new page after 5 cards are added to last page
         array_push($pages, []);
     }
     array_push(end($pages), $card); 
