@@ -38,6 +38,24 @@ if(isset($_POST["submit"])){
             $sql_str = $sql_str . "ORDER BY created ASC ";
         }
     }
+    if(isset($_POST["by_category"])){
+        $categories_results = [];
+        $stmt = $db->prepare("SELECT id FROM Products WHERE category = :category");
+        try {
+            $stmt->execute([":category" => $_POST["by_category"]]);
+            $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($r) {
+                $categories_results = $r;
+            }
+        } catch (PDOException $e) {
+            flash("<pre>" . var_export($e, true) . "</pre>");
+        }
+        $sql_str = $sql_str . "AND product_id in (";
+        foreach($categories_results as $index => $value){
+            $sql_str = $sql_str . $value . ",";
+        }
+        $sql_str = substr($sql_str, 0, -1) . ") ";
+    }
     $stmt = $db->prepare($sql_str);
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
