@@ -31,10 +31,10 @@ else{
 if(isset($_POST["submit"])){
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
-            $sql_str .= "ORDER BY total_price ";
+            $sql_str .= "ORDER BY :total_price ";
         }
         else{
-            $sql_str .= "ORDER BY created ";
+            $sql_str .= "ORDER BY :created ";
         }
     }
 }
