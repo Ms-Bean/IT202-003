@@ -11,7 +11,7 @@ if(!is_logged_in()){
         <label>Sort by date</label><br>
         <input type="radio" name="sorter" value="value_by_total"/>
         <label>Sort by total</label<br><br>
-        <input type="text" name="by_category" placeholder="category"/><br><br>
+        <input type="text" name="by_category" placeholder="category" value=""/><br><br>
         <input type="date" name="start_date_range" placeholder="start date"/><br>
         <input type="date" name="end_date_range" placeholder="end date"/><br>
         <input type="submit" name="submit" value="submit"/><br>
@@ -38,7 +38,7 @@ if(isset($_POST["submit"])){
             $sql_str = $sql_str . "ORDER BY created ASC ";
         }
     }
-    if(isset($_POST["by_category"])){
+    if($_POST["by_category"] !== ''){
         $categories_results = [];
         $stmt = $db->prepare("SELECT id FROM Products WHERE category = :category");
         try {
@@ -51,8 +51,8 @@ if(isset($_POST["submit"])){
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
         $sql_str = $sql_str . "AND product_id in (";
-        foreach($categories_results as $index => $value){
-            $sql_str = $sql_str . $value . ",";
+        foreach($categories_results as $index => $record){
+            $sql_str = $sql_str . $record["id"] . ",";
         }
         $sql_str = substr($sql_str, 0, -1) . ") ";
     }
