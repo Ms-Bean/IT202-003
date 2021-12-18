@@ -124,7 +124,7 @@ foreach($pages[$current_page] as $info_card){
 </div>
 
 <form method="post">
-    <input type="submit" name="nextPage" value="next" onclick = "document.getElementById('info_cards').outerHTML=('');"/>
+    <input type="button" name="nextPage" value="next" onclick = "document.getElementById('info_cards').outerHTML=('');"/>
 </form>
 <?php
     if(isset($_POST["nextPage"])){ 
