@@ -50,9 +50,21 @@ if(isset($_POST["submit"])){
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
-        $sql_str = $sql_str . "AND product_id in (";
+        $sql_str = $sql_str . "AND order_id in (";
         foreach($categories_results as $index => $record){
-            $sql_str = $sql_str . $record["id"] . ",";
+            $stmt = $db->prepare("SELECT order_id FROM OrderItems WHERE product_id = :product_id");
+            try {
+                $stmt->execute([":product_id" => $record["id"]]);
+                $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                if ($r) {
+                    $deep_results = $r;
+                }
+            } catch (PDOException $e) {
+                flash("<pre>" . var_export($e, true) . "</pre>");
+            }
+            foreach($deep_results as $deep_index => $deep_record){
+                $sql_str = $sql_str . $deep_record . ", ";
+            }
         }
         $sql_str = substr($sql_str, 0, -1) . ") ";
         flash($sql_str);
