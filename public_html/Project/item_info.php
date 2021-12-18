@@ -59,12 +59,12 @@ if(is_logged_in()){echo<<<KEIYOUDOUSHI
             <textarea name="comment_input" placeholder="Comment" maxlength="150" required></textarea>
         </div>
         <div>
-        <input type="submit" value="Submit" name="submit" />
+        <input type="submit" value="Add to cart" name="submit" />
         </div>
     </form>
 KEIYOUDOUSHI;}
 else{
-    echo("<h1>Log in to rate item</h1>");
+    echo("<h1>Log in to rate item</h1><br>");
 }
 ?>
 </div>
@@ -94,7 +94,7 @@ if(is_logged_in()){
             $stmt = $db->prepare("INSERT INTO Ratings (product_id, user_id, rating, comment) VALUES(:product_id, :user_id, :rating, :comment)");
             try {
                 $stmt->execute([":product_id" => $id, ":user_id" => $_SESSION["user"]["id"], ":rating" => $rating, "comment" => $comment]);
-                flash("Rating Added");
+                flash("You've registered");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
@@ -133,7 +133,7 @@ foreach($result as $index => $record){
         echo("Email: " . $user_result["email"] . "<br>");
     }
     else{
-        echo("Private Email");
+        echo("Private Email<br>");
     }
     echo("Rating: ");
     for($x = 0; $x < $record["rating"]; $x++){
