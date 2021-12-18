@@ -60,8 +60,9 @@ try {
 }
 foreach($result as $index => $record){
     echo("
-    <div>
-    ". $record . "
+    <div class='cart_item'>
+    Rating: ". $record["rating"] . "<br>
+    Comment: ". $record["comment"] . "<br>
     </div><br>
     ");
 }
