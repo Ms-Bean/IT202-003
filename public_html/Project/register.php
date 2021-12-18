@@ -27,6 +27,10 @@ if(isset($_POST['password'])){
         <label for="confirm">Confirm</label>
         <input value = "<?php echo $confirm;?>"type="password" name="confirm" required minlength="8" />
     </div>
+    <div>
+        <label for="visibility">Visibility</label>
+        <input type="checkbox" value="visible"/>
+    </div>
     <input type="submit" value="Register" />
 </form>
 <script>
@@ -40,11 +44,16 @@ if(isset($_POST['password'])){
 <?php
  //TODO 2: add PHP Code
  if(isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"])){
-     $email = se($_POST, "email", "", false);
-     $username = se($_POST, "username", "", false);
-     $password = se($_POST, "password", "", false);
-     $confirm = se($_POST, "confirm", "", false);
-
+    $email = se($_POST, "email", "", false);
+    $username = se($_POST, "username", "", false);
+    $password = se($_POST, "password", "", false);
+    $confirm = se($_POST, "confirm", "", false);
+    if($isset($_POST["visibility"])){
+        $visibility = "true";
+    }
+    else{
+        $visibility = "false";
+    }
     $hasErrors = false;
     if(empty($email)){
         $hasErrors = true;
@@ -80,9 +89,9 @@ if(isset($_POST['password'])){
     else {
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
-        $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
+        $stmt = $db->prepare("INSERT INTO Users (email, password, username, visibility) VALUES(:email, :password, :username :visibility)");
         try {
-            $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
+            $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username, "visibility" => $visibility]);
             flash("You've registered");
         } catch (Exception $e) {
             $error = var_export($e, true);
