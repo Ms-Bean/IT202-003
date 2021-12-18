@@ -4,30 +4,21 @@ if(!is_logged_in()){
     flash("You must log in to view this page.");
     die(header("Location: login.php"));
 }
-if(empty($_GET)){
-    $page = 0;
-}
-else {
-    $page = $_GET['page'];
-}
-$PER_PAGE = 5;
 ?>
 <form method="POST">
     <div>
-        <input type="radio" name="sorter" value="value_by_date" <?php if(isset($_GET["sorter"])){if($_GET["sorter"] === 'value_by_date'){echo("checked='checked'");}}?>>
+        <input type="radio" name="sorter" value="value_by_date"/>
         <label>Sort by date</label><br>
-        <input type="radio" name="sorter" value="value_by_total" <?php if(isset($_GET["sorter"])){if($_GET["sorter"] === 'value_by_total'){echo("checked='checked'");}}?>>
+        <input type="radio" name="sorter" value="value_by_total"/>
         <label>Sort by total</label<br><br>
-        <input type="text" name="by_category" placeholder="category" <?php if(isset($_GET["by_category"])){echo("value=" . $_GET["by_category"]);}else{echo("value=''");}?>><br><br>
+        <input type="text" name="by_category" placeholder="category" value=""/><br><br>
         <label>Start date</label>
-        <input type="date" name="start_date_range" <?php if(isset($_GET["start_date_range"])){echo("value=" . $_GET["start_date_range"]);}else{echo("value=''");}?>><br>
+        <input type="date" name="start_date_range" value=""/><br>
         <label>End date</label>
-        <input type="date" name="end_date_range" <?php if(isset($_GET["end_date_range"])){echo("value=" . $_GET["end_date_range"]);}else{echo("value=''");}?>><br>
-        <input type="submit" name="submit" value="submit" id="submitForm"/><br>
+        <input type="date" name="end_date_range" value=""/><br>
+        <input type="submit" name="submit" value="submit"/><br>
     </div>
 </form>
-<?php
-?>
 <?php
 $orders_results = [];
 $orderitems_results = [];
@@ -39,8 +30,7 @@ if(has_role("Owner")){
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (1=1 AND user_id = :user_id) ";
 }
-if(isset($_POST["submit"]) or isset($_GET["touched"])){
-    
+if(isset($_POST["submit"])){
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
             $sql_str = $sql_str . "ORDER BY total_price DESC ";
@@ -88,7 +78,7 @@ if(isset($_POST["submit"]) or isset($_GET["touched"])){
         $end_timestamp = date($_POST["end_date_range"] . " 23:59:59");
         $sql_str = $sql_str . "AND created <= '" . $end_timestamp . "' ";
     }
-    $sql_str = $sql_str . "LIMIT " . $page*$PER_PAGE . "," . $PER_PAGE;
+    
     $stmt = $db->prepare($sql_str);
     try {
         $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
@@ -99,40 +89,31 @@ if(isset($_POST["submit"]) or isset($_GET["touched"])){
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-    echo('<a href="purchase_history.php?page=1'); 
-    if($_POST["by_category"] !== ''){
-        echo("&by_category=" . $_POST["by_category"]);
-    }
-    if(isset($_POST["sorter"])){
-        echo("&sorter=" . $_POST["sorter"]);
-    }
-    if($_POST["start_date_range"] !== ''){
-        echo("&start_date_range=" . $_POST["start_date_range"]);
-    }
-    if($_POST["end_date_range"] !== ''){
-        echo("&end_date_range=" . $_POST["end_date_range"]);
-    }
-    echo('&touched=true">Page 2</a>');
 }
 
 ?>
 <h1>Order History</h1>
 <?php
 $total = 0;
+$pages = [[]]; //Store pages as a list of lists, each sublist being a list of order info cards
 foreach($orders_results as $index => $record){
     $total += $record["total_price"];
-    echo("<div class='order_info'>");
-    echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
-    echo("<br>User ID: " . $record["user_id"]);
-    echo("<br>Total price: " . $record["total_price"]);
-    echo("<br>Payment Method: " . $record["payment_method"]);
-    echo("<br>Address: " . $record["address"]);
-    echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
-    echo("</div><br>");
-}
-
-if(has_role("Owner")){
-    echo("<h1>Total: " . $total . "</h1>");
+    $card = "
+    <div class='order_info'>
+    <br>Order " . $record["id"] . " placed on " . $record["created"] .
+    "<br>User ID: " . $record["user_id"] .
+    "<br>Total price: " . $record["total_price"] .
+    "<br>Payment Method: " . $record["payment_method"] .
+    "<br>Address: " . $record["address"] .
+    "<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>
+    </div><br>";
+    if(sizeof(end($pages)) < 5){ //Create new page after 5 cards are added to last page
+        $array_push($pages, []);
+    }
+    $array_push(end($pages), $card); 
+} //We should now have something that looks like this [[a, b, c, d, e], [f, g, h, i, j], [k, l]]
+foreach($pages[0] as $info_card){
+    echo($info_card);
 }
 ?>
 <?php require(__DIR__ . "/../../partials/flash.php");

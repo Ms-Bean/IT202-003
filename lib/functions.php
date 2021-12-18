@@ -8,31 +8,7 @@ require_once(__DIR__."/db.php");
  * Takes an array, a key, and default value and will return the value from the array if the key exists or the default value.
  * Can pass a flag to determine if the value will immediately echo or just return so it can be set to a variable
  */
-function paginate($query, $params = [], $per_page = 10)
-{
-    global $page;
-    try {
-        $page = (int)se($_GET, "page", 1, false);
-    } catch (Exception $e) {
-        $page = 1;
-    }
-    $db = getDB();
-    $stmt = $db->prepare($query);
-    try {
-        $stmt->execute($params);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        error_log(var_export($e, true));
-    }
-    $total = 0;
-    if (isset($result)) {
-        $total = (int)se($result, "total", 0, false);
-    }
-    global $total_pages;
-    $total_pages = ceil($total / $per_page);
-    global $offset;
-    $offset = ($page - 1) * $per_page;
-}
+
 function se($v, $k = null, $default = "", $isEcho = true) {
     if (is_array($v) && isset($k) && isset($v[$k])) {
         $returnValue = $v[$k];
