@@ -74,10 +74,13 @@ foreach($result as $index => $record){
     }
     echo("<div class='cart_item'>");
     if($user_result["visibility"] !== 'false'){
-        echo("Email: " . $user_result["email"]);
+        echo("Email: " . $user_result["email"] . "<br>");
     }
-    echo("
-    Rating: ". $record["rating"] . "<br><br>
+    echo("Rating: ");
+    for($x = 0; $x < $record["rating"]; $x++){
+        echo("⭐");
+    }
+    echo("<br>
     <i>". $record["comment"] . "</i><br>
     - ". $user_result["username"] . "<br>
     </div><br>
