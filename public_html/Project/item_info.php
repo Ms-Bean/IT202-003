@@ -29,6 +29,7 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 //Get average rating
+$average_rating = null;
 if(!empty($ratings_result)){
     $average_rating = 0;
     $count = 0;
