@@ -98,7 +98,7 @@ if(isset($_POST["submit"])){
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
     echo('<a href="purchase_history.php?page=1'); 
-    if($_POST["category"] !== ''){
+    if($_POST["by_category"] !== ''){
         echo("&by_category=" . $_POST["by_category"]);
     }
     if(isset($_POST["sorter"])){
