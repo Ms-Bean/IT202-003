@@ -50,7 +50,8 @@ if(isset($_POST["submit"])){
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
         }
-        $sql_str = $sql_str . "AND id in (";
+
+        $sql_str = $sql_str . "AND id in ( ";
         foreach($categories_results as $index => $record){
             $stmt = $db->prepare("SELECT order_id FROM OrderItems WHERE product_id = :product_id");
             try {
