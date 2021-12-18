@@ -49,11 +49,12 @@ try {
 <br>
 <div class="add_rating">
 <?php
-if(is_logged_in()){echo<<<KEIYOUDOUSHI
+if(is_logged_in()){echo<<<A
     <h1>Rate Item</h1>
     <form method="POST">
         <div>
-            <input type="number" min="1" max="5" name="rating_input" placeholder="Rating" required />
+            <label for="rating_input">Rating</label>
+            <input type="number" min="1" max="5" name="rating_input" required />
         </div>
         <div>
             <textarea name="comment_input" placeholder="Comment" maxlength="150" required></textarea>
@@ -62,7 +63,7 @@ if(is_logged_in()){echo<<<KEIYOUDOUSHI
         <input type="submit" value="Add to cart" name="submit" />
         </div>
     </form>
-KEIYOUDOUSHI;}
+A;}
 else{
     echo<<<A
     <h1>Log in to rate item</h1>
