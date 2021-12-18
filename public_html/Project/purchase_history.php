@@ -29,30 +29,13 @@ else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id ";
 }
 if(isset($_POST["submit"])){
-    if(isset($_POST["by_category"])){
-        $categories_results = [];
-        $stmt = $db->prepare("SELECT id FROM Products WHERE category = :category");
-        try {
-            $stmt->execute([":category" => $_POST["by_category"]]);
-            $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($r) {
-                $categories_results = $r;
-            }
-        } catch (PDOException $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
-        }
-        $sql_str = $sql_str . "AND product_id in (";
-        foreach($categories_results as $index => $value){
-            $sql_str = $sql_str . $value . ",";
-        }
-        $sql_str = substr($sql_str, 0, -1) . ") ";
-    }
+    
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
-            $sql_str = $sql_str . "ORDER BY total_price DESC";
+            $sql_str = $sql_str . "ORDER BY total_price DESC ";
         }
         else{
-            $sql_str = $sql_str . "ORDER BY created ASC";
+            $sql_str = $sql_str . "ORDER BY created ASC ";
         }
     }
     $stmt = $db->prepare($sql_str);
