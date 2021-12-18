@@ -4,12 +4,13 @@ if(!is_logged_in()){
     flash("You must log in to view this page.");
     die(header("Location: login.php"));
 }
-
-$page = $_GET['page'];
-$PER_PAGE = 5;
-if(empty($page)){
-    $page = 0;
+if(empty($_GET)){
+    $page = 1;
 }
+else {
+    $page = $_GET['page'];
+}
+$PER_PAGE = 5;
 ?>
 <form method="POST">
     <div>
