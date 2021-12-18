@@ -67,6 +67,20 @@ require_once(__DIR__ . "/../lib/functions.php");
         height: 200px;
         text-align: left;
     }
+    .add_rating{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        position: relative;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 400px;
+        height: 400px;
+        text-align: left;
+    }
     
     .cart_item{
         position: fixed;
