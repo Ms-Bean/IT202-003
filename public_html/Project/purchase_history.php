@@ -23,37 +23,32 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id OR NOT user_id = :user_id LIMIT 10 ";
 }
 else{
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 AND user_id = :user_id LIMIT 10 ";
 }
 if(isset($_POST["submit"])){
-    if(has_role("Owner")){
-        $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id LIMIT 10 ";
-    }
-    else{
-        $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id LIMIT 10 ";
-    }
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
-            $sql_str .= "ORDER BY :total_price ";
+            $sql_str = $sql_str . "ORDER BY total_price ";
         }
         else{
-            $sql_str .= "ORDER BY :created ";
+            $sql_str = $sql_str . "ORDER BY created ";
         }
     }
-}
-$stmt = $db->prepare($sql_str);
-try {
-    $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($r) {
-        $orders_results = $r;
+    $stmt = $db->prepare($sql_str);
+    try {
+        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $orders_results = $r;
+        }
+    } catch (PDOException $e) {
+        flash("<pre>" . var_export($e, true) . "</pre>");
     }
-} catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
 }
+
 ?>
 <h1>Order History</h1>
 <?php
