@@ -5,7 +5,7 @@ if(!is_logged_in()){
     die(header("Location: login.php"));
 }
 ?>
-<form>
+<form method="POST">
     <label> Sort by total
     <input type='checkbox' name='by_total'/><br>
     <input type='submit' name='submit' value='submit'/><br>
