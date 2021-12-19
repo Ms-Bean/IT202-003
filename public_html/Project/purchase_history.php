@@ -59,7 +59,7 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders ";
 }
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
@@ -73,7 +73,7 @@ if($by_before !== ''){
 if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
 }
-$sql_str = $sql_str . ") LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
+$sql_str = $sql_str . " LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
 echo($sql_str);
 $stmt = $db->prepare($sql_str);
 try {
