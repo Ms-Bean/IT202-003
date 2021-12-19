@@ -22,7 +22,7 @@ if(isset($_GET["by_total"])){
     $by_total = $_GET["by_total"];
 }
 //Override with values from submit if available
-if($isset($_POST['submit'])){
+if(isset($_POST['submit'])){
     if(isset($_POST["by_total"])){
         $by_total = true;
     }
