@@ -100,7 +100,7 @@ try {
 ?>
 <h1>Order History</h1>
 <?php
-echo($count_results[0]);
+echo($count_results);
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
