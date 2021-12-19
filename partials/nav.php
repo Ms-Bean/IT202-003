@@ -96,9 +96,6 @@ require_once(__DIR__ . "/../lib/functions.php");
         height: 200px;
         text-align: left;
     }
-    .page_traverser{
-        display: inline-block;
-    }
     .order_info{
         position: fixed;
         margin-left: auto;
@@ -125,6 +122,9 @@ require_once(__DIR__ . "/../lib/functions.php");
         border: 2px solid black
        
     }
+    .page_label{
+        display: inline-block;
+    }
     .paginate_button{
         position: center;
         text-align: center;
@@ -134,8 +134,8 @@ require_once(__DIR__ . "/../lib/functions.php");
         padding-top: 5px;
         margin-bottom: 50px;
         background-color:floralwhite;
-        border: 2px solid black
-       
+        border: 2px solid black;
+        display: inline-block;
     }
     .form{
         text-align: center;
