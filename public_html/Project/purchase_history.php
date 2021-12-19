@@ -106,20 +106,21 @@ if(isset($_POST["submit"]) or $_GET["touched"] === 'true'){
     } catch (PDOException $e) {
         flash("<pre>" . var_export($e, true) . "</pre>");
     }
-    echo('<a href="purchase_history.php?page=1'); 
+    $href = 'purchase_history.php?page=1'; 
     if($_POST["by_category"] !== ''){
-        echo("&by_category=" . $_POST["by_category"]);
+        $href .= "&by_category=" . $_POST["by_category"];
     }
     if(isset($_POST["sorter"])){
-        echo("&sorter=" . $_POST["sorter"]);
+        $href .= "&sorter=" . $_POST["sorter"];
     }
     if($_POST["start_date_range"] !== ''){
-        echo("&start_date_range=" . $_POST["start_date_range"]);
+        $href .= "&start_date_range=" . $_POST["start_date_range"];
     }
     if($_POST["end_date_range"] !== ''){
-        echo("&end_date_range=" . $_POST["end_date_range"]);
+        $href .= "&end_date_range=" . $_POST["end_date_range"];
     }
-    echo('&touched=true">Page 2</a>');
+    $href .= '&touched=true">Page 2</a>';
+    header("Refresh:0; url=" . $href);
 }
 
 ?>
