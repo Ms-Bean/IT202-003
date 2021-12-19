@@ -122,6 +122,18 @@ require_once(__DIR__ . "/../lib/functions.php");
         border: 2px solid black
        
     }
+    .paginate_button{
+        position: center;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        margin-bottom: 50px;
+        background-color:floralwhite;
+        border: 2px solid black
+       
+    }
     .form{
         text-align: center;
     }

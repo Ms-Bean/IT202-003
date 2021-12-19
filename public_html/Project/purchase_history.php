@@ -71,7 +71,7 @@ if($by_before !== ''){
     $sql_str = $sql_str . "AND created <= '" . $by_before . "' ";
 }
 if($by_total){
-    $sql_str = $sql_str . "ORDER BY total_price ";
+    $sql_str = $sql_str . "ORDER BY total_price DESC";
 }
 $sql_str = $sql_str . " LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sql_str)[1])[0]; //Circumcise the sql string in order to obtain count
@@ -100,7 +100,13 @@ try {
 ?>
 <h1>Order History</h1>
 <?php
-echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
+if($current_page*$PER_PAGE < $count_results["COUNT(*)"]){
+    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
+}
+echo("<h2>Page " . $current_page+1 . "</h2>");
+if($current_page >= 1){
+    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page - 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
+}
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
