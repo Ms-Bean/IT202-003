@@ -96,6 +96,9 @@ require_once(__DIR__ . "/../lib/functions.php");
         height: 200px;
         text-align: left;
     }
+    .page_traverser{
+        display: inline-block;
+    }
     .order_info{
         position: fixed;
         margin-left: auto;
