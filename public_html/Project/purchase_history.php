@@ -73,7 +73,7 @@ if($by_before !== ''){
 if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
 }
-$sql_str = $sql_str . "LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . ") ";
+$sql_str = $sql_str . ") LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
 echo($sql_str);
 $stmt = $db->prepare($sql_str);
 try {
