@@ -46,7 +46,6 @@ if(has_role("Owner")){
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (1=1 AND user_id = :user_id) ";
 }
-if(isset($_POST["submit"]) or $_GET["touched"] === 'true'){
     
     if(isset($_POST["sorter"])){
         if($_POST["sorter"] === 'value_by_total'){
@@ -121,7 +120,7 @@ if(isset($_POST["submit"]) or $_GET["touched"] === 'true'){
     }
     $href .= '&touched=true">Page 2</a>';
     header("Refresh:0; url=" . $href);
-}
+
 
 ?>
 <h1>Order History</h1>
