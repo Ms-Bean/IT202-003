@@ -76,7 +76,7 @@ if($by_total){
 $sql_str = $sql_str . " LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sql_str)[1])[0]; //Circumcise the sql string in order to obtain count
 echo($sql_str);
-echo("Count: " . $count_str[0]);
+echo("Count: " . $count_str);
 $stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
@@ -100,7 +100,7 @@ try {
 ?>
 <h1>Order History</h1>
 <?php
-echo($count_results);
+echo($count_results[0]);
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
