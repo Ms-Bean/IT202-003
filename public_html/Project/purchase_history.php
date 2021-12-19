@@ -74,7 +74,9 @@ if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
 }
 $sql_str = $sql_str . " LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
+$count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sql_str)[1])[0]; //Circumcise the sql string in order to obtain count
 echo($sql_str);
+echo("Count: " . $count_str);
 $stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
@@ -85,9 +87,20 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+$stmt = $db->prepare($count_str);
+try {
+    $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $count_results = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
 ?>
 <h1>Order History</h1>
 <?php
+echo($count_results);
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
