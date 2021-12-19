@@ -18,8 +18,8 @@ if(!is_logged_in()){
 $PER_PAGE = 5;
 $current_page = 0;
 $by_total = false;
-$by_since;
-$by_before;
+$by_since = '';
+$by_before = '';
 //Use values from link if available
 if(isset($_GET["current_page"])){
     $current_page = $_GET["current_page"];
@@ -36,10 +36,10 @@ if(isset($_GET["by_total"])){
 //Update or wipe values with submit
 if(isset($_POST['submit'])){
     if(isset($_POST["by_total"])){
-        $by_total = true;
+        $by_total = "";
     }
     else{
-        $by_total = null;
+        $by_total = "";
     }
     if(isset($_POST["by_since"])){
         $by_since = date($_POST["by_since"] . " 00:00:00");
@@ -64,10 +64,10 @@ if(has_role("Owner")){
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
 }
-if(isset($by_since)){
+if($by_since !== ''){
     $sql_str = $sql_str . "AND created >= " . $by_since . " ";
 }
-if(isset($by_before)){
+if($by_before !== ''){
     $sql_str = $sql_str . "AND created <= " . $by_before . " ";
 }
 if($by_total){
