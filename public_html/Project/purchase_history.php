@@ -36,7 +36,7 @@ if(isset($_GET["by_total"])){
 //Update or wipe values with submit
 if(isset($_POST['submit'])){
     if(isset($_POST["by_total"])){
-        $by_total = "";
+        $by_total = '';
     }
     else{
         $by_total = "";
@@ -45,13 +45,13 @@ if(isset($_POST['submit'])){
         $by_since = date($_POST["by_since"] . " 00:00:00");
     }
     else{
-        $by_since = null;
+        $by_since = '';
     }
     if($_POST["by_before"] !== ''){
         $by_before = date($_POST["by_before"] . " 23:59:59");
     }
     else{
-        $by_before = null;
+        $by_before = '';
     }
 }
 $orders_results = [];
@@ -59,7 +59,7 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (user_id = :user_id OR user_id != :user_id) ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 ";
 }
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
