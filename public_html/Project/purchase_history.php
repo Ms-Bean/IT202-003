@@ -41,6 +41,7 @@ if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
 }
 $sql_str = "LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
+echo($sql_str);
 $stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
