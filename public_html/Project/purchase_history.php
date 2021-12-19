@@ -59,10 +59,10 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR user_id != :user_id AND (1=1 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (user_id = :user_id OR user_id != :user_id) ";
 }
 else{
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id AND (1=1 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
 }
 if($by_since !== ''){
     $sql_str = $sql_str . "AND created >= " . $by_since . " ";
