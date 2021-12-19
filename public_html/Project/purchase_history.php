@@ -41,13 +41,13 @@ if(isset($_POST['submit'])){
     else{
         $by_total = "";
     }
-    if(isset($_POST["by_since"])){
+    if($_POST["by_since"] !== ''){
         $by_since = date($_POST["by_since"] . " 00:00:00");
     }
     else{
         $by_since = null;
     }
-    if(isset($_POST["by_before"])){
+    if($_POST["by_before"] !== ''){
         $by_before = date($_POST["by_before"] . " 23:59:59");
     }
     else{
@@ -59,10 +59,10 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR user_id != :user_id AND (1=1 ";
 }
 else{
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id AND (1=1 ";
 }
 if($by_since !== ''){
     $sql_str = $sql_str . "AND created >= " . $by_since . " ";
@@ -73,7 +73,7 @@ if($by_before !== ''){
 if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
 }
-$sql_str = $sql_str . "LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
+$sql_str = $sql_str . "LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . ") ";
 echo($sql_str);
 $stmt = $db->prepare($sql_str);
 try {
