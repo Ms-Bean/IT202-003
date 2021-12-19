@@ -98,5 +98,5 @@ foreach($orders_results as $index => $record){
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
-echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "by_before=" . $by_before . ">Next</a>");
+echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
 ?>
