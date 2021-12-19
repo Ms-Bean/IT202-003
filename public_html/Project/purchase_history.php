@@ -131,8 +131,8 @@ foreach($pages[$current_page] as $info_card){
 <?php
 echo("<a href = purchase_history.php?");
 echo("&current_page=" . ($current_page+1));
-if($_POST["category"] !== ''){
-    echo("&category=" . $_POST["category"]);
+if($_POST["by_category"] !== ''){
+    echo("&by_category=" . $_POST["by_category"]);
 }
 echo(">Next</a>");
 ?>
