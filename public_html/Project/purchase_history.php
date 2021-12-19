@@ -6,25 +6,52 @@ if(!is_logged_in()){
 }
 ?>
 <form method="POST">
-    <label> Sort by total
+    <label>Sort by total</label>
     <input type='checkbox' name='by_total'/><br>
+    <label>Since</label>
+    <input type='date' name='by_since'/><br>
+    <label>Before</label>
+    <input type='date' name='by_before'/><br>
     <input type='submit' name='submit' value='submit'/><br>
 </form>
 <?php
 $PER_PAGE = 5;
 $current_page = 0;
 $by_total = false;
+$by_since;
+$by_before;
 //Use values from link if available
 if(isset($_GET["current_page"])){
     $current_page = $_GET["current_page"];
 }
+if(isset($_GET["by_since"])){
+    $by_since = $_GET["by_since"];
+}
+if(isset($_GET["by_before"])){
+    $by_before = $_GET["by_before"];
+}
 if(isset($_GET["by_total"])){
     $by_total = $_GET["by_total"];
 }
-//Override with values from submit if available
+//Update or wipe values with submit
 if(isset($_POST['submit'])){
     if(isset($_POST["by_total"])){
         $by_total = true;
+    }
+    else{
+        $by_total = null;
+    }
+    if(isset($_POST["by_since"])){
+        $by_since = date($_POST["by_since"] . " 00:00:00");
+    }
+    else{
+        $by_since = null;
+    }
+    if(isset($_POST["by_before"])){
+        $by_before = date($_POST["by_before"] . " 23:59:59");
+    }
+    else{
+        $by_before = null;
     }
 }
 $orders_results = [];
@@ -32,10 +59,16 @@ $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id OR NOT user_id = :user_id ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE 1=1 ";
 }
 else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
+}
+if(isset($by_since)){
+    $sql_str = $sql_str . "AND created >= " . $by_since . " ";
+}
+if(isset($by_before)){
+    $sql_str = $sql_str . "AND created <= " . $by_before . " ";
 }
 if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
@@ -65,5 +98,5 @@ foreach($orders_results as $index => $record){
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
-echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . ">Next</a>");
+echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "by_before=" . $by_before . ">Next</a>");
 ?>
