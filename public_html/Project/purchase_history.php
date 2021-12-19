@@ -65,10 +65,10 @@ else{
     $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
 }
 if($by_since !== ''){
-    $sql_str = $sql_str . "AND created >= " . $by_since . " ";
+    $sql_str = $sql_str . "AND created >= '" . $by_since . "' ";
 }
 if($by_before !== ''){
-    $sql_str = $sql_str . "AND created <= " . $by_before . " ";
+    $sql_str = $sql_str . "AND created <= '" . $by_before . "' ";
 }
 if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price ";
