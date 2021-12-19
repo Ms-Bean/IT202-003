@@ -90,7 +90,7 @@ try {
 $stmt = $db->prepare($count_str);
 try {
     $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($r) {
         $count_results = $r;
     }
@@ -103,6 +103,7 @@ try {
 echo '<pre>';
 var_dump($count_results); 
 echo '</pre>';
+echo($count_results["COUNT(*)"]);
 foreach($orders_results as $index => $record){
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
