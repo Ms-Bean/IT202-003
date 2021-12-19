@@ -65,5 +65,5 @@ foreach($orders_results as $index => $record){
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
-echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1);
+echo("<a href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . ">Next</a>");
 ?>
