@@ -95,7 +95,12 @@ if(isset($_POST["submit"])){
 <h1>Order History</h1>
 <?php
 $total = 0;
-$current_page = 0;
+if(isset($_GET["current_page"])){
+    $current_page = $_GET["current_page"];
+}
+else{
+    $current_page = 0;
+}
 $pages = [[]]; //Store pages as a list of lists, each sublist being a list of order info cards
 foreach($orders_results as $index => $record){
     $total += $record["total_price"];
@@ -123,19 +128,13 @@ foreach($pages[$current_page] as $info_card){
 ?>
 </div>
 
-<form method="post">
-    <input type="button" name="nextPage" value="next" onclick = "document.getElementById('info_cards').outerHTML=('');"/>
-</form>
 <?php
-    if(isset($_POST["nextPage"])){ 
-        $current_page++;
-        echo("<div id='info_cards'>");
-        foreach($pages[$current_page] as $info_card){
-            echo($info_card);
-        }
-        echo("</div>");
-    }
-
+echo("<a href = purchase_history.php?");
+echo("&current_page=" . ($current_page+1));
+if($_POST["category"] !== ''){
+    echo("&category=" . $_POST["category"]);
+}
+echo(">Next</a>");
 ?>
 <?php require(__DIR__ . "/../../partials/flash.php");
 ?>
