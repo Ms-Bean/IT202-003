@@ -112,6 +112,7 @@ if(is_logged_in()){
             } catch (PDOException $e) {
                 flash("<pre>" . var_export($e, true) . "</pre>");
             }
+            echo($averages_result["AVG(rating)"]);
             $stmt = $db->prepare("UPDATE Products SET average_rating = :average_rating WHERE id = :id");
             try {
                 $stmt->execute([":average_rating" => $averages_results["AVG(rating)"], ":id" => $id]);
