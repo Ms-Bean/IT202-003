@@ -142,7 +142,7 @@ if (isset($_POST['submit'])) {
 }
 }
 ?>
-
+<img class='cactus' src="<?php echo(__DIR__ . '/../../../Project/cacti/Kaktus3-scaled.png');?>"/>
 <div class="container-fluid">
     <h1>Total: $<?php echo($grand_sum)?></h1>
     <form method="POST">

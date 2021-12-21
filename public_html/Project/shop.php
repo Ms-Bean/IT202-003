@@ -30,7 +30,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     }
 }
 ?>
-<img class='cactus' src="<?php echo(__DIR__ . '/../../Project/cacti/Kaktus-%C3%A4ndrad.png');?>"/>
+<img class='cactus' src="<?php echo(__DIR__ . '/../../../Project/cacti/Kaktus-%C3%A4ndrad.png');?>"/>
 <div class="container-fluid">
     <h1>Shop</h1>
     <form method="POST">
