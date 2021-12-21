@@ -63,7 +63,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
                 <div class='info_card'>
                     <h2>{$record["name"]}</h2><br><br>
                     <h3>Type: {$record["category"]}</h3><br>
-                    <h3>Cost: ${$record["cost"]}</h3><br>
+                    <h3>Cost: {$record["cost"]}</h3><br>
                     <a href='item_info.php?id={$record["id"]}'>Item info</a><br>
                     <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a>
                 </div><br>
