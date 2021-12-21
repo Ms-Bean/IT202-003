@@ -8,6 +8,8 @@ if(!is_logged_in()){
 <form method="POST">
     <label>Sort by total</label>
     <input type='checkbox' name='by_total'/><br>
+    <label>Sort by date</label>
+    <input type='checkbox' name='by_date'/><br>
     <label>Since</label>
     <input type='date' name='by_since'/><br>
     <label>Before</label>
@@ -18,9 +20,13 @@ if(!is_logged_in()){
 $PER_PAGE = 5;
 $current_page = 0;
 $by_total = false;
+$by_date = false;
 $by_since = '';
 $by_before = '';
 //Use values from link if available
+if(isset($_GET["by_date"])){
+    $by_date = true;
+}
 if(isset($_GET["current_page"])){
     $current_page = $_GET["current_page"];
 }
@@ -40,6 +46,10 @@ if(isset($_POST['submit'])){
     }
     else{
         $by_total = false;
+        
+        if(isset($_POST["by_date"])){
+            $by_date = true;
+        }
     }
     if($_POST["by_since"] !== ''){
         $by_since = date($_POST["by_since"] . " 00:00:00");
@@ -73,6 +83,9 @@ if($by_before !== ''){
 if($by_total){
     $sql_str = $sql_str . "ORDER BY total_price DESC";
 }
+else if($by_date){
+    $sql_str = $sql_str . "ORDER BY created DESC";
+}
 $sql_str = $sql_str . " LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sql_str)[1])[0]; //Circumcise the sql string in order to obtain count
 $stmt = $db->prepare($sql_str);
@@ -100,10 +113,10 @@ try {
 <div class="page_traverser">
 <?php
 if($current_page >= 1){
-    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page - 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Previous</a>");
+    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page - 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . "&by_date=" . $by_date . ">Previous</a>");
 }
 if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
-    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
+    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . "&by_date=" . $by_date . ">Next</a>");
 }
 echo("</div>");
 $total = 0;
@@ -118,5 +131,7 @@ foreach($orders_results as $index => $record){
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
+if(has_role("Owner")){
 echo("<h1>" . $total . "</h1>");
+}
 ?>
