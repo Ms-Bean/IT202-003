@@ -119,7 +119,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         padding-top: 5px;
         margin-bottom: 50px;
         background-color:rgba(255, 85, 107, 0.867);
-        border: 2px solid black
+        border: 2px solid black;
        
     }
     .page_label{
