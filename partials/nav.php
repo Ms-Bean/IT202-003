@@ -25,17 +25,6 @@ require_once(__DIR__ . "/../lib/functions.php");
 ?>
 <head>
 <style>
-    .container-fluid{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 450px;
-        height: 500px;
-    }
     li{
         display: inline;
         margin-right: 10px;
