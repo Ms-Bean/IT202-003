@@ -25,9 +25,19 @@ require_once(__DIR__ . "/../lib/functions.php");
 ?>
 <head>
 <style>
-    li{
-        display: inline;
-        margin-right: 10px;
+    .info_card{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        position: relative;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 400px;
+        height: 300px;
+        text-align: left;
     }
     .item_info{
         position: fixed;
