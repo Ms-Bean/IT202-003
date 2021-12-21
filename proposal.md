@@ -439,7 +439,381 @@
 </td>
 </tr></td></tr></table>
 
-- Milestone 4
+
+<table>
+<tr><td>milestone 4</td></tr><tr><td>
+<table>
+<tr><td>F1 - Users can set their profile to be public or private (2021-12-18)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/profile.php](https://sdc2-prod.herokuapp.com/Project/profile.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/123](https://github.com/Spencer-Clarke/IT202-003/pull/123)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F1 - If public, hide email address from other users</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146959099-722d398c-679e-4489-9590-805bf7213d74.png">
+<p>User's email hidden on a review they left</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F2 - Ratings (2021-12-18)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/item_info.php?id=7](https://sdc2-prod.herokuapp.com/Project/item_info.php?id=7)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/124](https://github.com/Spencer-Clarke/IT202-003/pull/124)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/134](https://github.com/Spencer-Clarke/IT202-003/pull/134)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F2 - Create a table called ratings (id, product_id, user_id, rating, comment, created</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146959694-2613d14d-2ef0-43a4-b6f8-7fcc35b99f78.png">
+<p>The table</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - 1-5 Rating</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146960083-826e6215-a719-4f38-a70d-511fbc1a79f8.png">
+<p>Rating range validation</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Must be done on the product details page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146960339-200d1020-0dde-4c95-8063-144d44a6e294.png">
+<p>Rating mechanic shown to be on item_info.php</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Ratings and comments visible on product details page. Show latest 10 reviews, paginate anything beyond 10</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146971884-daa93811-a826-4100-89e4-12f026d844d4.png">
+<p>Reviews of cholla cactus on page 1</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146972037-6962b724-f546-47ba-8c32-ab603a4cccf4.png">
+<p>Reviews of cholla cactus on page 2</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F2 - Show average rating on product details page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146972343-1d021ea9-d852-42fc-aa2e-8d66bed12bee.png">
+<p>Average rating shown</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F3 - User's purchase history changes ()</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/purchase_history.php](https://sdc2-prod.herokuapp.com/Project/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/125](https://github.com/Spencer-Clarke/IT202-003/pull/125)</p><p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/135](https://github.com/Spencer-Clarke/IT202-003/pull/135)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by date and range</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146975333-62701d60-3fe9-477c-b904-234248fda898.png">
+<p>No results show from tomorrow because of date filter</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Filter by category</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p>I couldn't do this since the category is not stored in the order tables</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Sort by total, date purchase, etc</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146975093-43ab10b5-35d4-493e-a450-8501fc7c0342.png">
+<p>Sorted by date</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146972898-7d3a0f65-98b9-4d33-b3fc-709cc298504b.png">
+<p>Sorted by total</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F3 - Add pagination</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146975814-fc214422-5f3b-4c05-a011-80bb145d2f6b.png">
+<p>Second page of personal order history</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F4 - Store owner purchase history changes ()</td></tr>
+<tr><td>Status: incomplete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/purchase_history.php](https://sdc2-prod.herokuapp.com/Project/purchase_history.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/125](https://github.com/Spencer-Clarke/IT202-003/pull/125)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F4 - Filter by Date Range</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146976578-388acadc-92f8-46a9-bc62-d18b355332d1.png">
+<p>Multiple users' orders filtered through date range for owner</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Filter by category</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=incomplete"></td></tr>
+
+<tr><td>
+<img width="768px" src="">
+<p></p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F4 - Sort by total, date purchased, etc</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146976984-8b0725d7-c840-407f-8a07-8b41d1738500.png">
+<p>Multiple users' orders sorted by total</p>
+</td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146977175-9cbae37b-49cb-4609-94c9-62fa44233350.png">
+<p>Multiple users' orders sorted in chronological order</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F5 - Add Pagination to shop and other product lists (2021-12-20)</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/admin/list_items.php](https://sdc2-prod.herokuapp.com/Project/admin/list_items.php)</p><p>
+
+ [https://sdc2-prod.herokuapp.com/Project/shop.php](https://sdc2-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/127](https://github.com/Spencer-Clarke/IT202-003/pull/127)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F5 - Pagination on shop</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146977977-ecce4a9c-d578-4a68-bda5-579af74457f3.png">
+<p>Second page on shop, with previous and next buttons to traverse</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F5 - Pagination on item list</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146978188-90fdc071-02ad-474e-b8dd-7979c6c63a5a.png">
+<p>Pagination on item list, very similar to shop page, but with hidden and out of stock items showing</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F6 - Store owner will be able to see all products out of stock ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/admin/list_items.php](https://sdc2-prod.herokuapp.com/Project/admin/list_items.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/128](https://github.com/Spencer-Clarke/IT202-003/pull/128)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F6 - This will be applied as a filter to the product list page</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146978646-70da5d53-c7d6-4db8-a091-7e2964a9acc5.png">
+<p>Only items out of stock are dispalyed</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr><td>
+<table>
+<tr><td>F6 - Pagination should account for this</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146979028-3cd81dbd-99cd-4418-af9b-bd1a5ceade82.png">
+<p>Second page of out of stock items</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<tr><td>F7 - User can sort by average rating on shop page ()</td></tr>
+<tr><td>Status: complete</td></tr>
+<tr><td>Links:<p>
+
+ [https://sdc2-prod.herokuapp.com/Project/shop.php](https://sdc2-prod.herokuapp.com/Project/shop.php)</p></td></tr>
+<tr><td>PRs:<p>
+
+ [https://github.com/Spencer-Clarke/IT202-003/pull/129](https://github.com/Spencer-Clarke/IT202-003/pull/129)</p></td></tr>
+<tr><td>
+<table>
+<tr><td>F7 - Sort by rating</td></tr>
+<tr><td>Status: 
+<img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=completed"></td></tr>
+
+<tr><td>
+<img width="768px" src="https://user-images.githubusercontent.com/89927037/146979491-f4898018-b05d-405e-b238-43dd3607aa25.png">
+<p>Sort by rating</p>
+</td></tr>
+
+</td>
+</tr>
+</table>
+</td>
+</tr></td></tr></table>
 ### Intructions
 #### Don't delete this
 1. Pick one project type
