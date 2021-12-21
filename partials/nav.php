@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 ?>
 <head>
 <style>
-    .info_card{
+    .info{
         position: fixed;
         left: 50%;
         margin-left: -150px;
