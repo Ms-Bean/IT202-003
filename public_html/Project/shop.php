@@ -56,21 +56,26 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         </div>
     </form>
     <?php
+    $flopper=0;
+    echo("<div class='row'>");
     foreach ($results as $index => $record){
-        if($record["visibility"] === 'true'){
-            echo(<<<GODAN
-                <div class='info_card'>
-                    <h2>{$record["name"]}</h2><br><br>
-                    <h3>Type: {$record["category"]}</h3><br>
-                    <h3>Cost: {$record["cost"]}</h3><br>
-                    <a href='item_info.php?id={$record["id"]}'>Item info</a><br>
-                    <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a><br>
-            GODAN);
-            if(has_role("Admin")){
-                echo("<a href='../admin/edit_item.php?id={$record["id"]}'>Edit</a>");
-            }
-            echo("</div><br>");
+        $card = <<<GODAN
+        <div class='info_card'>
+        <h2>{$record["name"]}</h2><br><br>
+        <h3>Type: {$record["category"]}</h3><br>
+        <h3>Cost: {$record["cost"]}</h3><br>
+        <a href='item_info.php?id={$record["id"]}'>Item info</a><br>
+        <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a><br>
+        GODAN;
+        if(has_role("Admin")){
+            $card .= "<a href='../admin/edit_item.php?id={$record["id"]}'>Edit</a>";
         }
+        $card .= "</div>";
+        if($flopper == 2){
+            $card .= "</div><div class='row'>";
+            $flopper = 0;
+        }
+        $flopper++;
     }
     ?>
 </div>

@@ -29,6 +29,10 @@ li{
     width: 400px;
     height: 300px;
     text-align: left;
+    float: left;
+}
+.row{
+    display: block;
 }
 .nav_bar{
     border: 1px solid black;
