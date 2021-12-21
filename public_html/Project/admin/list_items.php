@@ -5,7 +5,6 @@ $results = [];
 $itemCategory = "";
 $itemName = "";
 $sortPrice = "";
-$sortRating = "";
 $outOfStock = "";
 $current_page = 0;
 if(isset($_GET["current_page"])){
