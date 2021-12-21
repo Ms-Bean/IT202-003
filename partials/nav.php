@@ -67,20 +67,6 @@ require_once(__DIR__ . "/../lib/functions.php");
         height: 200px;
         text-align: left;
     }
-    .info_card{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 400px;
-        height: 300px;
-        text-align: left;
-    }
     .add_rating{
         position: fixed;
         left: 50%;
@@ -135,21 +121,6 @@ require_once(__DIR__ . "/../lib/functions.php");
         background-color:rgba(255, 85, 107, 0.867);
         border: 2px solid black
        
-    }
-    .page_label{
-        display: inline-block;
-    }
-    .paginate_button{
-        position: center;
-        text-align: center;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 10px;
-        padding-top: 5px;
-        margin-bottom: 50px;
-        background-color:floralwhite;
-        border: 2px solid black;
-        display: inline-block;
     }
     .form{
         text-align: center;
