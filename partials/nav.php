@@ -23,6 +23,7 @@ session_start();
 require_once(__DIR__ . "/../lib/functions.php");
 
 ?>
+<head>
 <style>
     .info_card{
         position: fixed;
@@ -152,6 +153,7 @@ require_once(__DIR__ . "/../lib/functions.php");
     }
     
 </style>
+</head>
 <nav class="nav_bar">
 <ul>
         <?php if (is_logged_in()) : ?>
