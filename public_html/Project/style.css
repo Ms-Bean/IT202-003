@@ -17,22 +17,22 @@ li{
     text-align: left;
 }
 .info_card{
-    position: fixed;
     left: 50%;
-    margin-left: -150px;
-    position: relative;
+    margin-right: 150px;
     margin-bottom: 50px;
     border: 1px solid black;
     box-shadow: 5px 5px black;
     padding: 10px;
     background-color: #a2eda1;
     width: 400px;
-    height: 300px;
+    height: 450px;
     text-align: left;
     float: left;
 }
 .row{
-    display: block;
+  content: "";
+  display: block;
+  clear: both;
 }
 .nav_bar{
     border: 1px solid black;
