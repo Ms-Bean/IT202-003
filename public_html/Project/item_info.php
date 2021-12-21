@@ -8,13 +8,14 @@ $id = se($_GET, "id", -1, false);
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");
 try {
     $stmt->execute([":id" => $id]);
-    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $result = $r;
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+
 ?>
 <style>
 
@@ -101,6 +102,23 @@ if(is_logged_in()){
                 flash("Rating submitted");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            }
+            $stmt = $db->prepare("SELECT AVG(rating) AS average FROM Ratings WHERE product_id = :product_id");
+            try {
+                $stmt->execute([":id" => $id]);
+                $r = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($r) {
+                    $averages_result = $r;
+                }
+            } catch (Exception $e) {
+                echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            }
+            
+            $stmt = $db->prepare("UPDATE Products SET average_rating = :average_rating WHERE id = :id");
+            try {
+                $stmt->execute([":average_rating" => $averages_result["average"], ":id" => $id]);
+            } catch (Exception $e) {
+                flash("<pre>" . var_export($e, true) . "</pre>");
             }
         }
     }
