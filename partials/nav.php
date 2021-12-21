@@ -148,20 +148,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         border: 2px solid black;
         display: inline-block;
     }
-    .info_card{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 400px;
-        height: 300px;
-        text-align: left;
-    }
+
 </style>
 <nav class="nav_bar">
 <ul>
