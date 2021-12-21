@@ -137,7 +137,11 @@ require_once(__DIR__ . "/../lib/functions.php");
         width: 300px;
         height: 200px;
     }
-    
+    .paginate_button{
+        background-color:azure;
+        border: 1px solid black;
+        float: left;
+    }
 </style>
 </head>
 <nav class="nav_bar">

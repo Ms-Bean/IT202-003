@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
+
 if(!is_logged_in()){
     flash("You must log in to checkout.");
     die(header("Location: login.php"));
