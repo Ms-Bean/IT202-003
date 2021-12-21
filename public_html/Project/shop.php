@@ -40,7 +40,7 @@ if(isset($_POST["submit"])){
         }
     }
     else{
-        $sortPrice = false;
+        $sortPrice = "";
     }
 }
 $params = [];
@@ -92,7 +92,6 @@ try {
         <div>
             <input type="search" name="itemName" placeholder="Item Filter" /><br>
             <input type="search" name="itemCategory" placeholder="Category Filter" /><br>
-            <input type="checkbox" name="sortPrice" value="Sort by price"/> Sort by price<br>
             <input type="radio" name="sorter" value="sort_price"/>Sort by price<br>
             <input type="radio" name="sorter" value="sort_rating"/>Sort by rating<br>
             <input type="submit" name="submit" value="Search"/>
