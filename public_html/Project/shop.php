@@ -46,8 +46,11 @@ if(!empty($itemName)){
 if($sorter === 'sort_price'){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
-else if($sorter === 'sort_price'){
+if($sorter === 'sort_price'){
     $sqlstr = $sqlstr . " ORDER BY average_rating DESC";
+}
+else{
+    echo($sorter);
 }
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
