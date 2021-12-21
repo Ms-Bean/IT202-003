@@ -133,8 +133,8 @@ if(is_logged_in()){
 //Get ratings
 $sqlstr = "SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id LIMIT " . $PER_PAGE*$current_page . "," . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
-echo($sql_str);
-$stmt = $db->prepare($sql_str);
+echo($sqlstr);
+$stmt = $db->prepare($sqlstr);
 try {
     $stmt->execute([":id" => $id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
