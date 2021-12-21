@@ -76,6 +76,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
             $flopper = 0;
         }
         $flopper++;
+        echo($card);
     }
     ?>
 </div>
