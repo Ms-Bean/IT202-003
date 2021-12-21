@@ -155,8 +155,7 @@ html{
     margin: auto;
 }
 .page_traverser{
-    border: 1px solid black;
-    margin: auto;
+    margin-bottom: 5px;
 }
 .page_label{
     float: left;
