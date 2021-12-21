@@ -16,7 +16,7 @@ li{
     height: 600px;
     text-align: left;
 }
-.item_card{
+.info_card{
     position: fixed;
     left: 50%;
     margin-left: -150px;
