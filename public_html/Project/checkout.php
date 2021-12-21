@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
+require_once(__DIR__ . "/../../partials/flash.php");
 if(!is_logged_in()){
     flash("You must log in to checkout.");
     die(header("Location: login.php"));
@@ -188,6 +189,3 @@ if (isset($_POST['submit'])) {
     </form>
 
 </div>
-<?php
-require_once(__DIR__ . "/../../partials/flash.php");
-?>
