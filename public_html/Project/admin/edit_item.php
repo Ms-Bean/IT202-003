@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 
 $result = [];
 $columns = get_columns("Products");
-$ignore = ["id", "modified", "created"];
+$ignore = ["id", "modified", "created", "average_rating"];
 $db = getDB();
 $id = se($_GET, "id", -1, false);
 $stmt = $db->prepare("SELECT * FROM Products where id =:id");

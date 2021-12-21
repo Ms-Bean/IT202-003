@@ -5,7 +5,6 @@ $results = [];
 $itemCategory = "";
 $itemName = "";
 $sortPrice = "";
-$sortRating = "";
 $outOfStock = "";
 $current_page = 0;
 if(isset($_GET["current_page"])){
@@ -15,13 +14,17 @@ if(isset($_GET["itemCategory"])){
     $itemCategory = $_GET["itemCategory"];
 }
 if(isset($_GET["outOfStock"])){
-    $outOfStock = "true";
+    if($_GET["outOfStock"] === 'true'){
+        $outOfStock = "true";
+    }
 }
 if(isset($_GET["itemName"])){
     $itemName = $_GET["itemName"];
 }
 if(isset($_GET["sortPrice"])){
-    $sortPrice = "true";
+    if($_GET["sortPrice"] === 'true'){
+        $sortPrice = "true";
+    }
 }
 if(isset($_POST["submit"])){
     if(isset($_POST["itemName"])){
@@ -91,8 +94,8 @@ try {
         <div>
             <input type="search" name="itemName" placeholder="Item Filter" /><br>
             <input type="search" name="itemCategory" placeholder="Category Filter" /><br>
-            <input type="checkbox" name="sortPrice" value="Sort by price"/> Sort by price<br>
-            <input type="checkbox" name="outOfStock" value="Out of stock"/> Search items out of stock<br>
+            <input type="checkbox" name="sortPrice"/> Sort by price<br>
+            <input type="checkbox" name="outOfStock"/> Search items out of stock<br>
             <input type="submit" name="submit" value="Search"/>
         </div>
     </form>
