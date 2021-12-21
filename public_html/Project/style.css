@@ -157,6 +157,9 @@ html{
 .page_traverser{
     margin-bottom: 5px;
 }
+.page_traverser_center{
+    margin: auto;
+}
 .page_label{
     float: left;
     border: 1px solid black;
