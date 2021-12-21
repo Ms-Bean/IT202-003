@@ -1,3 +1,8 @@
+https://www.youtube.com/watch?v=9u4jAGS5CtE
+
+---- VIDEO OF DEMO -----
+
+
 # Project Name: Simple Shop
 ## Project Summary: A shop that allows users to register accounts and buy decorative and edible cacti
 ## Github Link: https://github.com/Spencer-Clarke/IT202-003/tree/prod
