@@ -114,7 +114,7 @@ if(is_logged_in()){
             }
             $stmt = $db->prepare("UPDATE Products SET average_rating = :average_rating WHERE id = :id");
             try {
-                $stmt->execute([":average_rating" => $averages_results["COUNT(*)"], ":id" => $id]);
+                $stmt->execute([":average_rating" => $averages_results["AVG(rating)"], ":id" => $id]);
             } catch (Exception $e) {
                 flash("<pre>" . var_export($e, true) . "</pre>");
             }
