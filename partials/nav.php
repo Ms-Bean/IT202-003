@@ -174,7 +174,7 @@ require_once(__DIR__ . "/../lib/functions.php");
             <li><a href="<?php echo __DIR__ . "/../../Project/admin/list_items.php"; ?>">List Items</a></li>
         <?php endif; ?>
         <?php 
-        if(!is_logged_in()){
+        if(is_logged_in()){
             echo(<<<ICHIDAN
             <li><a href="<?php echo __DIR__ . "/../../Project/logout.php"; ?>">Logout</a></li>
             ICHIDAN);
