@@ -4,8 +4,8 @@ $PER_PAGE = 10;
 $results = [];
 $itemCategory = "";
 $itemName = "";
-$sortPrice = false;
-$sortRating = false;
+$sortPrice = "";
+$sortRating = "";
 $current_page = 0;
 if(isset($_GET["current_page"])){
     $current_page = $_GET["current_page"];
@@ -17,7 +17,7 @@ if(isset($_GET["itemName"])){
     $itemName = $_GET["itemName"];
 }
 if(isset($_GET["sortPrice"])){
-    $sortPrice = true;
+    $sortPrice = "true";
 }
 if(isset($_POST["submit"])){
     if(isset($_POST["itemName"])){
