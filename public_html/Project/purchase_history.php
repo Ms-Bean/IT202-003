@@ -96,13 +96,12 @@ try {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 ?>
-<h1>Order History</h1>
+<h1>Order History Page <?php echo($current_page)?></h1>
 <div class="page_traverser">
 <?php
 if($current_page >= 1){
     echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page - 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Previous</a>");
 }
-echo("<p class='page_label'>Page " . $current_page+1 . "</p>");
 if($current_page*$PER_PAGE < $count_results["COUNT(*)"]){
     echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
 }
