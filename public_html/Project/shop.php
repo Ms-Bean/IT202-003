@@ -47,19 +47,19 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
 </style>
 <div class="container-fluid">
     <h1>Shop</h1>
-    <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
-        <div class="input-group mb-3">
-            <input class="form-control" type="search" name="itemName" placeholder="Item Filter" /><br>
-            <input class="form-control" type="search" name="itemCategory" placeholder="Category Filter" /><br>
+    <form method="POST">
+        <div>
+            <input type="search" name="itemName" placeholder="Item Filter" /><br>
+            <input type="search" name="itemCategory" placeholder="Category Filter" /><br>
             <input type="checkbox" name="sortPrice" value="Sort by price"/> Sort by price<br>
-            <input class="btn btn-primary" type="submit" value="Search" />
+            <input type="submit" value="Search" />
         </div>
     </form>
     <?php
     foreach ($results as $index => $record){
         if($record["visibility"] === 'true'){
             echo(<<<GODAN
-                <div class='info'>
+                <div class='info_card'>
                     <h2>{$record["name"]}</h2><br><br>
                     <h3>Type: {$record["category"]}</h3><br>
                     <h3>Cost: {$record["cost"]}</h3><br>
