@@ -25,64 +25,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 ?>
 <head>
 <style>
-    li{
-        display: inline;
-        margin-right: 10px;
-    }
-    .item_info{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 400px;
-        height: 600px;
-        text-align: left;
-    }
-    .nav_bar{
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 100%;
-        margin-bottom: 30px;
-    }
-    html{
-        font-family: verdana;
-    }
-    .rating_card{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 400px;
-        height: 200px;
-        text-align: left;
-    }
-    .add_rating{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 400px;
-        height: 300px;
-        text-align: left;
-    }
-    
+
     .cart_item{
         position: fixed;
         left: 50%;
