@@ -35,9 +35,11 @@ li{
   clear: both;
 }
 .cactus{
-    float: left;
-    height: 200px;
-    width: 200px;
+    position: fixed;
+    height: 300px;
+    width: 300px;
+    right: 100px;
+    top: 100px;
 }
 .nav_bar{
     border: 1px solid black;
