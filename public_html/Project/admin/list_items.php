@@ -31,6 +31,7 @@ if(isset($_POST["submit"])){
         $itemCategory = $_POST["itemCategory"];
     }
     if(isset($_POST["sortPrice"])){
+        echo("uh uh oh");
         $sortPrice = "true";
     }
     else{
