@@ -118,7 +118,7 @@ try {
         <a href='../add_to_cart.php?id={$record["id"]}'>Add to cart</a><br>
         GODAN;
         if(has_role("Admin")){
-            $card .= "<a href='admin/edit_item.php?id={$record["id"]}'>Edit</a>";
+            $card .= "<a href='edit_item.php?id={$record["id"]}'>Edit</a>";
         }
         $card .= "</div>";
         if($flopper == 2){
