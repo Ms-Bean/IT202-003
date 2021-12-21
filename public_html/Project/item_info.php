@@ -158,7 +158,7 @@ echo("<div class='page_traverser'");
 if($current_page >= 1){
     echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page-1 . ">Previous</a>");
 }
-if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
+if(($current_page+1)*$PER_PAGE < $count_result["COUNT(*)"]){
     echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page+1 . ">Next</a>");
 }
     echo("</div>");
