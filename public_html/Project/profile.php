@@ -6,6 +6,12 @@ if (!is_logged_in()) {
 ?>
 <?php
 if (isset($_POST["save"])) {
+    if(isset($_POST["visibility"])){
+        $visibility = "true";
+    }
+    else{
+        $visibility = "false";
+    }
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
     $hasErrors = false;
@@ -22,9 +28,9 @@ if (isset($_POST["save"])) {
         $hasErrors = true;
         flash("Invalid username, must be alphanumeric");
     }
-    $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+    $params = [":email" => $email, ":username" => $username, ":id" => get_user_id(), ":visibility" => $visibility];
     $db = getDB();
-    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, visibility = :visibility where id = :id");
     try {
         $stmt->execute($params);
     } catch (Exception $e) {
@@ -73,11 +79,12 @@ if (isset($_POST["save"])) {
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 if (isset($result["password"])) {
                     if (password_verify($current_password, $result["password"])) {
-                        $query = "UPDATE Users set password = :password where id = :id";
+                        $query = "UPDATE Users set password = :password visibility = :visibility where id = :id";
                         $stmt = $db->prepare($query);
                         $stmt->execute([
                             ":id" => get_user_id(),
-                            ":password" => password_hash($new_password, PASSWORD_BCRYPT)
+                            ":password" => password_hash($new_password, PASSWORD_BCRYPT),
+                            ":visibility" => $visibility
                         ]);
 
                         flash("Password reset", "success");
@@ -135,6 +142,10 @@ $username = get_username();
         <input type="password" name="confirmPassword" id="conp" />
     </div>
     <input type="submit" value="Update Profile" name="save" />
+    <div>
+        <label>Public</label>
+        <input type="checkbox" value="visible" name="visibility"/>
+    </div>
 </form>
 
 <script>

@@ -36,6 +36,7 @@ try {
 }
 
 ?>
+<img class='cactus' src="<?php echo(__DIR__ . '/../../../Project/cacti/Kaktus3%C3%A4ndrad.png');?>"/>
 <h1>Confirmation</h1>
 <div class="container-fluid">
     <?php
