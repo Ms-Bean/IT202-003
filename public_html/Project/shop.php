@@ -27,7 +27,6 @@ if(isset($_POST["submit"])){
     }
     if(isset($_POST["sorter"])){
         $sorter = $_POST["sorter"];
-        echo($sorter);
     }
     else{
         $sorter = "";
@@ -46,11 +45,8 @@ if(!empty($itemName)){
 if($sorter === 'sort_price'){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
-if($sorter === 'sort_price'){
+if($sorter === 'sort_rating'){
     $sqlstr = $sqlstr . " ORDER BY average_rating DESC";
-}
-else{
-    echo($sorter);
 }
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
