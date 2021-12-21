@@ -65,9 +65,12 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
                     <h3>Type: {$record["category"]}</h3><br>
                     <h3>Cost: {$record["cost"]}</h3><br>
                     <a href='item_info.php?id={$record["id"]}'>Item info</a><br>
-                    <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a>
-                </div><br>
+                    <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a><br>
             GODAN);
+            if(has_role("Admin")){
+                echo("<a href='../admin/edit_item.php?id={$record["id"]}'>Edit</a>");
+            }
+            echo("</div><br>");
         }
     }
     ?>
