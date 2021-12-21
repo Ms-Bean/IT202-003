@@ -91,8 +91,8 @@ try {
         <div>
             <input type="search" name="itemName" placeholder="Item Filter" /><br>
             <input type="search" name="itemCategory" placeholder="Category Filter" /><br>
-            <input type="checkbox" name="sortPrice" value="Sort by price"/> Sort by price<br>
-            <input type="checkbox" name="outOfStock" value="Out of stock"/> Search items out of stock<br>
+            <input type="checkbox" name="sortPrice"/> Sort by price<br>
+            <input type="checkbox" name="outOfStock"/> Search items out of stock<br>
             <input type="submit" name="submit" value="Search"/>
         </div>
     </form>
