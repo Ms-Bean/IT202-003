@@ -5,6 +5,7 @@ $results = [];
 $itemCategory = "";
 $itemName = "";
 $sortPrice = false;
+$sortRating = false;
 $current_page = 0;
 if(isset($_GET["current_page"])){
     $current_page = $_GET["current_page"];
@@ -42,10 +43,10 @@ if(!empty($itemName)){
 if(isset($_POST['sortPrice'])){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
+
+$sqlstr = "SELECT * FROM Products INNER JOIN Ratings ON Products.user_id = Ratings.user_id WHERE 1=1 AND stock > 0 AND NOT visibility = 'false' ORDER BY AVG(Ratings.rating)";
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
-echo($sqlstr);
-echo($count_str);
 $db = getDB();
 $stmt = $db->prepare($sqlstr);
 try {
@@ -67,18 +68,10 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
+
 ?>
 <img class='cactus' src="<?php echo(__DIR__ . '/../../../Project/cacti/Kaktus-%C3%A4ndrad.png');?>"/>
-<div class="page_traverser">
-<?php
-if($current_page >= 1){
-    echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . ">Previous</a>");
-}
-if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
-    echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. ">Next</a>");
-}
-echo("</div>");
-?>
+
 <div class="container-fluid">
     <h1>Shop</h1>
     <form method="POST">
@@ -89,7 +82,15 @@ echo("</div>");
             <input type="submit" name="submit" value="Search"/>
         </div>
     </form>
+    <div class="page_traverser">
     <?php
+    if($current_page >= 1){
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . ">Previous</a>");
+    }
+    if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. ">Next</a>");
+    }
+    echo("</div>");
     $flopper=0;
     echo("<div class='row'>");
     foreach ($results as $index => $record){
