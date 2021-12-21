@@ -4,8 +4,7 @@ $PER_PAGE = 10;
 $results = [];
 $itemCategory = "";
 $itemName = "";
-$sortPrice = "";
-$sortRating = "";
+$sorter = "";
 $current_page = 0;
 if(isset($_GET["current_page"])){
     $current_page = $_GET["current_page"];
@@ -16,11 +15,8 @@ if(isset($_GET["itemCategory"])){
 if(isset($_GET["itemName"])){
     $itemName = $_GET["itemName"];
 }
-if(isset($_GET["sortPrice"])){
-    $sortPrice = "true";
-}
-else if(isset($_GET["sortRating"])){
-    $sortRating = "true";
+if(isset($_GET["sorter"])){
+    $sorter = $_GET["sorter"];
 }
 if(isset($_POST["submit"])){
     if(isset($_POST["itemName"])){
@@ -30,17 +26,10 @@ if(isset($_POST["submit"])){
         $itemCategory = $_POST["itemCategory"];
     }
     if(isset($_POST["sorter"])){
-        if($_POST["sorter"] === 'sort_price'){
-            $sortPrice = "true";
-            $sortRating = "";
-        }
-        else{
-            $sortRating = "true";
-            $sortPrice = "";
-        }
+        $sorter = $_POST["sorter"];
     }
     else{
-        $sortPrice = "";
+        $sorter = "";
     }
 }
 $params = [];
@@ -53,10 +42,10 @@ if(!empty($itemName)){
     $sqlstr = $sqlstr . " AND name like :itemName";
     $params[":itemName"] = "%" . $itemName . "%";
 }
-if(!empty($sortPrice)){
+if($sorter === 'sort_price'){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
-if(!empty($sortRating)){
+else if($sorter === 'sort_cost'){
     $sqlstr = $sqlstr . " ORDER BY average_rating DESC";
 }
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
@@ -100,10 +89,10 @@ try {
     <div class="page_traverser">
     <?php
     if($current_page >= 1){
-        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . "&sortPrice=" . $sortPrice . "&sortRating=" . $sortRating . ">Previous</a>");
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . "&sorter=" . $sorter . ">Previous</a>");
     }
     if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
-        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. "&sortPrice=" . $sortPrice . "&sortRating=" . $sortRating . ">Next</a>");
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. "&sorter=" . $sorter . ">Next</a>");
     }
     echo("</div>");
     $flopper=0;
