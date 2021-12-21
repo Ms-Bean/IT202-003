@@ -32,12 +32,10 @@ require_once(__DIR__ . "/../lib/functions.php");
         padding-bottom: 10px;
         padding-top: 5px;
         margin-bottom: 50px;
-        background-color:floralwhite;
+        background-color: floralwhite;
         border: 2px solid black;
         display: inline-block;
     }
-</style>
-<style>
     li{
         display: inline;
         margin-right: 10px;
