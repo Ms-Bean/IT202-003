@@ -28,6 +28,20 @@ require_once(__DIR__ . "/../lib/functions.php");
         display: inline;
         margin-right: 10px;
     }
+    .item_info{
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+        position: relative;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        box-shadow: 5px 5px black;
+        padding: 10px;
+        background-color: #a2eda1;
+        width: 400px;
+        height: 600px;
+        text-align: left;
+    }
     .nav_bar{
         border: 1px solid black;
         box-shadow: 5px 5px black;
@@ -51,20 +65,6 @@ require_once(__DIR__ . "/../lib/functions.php");
         background-color: #a2eda1;
         width: 400px;
         height: 200px;
-        text-align: left;
-    }
-    .info_card{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        position: relative;
-        margin-bottom: 50px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 400px;
-        height: 300px;
         text-align: left;
     }
     .add_rating{
@@ -119,7 +119,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         padding-top: 5px;
         margin-bottom: 50px;
         background-color:rgba(255, 85, 107, 0.867);
-        border: 2px solid black;
+        border: 2px solid black
        
     }
     .page_label{
