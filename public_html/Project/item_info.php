@@ -147,7 +147,7 @@ try {
 $stmt = $db->prepare($count_str);
 try {
     $stmt->execute([":id" => $id]);
-    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($r) {
         $count_result = $r;
     }
