@@ -154,7 +154,7 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
-echo("<div class='page_traverser'");
+echo("<div class='page_traverser'>");
 if($current_page >= 1){
     echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page-1 . ">Previous</a>");
 }
