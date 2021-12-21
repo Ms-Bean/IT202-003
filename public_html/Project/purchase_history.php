@@ -106,7 +106,9 @@ if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
     echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
 }
 echo("</div>");
+$total = 0;
 foreach($orders_results as $index => $record){
+    $total += $record["total_price"];
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
     echo("<br>User ID: " . $record["user_id"]);
@@ -116,4 +118,5 @@ foreach($orders_results as $index => $record){
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
+echo("<h1>" . $total . "</h1>");
 ?>
