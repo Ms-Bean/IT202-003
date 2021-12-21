@@ -27,6 +27,7 @@ if(isset($_POST["submit"])){
     }
     if(isset($_POST["sorter"])){
         $sorter = $_POST["sorter"];
+        echo($sorter);
     }
     else{
         $sorter = "";
