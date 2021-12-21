@@ -158,7 +158,8 @@ html{
     margin-bottom: 5px;
 }
 .page_traverser_center{
-    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 .page_label{
     float: left;
