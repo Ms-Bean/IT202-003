@@ -44,7 +44,6 @@ if(isset($_POST['sortPrice'])){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
 
-$sqlstr = "SELECT * FROM Products INNER JOIN Ratings ON Products.id = Ratings.product_id WHERE 1=1 AND stock > 0 AND NOT visibility = 'false' ORDER BY AVG(Ratings.rating)";
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
 $db = getDB();
