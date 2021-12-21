@@ -56,45 +56,21 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
             <input class="btn btn-primary" type="submit" value="Search" />
         </div>
     </form>
-    <?php if (count($results) == 0) : ?>
-        <p>No results to show</p>
-    <?php else : ?>
-        <table class="table">
-            <?php foreach ($results as $index => $record) : ?>
-                <?php if ($index == 0) : ?>
-                    <thead>
-                        <?php foreach ($record as $column => $value) : ?>
-                            <th><?php se($column); ?></th>
-                        <?php endforeach; ?>
-                        <th>Actions</th>
-                    </thead>
-                <?php endif; ?>
-                <tr>
-                    <?php foreach ($record as $column => $value) : ?>
-                        <td><?php 
-                            $v = se($value, null, "N/A", false);
-                            echo $v;
-                            ?></td>
-                    <?php endforeach; ?>
-
-
-                    <td>
-                        <?php
-                            if(has_role("Admin")){
-                                echo('<a href="admin/edit_item.php?id=');
-                                se($record, "id");
-                                echo('">Edit</a><br>');
-                            }
-                            echo('<a href="item_info.php?id=');
-                            se($record, "id");
-                            echo('">Info</a>');
-                        ?>
-                        
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+    <?php
+    foreach ($results as $index => $record){
+        if($record["visibility"] === 'true'){
+            echo(<<<GODAN
+                <div class='info_card'>
+                    <h2>{$record["name"]}</h2><br><br>
+                    <h3>Type: {$record["category"]}</h3><br>
+                    <h3>Cost: ${$record["cost"]}</h3><br>
+                    <a href='item_info.php?id={$record["id"]}'>Item info</a><br>
+                    <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a>
+                </div><br>
+            GODAN);
+        }
+    }
+    ?>
 </div>
 <?php
 require_once(__DIR__ . "/../../partials/flash.php");
