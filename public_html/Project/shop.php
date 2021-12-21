@@ -1,6 +1,5 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
-
 $results = [];
 if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $itemCategory = se($_POST, "itemCategory", "", false);
@@ -31,20 +30,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     }
 }
 ?>
-<style>
-    table, tr, th, td{
-        border: 1px solid black;
-    }
-    td{
-        width: 14%;
-    }
-    .image{
-        border: 1px solid black;
-        height: 100px;
-        width: 100px;
-    }
-    
-</style>
+<img class='cactus' src="<?php echo(__DIR__ . "/../../Project/cacti/Kaktus-ändrad.png");?>"/>
 <div class="container-fluid">
     <h1>Shop</h1>
     <form method="POST">
