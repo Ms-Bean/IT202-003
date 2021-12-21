@@ -60,7 +60,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     foreach ($results as $index => $record){
         if($record["visibility"] === 'true'){
             echo(<<<GODAN
-                <div class='info_card'>
+                <div>
                     <h2>{$record["name"]}</h2><br><br>
                     <h3>Type: {$record["category"]}</h3><br>
                     <h3>Cost: {$record["cost"]}</h3><br>

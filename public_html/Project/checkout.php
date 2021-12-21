@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
     }
     flash("Order placed");
     die(header("Location: order_confirmation.php?id=" . $new_order_id));
-    }
+}
 }
 ?>
 <style>

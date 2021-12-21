@@ -39,6 +39,10 @@ require_once(__DIR__ . "/../lib/functions.php");
         height: 300px;
         text-align: left;
     }
+    li{
+        display: inline;
+        margin-right: 10px;
+    }
     .item_info{
         position: fixed;
         left: 50%;
