@@ -45,7 +45,7 @@ if(!empty($itemName)){
 if($sorter === 'sort_price'){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
-else if($sorter === 'sort_cost'){
+else if($sorter === 'sort_price'){
     $sqlstr = $sqlstr . " ORDER BY average_rating DESC";
 }
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
