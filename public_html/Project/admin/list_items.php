@@ -20,6 +20,7 @@ if(isset($_GET["itemName"])){
     $itemName = $_GET["itemName"];
 }
 if(isset($_GET["sortPrice"])){
+    echo("uh oh");
     $sortPrice = "true";
 }
 if(isset($_POST["submit"])){
