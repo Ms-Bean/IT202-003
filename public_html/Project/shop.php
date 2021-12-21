@@ -29,6 +29,9 @@ if(isset($_POST["submit"])){
     if(isset($_POST["sortPrice"])){
         $sortPrice = true;
     }
+    else{
+        $sortPrice = false;
+    }
 }
 $params = [];
 $sqlstr = "SELECT * FROM Products WHERE 1=1 AND stock > 0 AND NOT visibility = 'false' ";
