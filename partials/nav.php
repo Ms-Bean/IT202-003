@@ -24,7 +24,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 
 ?>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href=<?php echo __DIR__ . "/../../Project/style.css"; ?>>
 </head>
 <nav class="nav_bar">
 <ul>

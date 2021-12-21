@@ -1,7 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 
-
 $results = [];
 if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $itemCategory = se($_POST, "itemCategory", "", false);
