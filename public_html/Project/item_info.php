@@ -113,7 +113,7 @@ if(is_logged_in()){
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
             }
-            
+            echo($averages_result["average"]);
             $stmt = $db->prepare("UPDATE Products SET average_rating = :average_rating WHERE id = :id");
             try {
                 $stmt->execute([":average_rating" => $averages_result["average"], ":id" => $id]);
