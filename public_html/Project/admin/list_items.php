@@ -61,6 +61,7 @@ if(!empty($sortPrice)){
 }
 
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
+echo($sqlstr);
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
 $db = getDB();
 $stmt = $db->prepare($sqlstr);
