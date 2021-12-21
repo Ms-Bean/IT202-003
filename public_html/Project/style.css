@@ -1,0 +1,149 @@
+li{
+    display: inline;
+    margin-right: 10px;
+}
+.item_info{
+    position: fixed;
+    left: 50%;
+    margin-left: -150px;
+    position: relative;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 400px;
+    height: 600px;
+    text-align: left;
+}
+.info_card{
+    left: 50%;
+    margin-right: 150px;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 400px;
+    height: 450px;
+    text-align: left;
+    float: left;
+}
+.row{
+  content: "";
+  display: block;
+  clear: both;
+}
+.cactus{
+    position: fixed;
+    height: 300px;
+    width: 300px;
+    right: 100px;
+    top: 100px;
+}
+.nav_bar{
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 100%;
+    margin-bottom: 30px;
+}
+html{
+    font-family: verdana;
+}
+.rating_card{
+    position: fixed;
+    left: 50%;
+    margin-left: -150px;
+    position: relative;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 400px;
+    height: 200px;
+    text-align: left;
+}
+.add_rating{
+    position: fixed;
+    left: 50%;
+    margin-left: -150px;
+    position: relative;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 400px;
+    height: 300px;
+    text-align: left;
+}
+
+.cart_item{
+    position: fixed;
+    left: 50%;
+    margin-left: -150px;
+    position: relative;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 300px;
+    height: 200px;
+    text-align: left;
+}
+.order_info{
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-bottom: 50px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 800px;
+    height: 300px;
+    text-align: left;
+}
+.delete_button{
+    position: center;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    margin-bottom: 50px;
+    background-color:rgba(255, 85, 107, 0.867);
+    border: 2px solid black
+   
+}
+.form{
+    text-align: center;
+}
+.input_section{
+    position: fixed;
+    left: 50%;
+    margin-left: -150px;
+    border: 1px solid black;
+    box-shadow: 5px 5px black;
+    padding: 10px;
+    background-color: #a2eda1;
+    width: 300px;
+    height: 200px;
+}
+.paginate_button{
+    background-color:azure;
+    border: 1px solid black;
+    float: left;
+}
+.page_label{
+    float: left;
+    border: 1px solid black;
+    background-color:azure;
+    margin-right: 5px;
+    padding: 2px;
+}

@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
+
 if(!is_logged_in()){
     flash("You must log in to checkout.");
     die(header("Location: login.php"));
@@ -141,20 +142,7 @@ if (isset($_POST['submit'])) {
 }
 }
 ?>
-<style>
-    .container-fluid{
-        position: fixed;
-        left: 50%;
-        margin-left: -150px;
-        border: 1px solid black;
-        box-shadow: 5px 5px black;
-        padding: 10px;
-        background-color: #a2eda1;
-        width: 450px;
-        height: 500px;
-    }
-
-</style>
+<img class='cactus' src="<?php echo(__DIR__ . '/../../../Project/cacti/Kaktus3-scaled.png');?>"/>
 <div class="container-fluid">
     <h1>Total: $<?php echo($grand_sum)?></h1>
     <form method="POST">

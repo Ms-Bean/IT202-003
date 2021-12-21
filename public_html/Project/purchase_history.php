@@ -6,98 +6,107 @@ if(!is_logged_in()){
 }
 ?>
 <form method="POST">
-    <div>
-        <input type="radio" name="sorter" value="value_by_date"/>
-        <label>Sort by date</label><br>
-        <input type="radio" name="sorter" value="value_by_total"/>
-        <label>Sort by total</label<br><br>
-        <input type="text" name="by_category" placeholder="category" value=""/><br><br>
-        <label>Start date</label>
-        <input type="date" name="start_date_range" value=""/><br>
-        <label>End date</label>
-        <input type="date" name="end_date_range" value=""/><br>
-        <input type="submit" name="submit" value="submit"/><br>
-    </div>
+    <label>Sort by total</label>
+    <input type='checkbox' name='by_total'/><br>
+    <label>Since</label>
+    <input type='date' name='by_since'/><br>
+    <label>Before</label>
+    <input type='date' name='by_before'/><br>
+    <input type='submit' name='submit' value='submit'/><br>
 </form>
 <?php
+$PER_PAGE = 5;
+$current_page = 0;
+$by_total = false;
+$by_since = '';
+$by_before = '';
+//Use values from link if available
+if(isset($_GET["current_page"])){
+    $current_page = $_GET["current_page"];
+}
+if(isset($_GET["by_since"])){
+    $by_since = $_GET["by_since"];
+}
+if(isset($_GET["by_before"])){
+    $by_before = $_GET["by_before"];
+}
+if(isset($_GET["by_total"])){
+    $by_total = $_GET["by_total"];
+}
+//Update or wipe values with submit
+if(isset($_POST['submit'])){
+    if(isset($_POST["by_total"])){
+        $by_total = true;
+    }
+    else{
+        $by_total = false;
+    }
+    if($_POST["by_since"] !== ''){
+        $by_since = date($_POST["by_since"] . " 00:00:00");
+    }
+    else{
+        $by_since = '';
+    }
+    if($_POST["by_before"] !== ''){
+        $by_before = date($_POST["by_before"] . " 23:59:59");
+    }
+    else{
+        $by_before = '';
+    }
+}
 $orders_results = [];
 $orderitems_results = [];
 $db = getDB();
 $sql_str = "";
 if(has_role("Owner")){
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (1=1 AND user_id = :user_id OR NOT user_id = :user_id) ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE :user_id = :user_id ";
 }
 else{
-    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE (1=1 AND user_id = :user_id) ";
+    $sql_str = "SELECT id, user_id, total_price, created, payment_method, address FROM Orders WHERE user_id = :user_id ";
 }
-if(isset($_POST["submit"])){
-    
-    if(isset($_POST["sorter"])){
-        if($_POST["sorter"] === 'value_by_total'){
-            $sql_str = $sql_str . "ORDER BY total_price DESC ";
-        }
-        else{
-            $sql_str = $sql_str . "ORDER BY created ASC ";
-        }
-    }
-    if($_POST["by_category"] !== ''){
-        $categories_results = [];
-        $stmt = $db->prepare("SELECT id FROM Products WHERE category = :category");
-        try {
-            $stmt->execute([":category" => $_POST["by_category"]]);
-            $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($r) {
-                $categories_results = $r;
-            }
-        } catch (PDOException $e) {
-            flash("<pre>" . var_export($e, true) . "</pre>");
-        }
-
-        $sql_str = $sql_str . "AND id in (-1,";
-        foreach($categories_results as $index => $record){
-            $stmt = $db->prepare("SELECT order_id FROM OrderItems WHERE product_id = :product_id");
-            try {
-                $stmt->execute([":product_id" => $record["id"]]);
-                $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                if ($r) {
-                    $deep_results = $r;
-                }
-            } catch (PDOException $e) {
-                flash("<pre>" . var_export($e, true) . "</pre>");
-            }
-            foreach($deep_results as $deep_index => $deep_record){
-                $sql_str = $sql_str . $deep_record["order_id"] . ",";
-            }
-        }
-        $sql_str = substr($sql_str, 0, -1) . ") ";
-    }
-    if($_POST["start_date_range"] !== ''){
-        $start_timestamp = date($_POST["start_date_range"] . " 00:00:00");
-        $sql_str = $sql_str . "AND created >= '" . $start_timestamp . "' ";
-    }
-    if($_POST["end_date_range"] !== ''){
-        $end_timestamp = date($_POST["end_date_range"] . " 23:59:59");
-        $sql_str = $sql_str . "AND created <= '" . $end_timestamp . "' ";
-    }
-    
-    $stmt = $db->prepare($sql_str);
-    try {
-        $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $orders_results = $r;
-        }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
-    }
+if($by_since !== ''){
+    $sql_str = $sql_str . "AND created >= '" . $by_since . "' ";
 }
-
+if($by_before !== ''){
+    $sql_str = $sql_str . "AND created <= '" . $by_before . "' ";
+}
+if($by_total){
+    $sql_str = $sql_str . "ORDER BY total_price DESC";
+}
+$sql_str = $sql_str . " LIMIT "  . $current_page*$PER_PAGE . "," . $PER_PAGE . " ";
+$count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sql_str)[1])[0]; //Circumcise the sql string in order to obtain count
+$stmt = $db->prepare($sql_str);
+try {
+    $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $orders_results = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+$stmt = $db->prepare($count_str);
+try {
+    $stmt->execute([":user_id" => $_SESSION["user"]["id"]]);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($r) {
+        $count_results = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
 ?>
-<h1>Order History</h1>
+<h1>Order History Page <?php echo($current_page + 1)?></h1>
+<div class="page_traverser">
 <?php
-$total = 0;
+if($current_page >= 1){
+    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page - 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Previous</a>");
+}
+if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
+    echo("<a class='paginate_button' href = purchase_history.php?by_total=" . $by_total . "&current_page=" . $current_page + 1 . "&by_since=" . $by_since . "&by_before=" . $by_before . ">Next</a>");
+}
+echo("</div>");
 foreach($orders_results as $index => $record){
-    $total += $record["total_price"];
     echo("<div class='order_info'>");
     echo("<br>Order " . $record["id"] . " placed on " . $record["created"]);
     echo("<br>User ID: " . $record["user_id"]);
@@ -107,9 +116,4 @@ foreach($orders_results as $index => $record){
     echo("<br><a href='order_details.php?id=" . $record["id"] . "'>Order Info</a>");
     echo("</div><br>");
 }
-if(has_role("Owner")){
-    echo("<h1>Total: " . $total);
-}
-?>
-<?php require(__DIR__ . "/../../partials/flash.php");
 ?>
