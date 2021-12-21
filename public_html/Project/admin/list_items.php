@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "../../../partials/nav.php");
+require(__DIR__ . "/../../../partials/nav.php");
 $PER_PAGE = 10;
 $results = [];
 $itemCategory = "";
@@ -83,7 +83,7 @@ try {
 
 ?>
 <div class="container-fluid">
-    <h1>Shop</h1>
+    <h1>Item List</h1>
     <form method="POST">
         <div>
             <input type="search" name="itemName" placeholder="Item Filter" /><br>
@@ -127,5 +127,5 @@ try {
     ?>
 </div>
 <?php
-require_once(__DIR__ . "../../../partials/flash.php");
+require_once(__DIR__ . "/../../../partials/flash.php");
 ?>
