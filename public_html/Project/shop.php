@@ -84,9 +84,7 @@ try {
             <input type="radio" name="sorter" value="sort_price"/>Sort by price<br>
             <input type="radio" name="sorter" value="sort_rating"/>Sort by rating<br>
             <input type="submit" name="submit" value="Search"/>
-        </div>
-    </form>
-    <div class="page_traverser">
+            <div class="page_traverser">
     <?php
     if($current_page >= 1){
         echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . "&sorter=" . $sorter . ">Previous</a>");
@@ -94,7 +92,11 @@ try {
     if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
         echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. "&sorter=" . $sorter . ">Next</a>");
     }
-    echo("</div>");
+        echo("</div>");
+    ?>
+    </div>
+    </form>
+    <?php
     $flopper=0;
     echo("<div class='row'>");
     foreach ($results as $index => $record){
