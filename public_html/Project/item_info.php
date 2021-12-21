@@ -23,7 +23,7 @@ try {
     <h1><?php echo($result["name"])?></h1>
     <?php foreach ($result as $column => $value) : ?>
     <?php 
-        if($column === "name"){
+        if($column === "name" or $column === "average_rating"){
             
         }
         else{
