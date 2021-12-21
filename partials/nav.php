@@ -142,6 +142,11 @@ require_once(__DIR__ . "/../lib/functions.php");
         border: 1px solid black;
         float: left;
     }
+    .page_label{
+        float: left;
+        border: 1px solid black;
+        background-color:azure;
+    }
 </style>
 </head>
 <nav class="nav_bar">
