@@ -40,7 +40,7 @@ if(!empty($itemName)){
     $sqlstr = $sqlstr . " AND name like :itemName";
     $params[":itemName"] = "%" . $itemName . "%";
 }
-if(isset($_POST['sortPrice'])){
+if(!empty($sortPrice)){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
 
