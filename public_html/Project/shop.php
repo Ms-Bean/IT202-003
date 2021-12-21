@@ -41,6 +41,8 @@ if(isset($_POST['sortPrice'])){
 }
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
+echo($sqlstr);
+echo($count_str);
 $db = getDB();
 $stmt = $db->prepare($sqlstr);
 try {
@@ -81,7 +83,7 @@ echo("</div>");
             <input type="search" name="itemName" placeholder="Item Filter" /><br>
             <input type="search" name="itemCategory" placeholder="Category Filter" /><br>
             <input type="checkbox" name="sortPrice" value="Sort by price"/> Sort by price<br>
-            <input type="submit" value="Search" />
+            <input type="submit" name="submit" value="Search"/>
         </div>
     </form>
     <?php
