@@ -133,7 +133,6 @@ if(is_logged_in()){
 //Get ratings
 $sqlstr = "SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id LIMIT " . $PER_PAGE*$current_page . "," . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
-flash($sqlstr);
 $stmt = $db->prepare($sqlstr);
 try {
     $stmt->execute([":id" => $id]);
@@ -154,14 +153,14 @@ try {
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
-echo("<center><div class='page_traverser'>");
+echo("<div class='page_traverser'>");
 if($current_page >= 1){
     echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page-1 . ">Previous</a>");
 }
 if(($current_page+1)*$PER_PAGE < $count_result["COUNT(*)"]){
     echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page+1 . ">Next</a>");
 }
-    echo("</div></center>");
+    echo("</div>");
 //Add rating cards to page
 if(isset($rating_result)){
     $average_rating = 0;
