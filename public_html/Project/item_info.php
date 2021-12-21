@@ -23,7 +23,7 @@ try {
     <h1><?php echo($result["name"])?></h1>
     <?php foreach ($result as $column => $value) : ?>
     <?php 
-        if($column === "name"){
+        if($column === "name" or $column === "average_rating"){
             
         }
         else{
@@ -101,6 +101,22 @@ if(is_logged_in()){
                 flash("Rating submitted");
             } catch (Exception $e) {
                 echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+            }
+            $stmt = $db->prepare("SELECT AVG(rating) FROM Ratings where product_id =:product_id");
+            try {
+                $stmt->execute([":product_id" => $id]);
+                $r = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($r) {
+                    $averages_result = $r;
+                }
+            } catch (PDOException $e) {
+                flash("<pre>" . var_export($e, true) . "</pre>");
+            }
+            $stmt = $db->prepare("UPDATE Products SET average_rating = :average_rating WHERE id = :id");
+            try {
+                $stmt->execute([":average_rating" => $averages_result["AVG(rating)"], ":id" => $id]);
+            } catch (Exception $e) {
+                flash("<pre>" . var_export($e, true) . "</pre>");
             }
         }
     }
