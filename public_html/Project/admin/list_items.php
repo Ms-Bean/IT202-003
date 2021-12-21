@@ -44,7 +44,7 @@ if(isset($_POST["submit"])){
     }
 }
 $params = [];
-$sqlstr = "SELECT * FROM Products WHERE 1=1 AND stock > 0";
+$sqlstr = "SELECT * FROM Products WHERE 1=1";
 if(!empty($itemCategory)){
     $sqlstr = $sqlstr . " AND category = :itemCategory";
     $params[":itemCategory"] = $itemCategory;
@@ -61,7 +61,6 @@ if(!empty($sortPrice)){
 }
 
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
-echo($sqlstr);
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
 $db = getDB();
 $stmt = $db->prepare($sqlstr);
