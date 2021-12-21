@@ -6,6 +6,9 @@ $itemCategory = "";
 $itemName = "";
 $sortPrice = false;
 $current_page = 0;
+if(isset($_GET["current_page"])){
+    $current_page = $_GET["current_page"];
+}
 if(isset($_GET["itemCategory"])){
     $itemCategory = $_GET["itemCategory"];
 }
