@@ -1,36 +1,67 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
 $results = [];
-if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
-    $itemCategory = se($_POST, "itemCategory", "", false);
-    $itemName = se($_POST, "itemName", "", false);
-    $params = [];
-    $sqlstr = "SELECT * FROM Products WHERE 1=1 AND stock > 0 AND NOT visibility = 'false' ";
-    if(!empty($itemCategory)){
-        $sqlstr = $sqlstr . " AND category = :itemCategory";
-        $params[":itemCategory"] = $itemCategory;
+$itemCategory = "";
+$itemName = "";
+$sortPrice = false;
+$current_page = 0;
+if(isset($_GET["itemCategory"])){
+    $itemCategory = $_GET["itemCategory"];
+}
+if(isset($_GET["itemName"])){
+    $itemName = $_GET["itemName"];
+}
+if(isset($_GET["sortPrice"])){
+    $sortPrice = true;
+}
+if(isset($_POST["submit"])){
+    if(isset($_POST["itemName"])){
+        $itemName = $_POST["itemName"];
     }
-    if(!empty($itemName)){
-        $sqlstr = $sqlstr . " AND name like :itemName";
-        $params[":itemName"] = "%" . $itemName . "%";
+    if(isset($_POST["itemCategory"])){
+        $itemCategory = $_POST["itemCategory"];
     }
-    if(isset($_POST['sortPrice'])){
-        $sqlstr = $sqlstr . " ORDER BY cost";
+    if(isset($_POST["sortPrice"])){
+        $sortPrice = true;
     }
-    $db = getDB();
-    $stmt = $db->prepare($sqlstr);
-    try {
-        $stmt->execute($params);
-        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($r) {
-            $results = $r;
-        }
-    } catch (PDOException $e) {
-        flash("<pre>" . var_export($e, true) . "</pre>");
+}
+$params = [];
+$sqlstr = "SELECT * FROM Products WHERE 1=1 AND stock > 0 AND NOT visibility = 'false' ";
+if(!empty($itemCategory)){
+    $sqlstr = $sqlstr . " AND category = :itemCategory";
+    $params[":itemCategory"] = $itemCategory;
+}
+if(!empty($itemName)){
+    $sqlstr = $sqlstr . " AND name like :itemName";
+    $params[":itemName"] = "%" . $itemName . "%";
+}
+if(isset($_POST['sortPrice'])){
+    $sqlstr = $sqlstr . " ORDER BY cost";
+}
+$sqlstr .= " LIMIT " . $current_page * 10 . ","  . 10;
+$db = getDB();
+$stmt = $db->prepare($sqlstr);
+try {
+    $stmt->execute($params);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $results = $r;
     }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
 }
 ?>
 <img class='cactus' src="<?php echo(__DIR__ . '/../../../Project/cacti/Kaktus-%C3%A4ndrad.png');?>"/>
+<div class="page_traverser">
+<?php
+if($current_page >= 1){
+    echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . ">Previous</a>");
+}
+if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
+    echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. ">Next</a>");
+}
+echo("</div>");
+?>
 <div class="container-fluid">
     <h1>Shop</h1>
     <form method="POST">
@@ -55,7 +86,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
         <a href='add_to_cart.php?id={$record["id"]}'>Add to cart</a><br>
         GODAN;
         if(has_role("Admin")){
-            $card .= "<a href='../admin/edit_item.php?id={$record["id"]}'>Edit</a>";
+            $card .= "<a href='admin/edit_item.php?id={$record["id"]}'>Edit</a>";
         }
         $card .= "</div>";
         if($flopper == 2){
