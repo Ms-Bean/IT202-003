@@ -57,7 +57,7 @@ if(!empty($sortPrice)){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
 if(!empty($sortRating)){
-    $sqlstr = $sqlstr . " ORDER BY average_rating";
+    $sqlstr = $sqlstr . " ORDER BY average_rating DESC";
 }
 $sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
 $count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
@@ -101,19 +101,24 @@ try {
     <div class="page_traverser">
     <?php
     if($current_page >= 1){
-        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . "&sortPrice=" . $sortPrice . "&sortRating" . $sortRating . ">Previous</a>");
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . "&sortPrice=" . $sortPrice . "&sortRating=" . $sortRating . ">Previous</a>");
     }
     if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
-        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. "&sortPrice=" . $sortPrice . "&sortRating" . $sortRating . ">Next</a>");
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. "&sortPrice=" . $sortPrice . "&sortRating=" . $sortRating . ">Next</a>");
     }
     echo("</div>");
     $flopper=0;
     echo("<div class='row'>");
     foreach ($results as $index => $record){
+        $stars = "";
+        for($i = 0; $i < (int)$record["average_rating"]; $i++){
+            $stars .= '⭐';
+        }
         $flopper++;
         $card = <<<GODAN
         <div class='info_card'>
         <h2>{$record["name"]}</h2><br><br>
+        {$stars}<br>
         <h3>Type: {$record["category"]}</h3><br>
         <h3>Cost: {$record["cost"]}</h3><br>
         <a href='item_info.php?id={$record["id"]}'>Item info</a><br>
