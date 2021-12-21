@@ -59,6 +59,7 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
     $flopper=0;
     echo("<div class='row'>");
     foreach ($results as $index => $record){
+        $flopper++;
         $card = <<<GODAN
         <div class='info_card'>
         <h2>{$record["name"]}</h2><br><br>
@@ -75,7 +76,6 @@ if (isset($_POST["itemName"]) or isset($_POST["itemCategory"])) {
             $card .= "</div><div class='row'>";
             $flopper = 0;
         }
-        $flopper++;
         echo($card);
     }
     ?>
