@@ -119,23 +119,8 @@ require_once(__DIR__ . "/../lib/functions.php");
         padding-top: 5px;
         margin-bottom: 50px;
         background-color:rgba(255, 85, 107, 0.867);
-        border: 2px solid black;
+        border: 2px solid black
        
-    }
-    .page_label{
-        display: inline-block;
-    }
-    .paginate_button{
-        position: center;
-        text-align: center;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 10px;
-        padding-top: 5px;
-        margin-bottom: 50px;
-        background-color:floralwhite;
-        border: 2px solid black;
-        display: inline-block;
     }
     .form{
         text-align: center;
