@@ -13,13 +13,13 @@ if(isset($_GET["current_page"])){
 if(isset($_GET["itemCategory"])){
     $itemCategory = $_GET["itemCategory"];
 }
-if(isset($_GET["outOfStock"])){
+if($_GET["outOfStock"] === 'true'){
     $outOfStock = "true";
 }
 if(isset($_GET["itemName"])){
     $itemName = $_GET["itemName"];
 }
-if(isset($_GET["sortPrice"])){
+if($_GET["sortPrice"] === 'true'){
     echo("uh oh");
     $sortPrice = "true";
 }
@@ -31,7 +31,6 @@ if(isset($_POST["submit"])){
         $itemCategory = $_POST["itemCategory"];
     }
     if(isset($_POST["sortPrice"])){
-        echo("uh uh oh");
         $sortPrice = "true";
     }
     else{
