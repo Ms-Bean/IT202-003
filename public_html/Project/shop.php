@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
+$PER_PAGE = 10;
 $results = [];
 $itemCategory = "";
 $itemName = "";
@@ -38,7 +39,8 @@ if(!empty($itemName)){
 if(isset($_POST['sortPrice'])){
     $sqlstr = $sqlstr . " ORDER BY cost";
 }
-$sqlstr .= " LIMIT " . $current_page * 10 . ","  . 10;
+$sqlstr .= " LIMIT " . $current_page * $PER_PAGE . ","  . $PER_PAGE;
+$count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
 $db = getDB();
 $stmt = $db->prepare($sqlstr);
 try {
@@ -46,6 +48,16 @@ try {
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $results = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+$stmt = $db->prepare($count_str);
+try {
+    $stmt->execute($params);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($r) {
+        $count_results = $r;
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
