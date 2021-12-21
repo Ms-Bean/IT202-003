@@ -136,19 +136,7 @@ require_once(__DIR__ . "/../lib/functions.php");
         width: 300px;
         height: 200px;
     }
-    .paginate_button{
-        position: center;
-        text-align: center;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 10px;
-        padding-top: 5px;
-        margin-bottom: 50px;
-        background-color:floralwhite;
-        border: 2px solid black;
-        display: inline-block;
-    }
-
+    
 </style>
 <nav class="nav_bar">
 <ul>
