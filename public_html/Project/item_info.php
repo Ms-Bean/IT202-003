@@ -2,6 +2,11 @@
 require(__DIR__ . "/../../partials/nav.php");
 
 $result = [];
+$PER_PAGE = 10;
+$current_page = 0;
+if(isset($_GET["current_page"])){
+    $current_page = $_GET["current_page"];
+}
 $columns = get_columns("Products");
 $db = getDB();
 $id = se($_GET, "id", -1, false);
@@ -124,13 +129,32 @@ if(is_logged_in()){
 
 ?>
 <?php
+if($current_page >= 1){
+    echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page-1 . ">Previous</a>");
+}
+if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
+    echo("<a class='paginate_button' href = item_info.php?id=" . $id . "&current_page=" . $current_page+1 . ">Next</a>");
+}
+    echo("</div>");
 //Get ratings
-$stmt = $db->prepare("SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id");
+$sqlstr = "SELECT rating, comment, user_id FROM Ratings WHERE product_id =:id LIMIT" . $PER_PAGE*$current_page . "," . $PER_PAGE;
+$count_str = "SELECT COUNT(*) FROM " . explode('LIMIT', explode('FROM', $sqlstr)[1])[0]; //Circumcise the sql string in order to obtain count
+$stmt = $db->prepare($sql_str);
 try {
     $stmt->execute([":id" => $id]);
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $rating_result = $r;
+    }
+} catch (PDOException $e) {
+    flash("<pre>" . var_export($e, true) . "</pre>");
+}
+$stmt = $db->prepare($count_str);
+try {
+    $stmt->execute([":id" => $id]);
+    $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($r) {
+        $count_result = $r;
     }
 } catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
