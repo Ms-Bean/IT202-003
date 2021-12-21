@@ -84,10 +84,10 @@ try {
     <div class="page_traverser">
     <?php
     if($current_page >= 1){
-        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . ">Previous</a>");
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page-1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory . "&sortPrice=" . $sortPrice . ">Previous</a>");
     }
     if(($current_page+1)*$PER_PAGE < $count_results["COUNT(*)"]){
-        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. ">Next</a>");
+        echo("<a class='paginate_button' href = shop.php?current_page=" . $current_page+1 . "&itemName=" . $itemName . "&itemCategory=" . $itemCategory. "&sortPrice=" . $sortPrice . ">Next</a>");
     }
     echo("</div>");
     $flopper=0;
